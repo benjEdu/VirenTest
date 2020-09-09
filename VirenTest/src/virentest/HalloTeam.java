@@ -10,5 +10,7 @@ package virentest;
  * @author z003ub8r
  */
 public class HalloTeam {
-    System.out.println("Hallo Team");
+    public static void main (String[] args){
+        System.out.println("Hallo Team");
+    }
 }
