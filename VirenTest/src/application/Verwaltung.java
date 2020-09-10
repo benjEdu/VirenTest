@@ -15,4 +15,6 @@ public class Verwaltung extends Mitarbeiter{
         super(mitarbeiterId);
     }
     
+    
+    
 }
