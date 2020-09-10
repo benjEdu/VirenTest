@@ -9,6 +9,10 @@ package application;
  *
  * @author benni
  */
-public class Verwaltung {
+public class Verwaltung extends Mitarbeiter{
+
+    public Verwaltung(String mitarbeiterId) {
+        super(mitarbeiterId);
+    }
     
 }
