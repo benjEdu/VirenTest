@@ -15,4 +15,6 @@ public class Laborant extends Mitarbeiter{
         super(mitarbeiterId);
     }
     
+    
+    
 }
