@@ -10,7 +10,7 @@ public abstract class Person {
     private String vname;
     private String email;
     private String tel;
-    private String hr;
+    private String hsNr;
     private String strasse;
     private String stadt;
     private String plz;
@@ -51,12 +51,12 @@ public abstract class Person {
         this.tel = tel;
     }
 
-    public String getHr() {
-        return hr;
+    public String getHsNr() {
+        return hsNr;
     }
 
-    public void setHr(String hr) {
-        this.hr = hr;
+    public void setHr(String hsNr) {
+        this.hsNr = hsNr;
     }
 
     public String getStrasse() {
