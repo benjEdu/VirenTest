@@ -10,5 +10,19 @@ package persistence;
  * @author benni
  */
 public class EinfacheDBFactory {
+    public static ITestpersonMapper getTestpersonMapper(){
+        return new TestpersonJavaDBMapper();
+    }
     
+    public static IAdminMapper getAdminMapper(){
+        return new AdminJavaDBMapper();
+    }
+    
+    public static IVerwaltungMapper getVerwaltungMapper(){
+        return new VerwaltungJavaDBMapper();
+    }
+    
+    public static ILaborantMapper getLaborantMapper(){
+        return new LaborantJavaDBMapper();
+    }
 }
