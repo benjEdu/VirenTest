@@ -5,33 +5,19 @@
  */
 package test;
 
+import application.Mitarbeiter;
+import application.Verwaltung;
+
 /**
  *
  * @author z003ub8r
  */
-public class Test extends person{
+public class Test{
 
-    
-    
-    public Test(String test){
-        super(test);
-    }
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
-        System.out.println("test");
-        Test test = new Test("test");
-        person p = new Test("person");
-        test.setA(2);
-        test.setB(2);
-        int c = test.getA()+test.getB();
-        System.out.println(c);
-        test.setTestString("holidhuedue");
-        System.out.println(test.getTestString());
-        int a = 5;
-        System.out.println(a);
+        Mitarbeiter t1 = new Verwaltung("1");
+        t1.setEmail("test");
+        System.out.println(t1.getEmail());
     }
     
 }
