@@ -1,14 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package application;
 
-/**
- *
- * @author benni
- */
+import persistence.EinfacheDBFactory;
+import persistence.ITestpersonMapper;
+
 public class TestpersonenVerwaltung {
+    private ITestpersonMapper mapper;
     
+    public TestpersonenVerwaltung() {
+        mapper = EinfacheDBFactory.getTestpersonMapper();
+    }
 }
