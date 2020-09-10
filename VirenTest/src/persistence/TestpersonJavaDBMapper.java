@@ -9,6 +9,11 @@ package persistence;
  *
  * @author benni
  */
-public class TestpersonJavaDBMapper {
+public class TestpersonJavaDBMapper implements ITestpersonMapper{
+
+    @Override
+    public boolean ergebnisAbrufen() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
