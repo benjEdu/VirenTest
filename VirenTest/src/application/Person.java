@@ -19,6 +19,20 @@ public abstract class Person {
     public Person() {
     }
 
+    public Person(String nname, String vname, String email, String tel, String hsNr, String strasse, String stadt, String plz, String land) {
+        this.nname = nname;
+        this.vname = vname;
+        this.email = email;
+        this.tel = tel;
+        this.hsNr = hsNr;
+        this.strasse = strasse;
+        this.stadt = stadt;
+        this.plz = plz;
+        this.land = land;
+    }
+    
+    
+
     public String getNname() {
         return nname;
     }
