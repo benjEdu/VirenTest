@@ -9,6 +9,16 @@ package application;
  *
  * @author benni
  */
-public class Testperson {
+public class Testperson extends Person{
+    private String testpersonId;
+
+    public Testperson(String testpersonId) {
+        this.testpersonId = testpersonId;
+    }
+
+    public String getTestpersonId() {
+        return testpersonId;
+    }
+    
     
 }
