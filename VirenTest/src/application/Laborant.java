@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Ok;
+package application;
 
 /**
  *
- * @author z0042y9h
+ * @author benni
  */
-public class Ok {
+public class Laborant {
     
 }

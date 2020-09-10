@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package virentest;
+package application;
 
 /**
  *
- * @author z003ub8r
+ * @author benni
  */
-public class HalloTeam {
-    public static void main (String[] args){
-        System.out.println("Hallo Team");
-    }
+public class Admin {
+    
 }
