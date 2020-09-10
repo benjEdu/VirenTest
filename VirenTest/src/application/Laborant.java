@@ -9,6 +9,10 @@ package application;
  *
  * @author benni
  */
-public class Laborant {
+public class Laborant extends Mitarbeiter{
+
+    public Laborant(String mitarbeiterId) {
+        super(mitarbeiterId);
+    }
     
 }
