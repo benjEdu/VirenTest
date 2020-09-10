@@ -10,5 +10,5 @@ package persistence;
  * @author benni
  */
 public interface ITestpersonMapper {
-    public boolean ergebnisAbrufen();
+    public boolean ergebnisAbrufen(String testpersonId);
 }
