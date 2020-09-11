@@ -3,6 +3,7 @@ package test;
 import application.Mitarbeiter;
 import application.Verwaltung;
 import view.TestergebnisLesen;
+import view.ViewLaborant;
 
 public class Test{
 
@@ -13,6 +14,8 @@ public class Test{
         */
         
         //new TestergebnisLesen("Virentestcenter");
+        
+        new ViewLaborant("Virentestcenter");
     }
     
 }
