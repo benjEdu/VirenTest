@@ -15,21 +15,9 @@ public class Test{
         Testperson tp = new Testperson(1, "Sentiten", "Dimitri", "test@testmail.com", "456498", "5", "laikestrasse", "Bonn", "9469", "Deutschelaaand");
         System.out.println(tp);
         
-        boolean eT = mapper.einfuegenTestperson(tp);
-        System.out.println(eT);
-    
-        //boolean at = mapper.aendernTestperson(Testperson p);
+        //new TestergebnisLesen("Virentestcenter");
         
-        Testperson tps = mapper.lesenTestperson(tp.getTestpersonId());
-        System.out.println(tps);
-    
-        boolean lT = mapper.loeschenTestperson(tp.getTestpersonId());
-        System.out.println(lT);
-        System.out.println(eT);
-        
-        
-    
-       
+        new ViewLaborant("Virentestcenter");
     }
     
 }

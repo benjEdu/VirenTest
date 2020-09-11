@@ -17,11 +17,11 @@ import java.util.logging.Logger;
 public class LaborantJavaDBMapper implements ILaborantMapper{
 
     @Override
-    public boolean einfuegenTestergebnis(int id, boolean ergebnis) {
+    public boolean einfuegenTestergebnis(String id, boolean ergebnis) {
                 Connection conn = getConn();
         try {
             PreparedStatement insert = conn.prepareStatement("insert into testergebnisse (testpersonId, ergebniss) values (?,?)");
-            insert.setInt(1, id);            
+            insert.setInt(1, Integer.parseInt(id));            
             insert.setBoolean(2, ergebnis);
             insert.executeUpdate();
             
@@ -68,10 +68,10 @@ public class LaborantJavaDBMapper implements ILaborantMapper{
     }*/
     
             private  Connection getConn() {
-        String userid = "Virusdatenbank";
+        String userid = "VDB";
         String password = "123";
         String driver = "org.apache.derby.jdbc.ClientDriver";
-        String url = "jdbc:derby://localhost:1527/spe";
+        String url = "jdbc:derby://localhost:1527/Virendatenbank";
         Connection conn = null;
         try {
             Class.forName(driver);
@@ -82,6 +82,10 @@ public class LaborantJavaDBMapper implements ILaborantMapper{
             System.err.println("getConn" + e);
         }
         return conn;
+    }
+
+    public boolean ergebnisAbrufen(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
