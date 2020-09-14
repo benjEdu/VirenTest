@@ -34,16 +34,14 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
             insert.setString(2, tp.getHsNr());
             insert.setString(3, tp.getStadt());
             insert.setString(4, tp.getPlz());
-            insert.setString(4, tp.getLand());
+            insert.setString(5, tp.getLand());
             insert.executeUpdate();
             conn.commit();
             ResultSet rs = insert.getGeneratedKeys();
-            
-            //TODO
+
             if(rs.next()){
                 adressId = rs.getInt(1);
             }
-            
             /*
             //Von der DB vergebene AdressID abfragen
             PreparedStatement select = conn.prepareStatement("select adressid from adressen where strasse = ? and where hsnr = ? and where plz");
@@ -61,7 +59,7 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
         //Testperson selbst einfuegen
         try {
             conn.setAutoCommit(false);
-            PreparedStatement insert = conn.prepareStatement("insert into testpersonen (vname, nname, email, tel,adressId) values (?,?,?,?,?)");
+            PreparedStatement insert = conn.prepareStatement("insert into testpersonen (vname, nname, email, tel,adressId) values (?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
             insert.setString(1, tp.getVname());
             insert.setString(2, tp.getNname());
             insert.setString(3, tp.getEmail());
@@ -69,6 +67,13 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
             insert.setInt(5, adressId);
             insert.executeUpdate();
             conn.commit();
+            ResultSet rs = insert.getGeneratedKeys();
+
+            //TODO
+            if(rs.next()){
+                int tpId = rs.getInt(1);
+                tp.setTestpersonId(tpId);
+            }
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(VerwaltungJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex);
@@ -129,7 +134,7 @@ throw new UnsupportedOperationException("Not supported yet."); //To change body 
                     String stadt = rs2.getString("Stadt");
                     String plz = rs2.getString("plz");
                     String land = rs2.getString("land");
-                    Testperson tp = new Testperson( Nname, Vname, Email, tel, hsNr, strasse, stadt, plz, land);
+                    Testperson tp = new Testperson(adressId, Nname, Vname, Email, tel, hsNr, strasse, stadt, plz, land);
                     return tp;
                 }
             }
