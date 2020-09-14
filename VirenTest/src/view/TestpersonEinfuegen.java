@@ -20,7 +20,6 @@ public class TestpersonEinfuegen extends JFrame {
     private JLabel stadt; 
     private JLabel plz; 
     private JLabel land;
-    
     private JLabel infoLabel;
     //Tesxtfelder
     private JTextField nnameText;
@@ -31,7 +30,8 @@ public class TestpersonEinfuegen extends JFrame {
     private JTextField strasseText; 
     private JTextField stadtText; 
     private JTextField plzText; 
-    private JTextField landText;
+    //Combobox
+    private JComboBox land2;
     //Buttons
     private JButton einfuegen;
     
@@ -69,9 +69,251 @@ public class TestpersonEinfuegen extends JFrame {
         plzText = new JTextField(6);
         
         land = new JLabel("Land:");
-        landText = new JTextField(20);
         
         infoLabel = new JLabel("");
+        
+        //ComboBox
+        String landArray[] = {"AD","AE",
+                 "Afghanistan",
+                 "Antigua und Barbuda",
+                 "Anguilla",
+                 "Albanien",
+                 "Armenien",
+                 "Niederländische Antillen",
+                 "Angola",
+                 "Antarktis",
+                 "Argentinien",
+                 "Amerikanisch-Samoa",
+                 "Österreich (Austria)",
+                 "Australien",
+                 "Aruba",
+                 "Azerbaijan",
+                 "Bosnien-Herzegovina",
+                 "Barbados",
+                 "Bangladesh",
+                 "Belgien",
+                 "Burkina Faso",
+                 "Bulgarien",
+                 "Bahrain",
+                 "Burundi",
+                 "Benin",
+                 "Bermudas",
+                 "Brunei Darussalam",
+                 "Bolivien",
+                 "Brasilien",
+                 "Bahamas",
+                 "Bhutan",
+                 "Bouvet Island",
+                 "Botswana",
+                 "Weißrußland (Belarus)",
+                 "Belize",
+                 "Canada",
+                 "Cocos (Keeling) Islands",
+                 "Demokratische Republik Kongo",
+                 "Zentralafrikanische Republik",
+                 "Kongo",
+                 "Schweiz",
+                 "Elfenbeinküste (Cote D'Ivoire)",
+                 "Cook Islands",
+                 "Chile",
+                 "Kamerun",
+                 "China",
+                 "Kolumbien",
+                 "Costa Rica",
+                 "Tschechoslowakei (ehemalige)",
+                 "Kuba",
+                 "Kap Verde",
+                 "Christmas Island",
+                 "Zypern",
+                 "Tschechische Republik",
+                 "Deutschland",
+                 "Djibouti",
+                 "Dänemark",
+                 "Dominica",
+                 "Dominikanische Republik",
+                 "Algerien",
+                 "Ecuador",
+                 "Estland",
+                 "Ägypten",
+                 "Westsahara",
+                 "Eritrea",
+                 "Spanien",
+                 "Äthiopien",
+                 "Finnland",
+                 "Fiji",
+                 "Falkland-Inseln (Malvinas)",
+                 "Micronesien",
+                 "Faröer-Inseln",
+                 "Frankreich",
+                 "France, Metropolitan",
+                 "Gabon",
+                 "Grenada",
+                 "Georgien",
+                 "Französisch Guiana",
+                 "Ghana",
+                 "Gibraltar",
+                 "Grönland",
+                 "Gambia",
+                 "Guinea",
+                 "Guadeloupe",
+                 "Äquatorialguinea",
+                 "Griechenland",
+                 "Südgeorgien und Südliche Sandwich-Inseln",
+                 "Guatemala",
+                 "Guam",
+                 "Guinea-Bissau",
+                 "Guyana",
+                 "Kong Hong",
+                 "Heard und Mc Donald Islands",
+                 "Honduras",
+                 "Haiti",
+                 "Ungarn",
+                 "Indonesien",
+                 "Irland",
+                 "Israel",
+                 "Indien",
+                 "British Indian Ocean Territory",
+                 "Irak",
+                 "Iran (Islamische Republik)",
+                 "Island",
+                 "Italien",
+                 "Jamaica",
+                 "Jordanien",
+                 "Japan",
+                 "Kenya",
+                 "Kirgisien",
+                 "Königreich Kambodscha",
+                 "Kiribati",
+                 "Komoren",
+                 "Saint Kitts und Nevis",
+                 "Korea, Volksrepublik",
+                 "Korea",
+                 "Kuwait",
+                 "Kayman Islands",
+                 "Kasachstan",
+                 "Laos",
+                 "Libanon",
+                 "Saint Lucia",
+                 "Liechtenstein",
+                 "Sri Lanka",
+                 "Liberia",
+                 "Lesotho",
+                 "Littauen",
+                 "Luxemburg",
+                 "Lettland",
+                 "Libyen",
+                 "Marokko",
+                 "Monaco",
+                 "Moldavien",
+                 "Madagaskar",
+                 "Marshall-Inseln",
+                 "Mazedonien, ehem. Jugoslawische Republik",
+                 "Mali",
+                 "Myanmar",
+                 "Mongolei",
+                 "Macao",
+                 "Nördliche Marianneninseln",
+                 "Martinique",
+                 "Mauretanien",
+                 "Montserrat",
+                 "Malta",
+                 "Mauritius",
+                 "Malediven",
+                 "Malawi",
+                 "Mexico",
+                 "Malaysien",
+                 "Mozambique",
+                 "Namibia",
+                 "Neu Kaledonien",
+                 "Niger",
+                 "Norfolk Island",
+                 "Nigeria",
+                 "Nicaragua",
+                 "Niederlande",
+                 "Norwegen",
+                 "Nepal",
+                 "Nauru",
+                 "Niue",
+                 "Neuseeland",
+                 "Oman",
+                 "Panama",
+                 "Peru",
+                 "Französisch Polynesien",
+                 "Papua Neuguinea",
+                 "Philippinen",
+                 "Pakistan",
+                 "Polen",
+                 "St. Pierre und Miquelon",
+                 "Pitcairn",
+                 "Puerto Rico",
+                 "Portugal",
+                 "Palau",
+                 "Paraguay",
+                 "Katar",
+                 "Reunion",
+                 "Rumänien",
+                 "Russische Föderation",
+                 "Ruanda",
+                 "Saudi Arabien",
+                 "Salomonen",
+                 "Seychellen",
+                 "Sudan",
+                 "Schweden",
+                 "Singapur",
+                 "St. Helena",
+                 "Slovenien",
+                 "Svalbard und Jan Mayen Islands",
+                 "Slowakei",
+                 "Sierra Leone",
+                 "San Marino",
+                 "Senegal",
+                 "Somalia",
+                 "Surinam",
+                 "Sao Tome und Principe",
+                 "El Salvador",
+                 "Syrien, Arabische Republik",
+                 "Swaziland",
+                 "Turk und Caicos-Inseln",
+                 "Tschad",
+                 "Französisches Südl.Territorium",
+                 "Togo",
+                 "Thailand",
+                 "Tadschikistan",
+                 "Tokelau",
+                 "Turkmenistan",
+                 "Tunesien",
+                 "Tonga",
+                 "Ost-Timor",
+                 "Türkei",
+                 "Trinidad und Tobago",
+                 "Tuvalu",
+                 "Taiwan",
+                 "Tansania, United Republic of",
+                 "Ukraine",
+                 "Uganda",
+                 "Großbritannien",
+                 "Vereinigte Staaten",
+                 "Vereinigte Staaten, Minor Outlying Islands",
+                 "Uruguay",
+                 "Usbekistan",
+                 "Vatikanstaat",
+                 "Saint Vincent und Grenadines",
+                 "Venezuela",
+                 "Virgin Islands (Britisch)",
+                 "Virgin Islands (U.S.)",
+                 "Vietnam",
+                 "Vanuatu",
+                 "Wallis und Futuna Islands",
+                 "Samoa",
+                 "Jemen",
+                 "Mayotte",
+                 "Jugoslawien",
+                 "Südafrika",
+                 "Sambia",
+                 "Zimbabwe"
+        };
+        
+        land2 = new JComboBox(landArray);
         
         //Button
         einfuegen = new JButton("insert");
@@ -80,6 +322,10 @@ public class TestpersonEinfuegen extends JFrame {
         add(vnameText);
         add(nname);
         add(nnameText);
+        add(email);
+        add(emailText);
+        add(tel);
+        add(telText);
         add(strasse);
         add(strasseText);
         add(hsNr);
@@ -89,7 +335,7 @@ public class TestpersonEinfuegen extends JFrame {
         add(plz);
         add(plzText);
         add(land);
-        add(landText);
+        add(land2);
        
         add(einfuegen);
         add(infoLabel);
@@ -118,12 +364,12 @@ public class TestpersonEinfuegen extends JFrame {
             String hsNr = hsNrText.getText();
             String stadt = stadtText.getText();
             String plz = plzText.getText();
-            String land = landText.getText();
+            String landAuswahl = land2.getSelectedItem() + "";
             
             
             VerwaltungJavaDBMapper mapper = new VerwaltungJavaDBMapper();
             
-            Testperson te = new Testperson(nname, vname, email, tel, hsNr, strasse, stadt, plz, land);
+            Testperson te = new Testperson(nname, vname, email, tel, hsNr, strasse, stadt, plz, landAuswahl);
             
             boolean ergebnis = mapper.einfuegenTestperson(te);
             
