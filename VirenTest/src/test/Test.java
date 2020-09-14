@@ -17,10 +17,10 @@ public class Test{
         //Testperson tp = new Testperson("Sentiten", "Dimitri", "test@testmail.com", "456498", "5", "laikestrasse", "Bonn", "9469", "Deutschelaaand");
         //System.out.println(tp);
         
-        new TestergebnisLesen("Virentestcenter", 1);
+        //new TestergebnisLesen("Virentestcenter", 2);
         
         //new ViewLaborant("Virentestcenter");
-        //new TestpersonEinfuegen("Virentestcenter");
+        new TestpersonEinfuegen("Virentestcenter");
         
         //mapper.einfuegenTestperson(tp);
         //List<Testperson> test = mapper.lesenAlleTestpersonen();

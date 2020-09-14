@@ -9,8 +9,15 @@ import persistence.TestpersonJavaDBMapper;
 import persistence.VerwaltungJavaDBMapper;
 
 public class TestpersonEinfuegen extends JFrame {
-    //Label
+    //Hintergrundfarbe
+    Color background = new Color(229, 255, 249);
+    Color background2 = new Color(194, 255, 241);
+    //Schriftart und -größe
+    Font ueberschriftFont = new Font("SansSerif", Font.BOLD, 25);
+    Font text = new Font("SansSerif", Font.BOLD, 17);
     
+    //Label
+    private JLabel ueberschrift;
     private JLabel nname;
     private JLabel vname;
     private JLabel email; 
@@ -42,7 +49,16 @@ public class TestpersonEinfuegen extends JFrame {
     }
 
     private void init() {
-        setLayout(new GridLayout(3, 2));
+        setLayout(new BorderLayout());
+        
+        JPanel blub = new JPanel(new GridLayout(9,2));
+        
+        
+        //Überschrift
+        ueberschrift = new JLabel("Willkommen beim Virustestcenter");
+        ueberschrift.setHorizontalAlignment(JLabel.CENTER);
+        ueberschrift.setFont(ueberschriftFont);
+        
         //Label
         nname = new JLabel("Nachname:");
         nnameText = new JTextField(30);
@@ -71,6 +87,17 @@ public class TestpersonEinfuegen extends JFrame {
         land = new JLabel("Land:");
         
         infoLabel = new JLabel("");
+        
+        nname.setFont(text);
+        vname.setFont(text);
+        email.setFont(text);
+        tel.setFont(text);
+        strasse.setFont(text);
+        hsNr.setFont(text);
+        stadt.setFont(text);
+        plz.setFont(text);
+        land.setFont(text);
+
         
         //ComboBox
         String landArray[] = {"AD","AE",
@@ -317,27 +344,29 @@ public class TestpersonEinfuegen extends JFrame {
         //Button
         einfuegen = new JButton("insert");
         //zu Frame adden
-        add(vname);
-        add(vnameText);
-        add(nname);
-        add(nnameText);
-        add(email);
-        add(emailText);
-        add(tel);
-        add(telText);
-        add(strasse);
-        add(strasseText);
-        add(hsNr);
-        add(hsNrText);
-        add(stadt);
-        add(stadtText);
-        add(plz);
-        add(plzText);
-        add(land);
-        add(land2);
-       
-        add(einfuegen);
-        add(infoLabel);
+        
+        blub.add(vname);
+        blub.add(vnameText);
+        blub.add(nname);
+        blub.add(nnameText);
+        blub.add(email);
+        blub.add(emailText);
+        blub.add(tel);
+        blub.add(telText);
+        blub.add(strasse);
+        blub.add(strasseText);
+        blub.add(hsNr);
+        blub.add(hsNrText);
+        blub.add(stadt);
+        blub.add(stadtText);
+        blub.add(plz);
+        blub.add(plzText);
+        blub.add(land);
+        blub.add(land2);
+        
+        add(ueberschrift, BorderLayout.NORTH);
+        add(blub, BorderLayout.CENTER);
+        add(einfuegen, BorderLayout.SOUTH);
         
         
         //ActionListener für Button
@@ -347,7 +376,9 @@ public class TestpersonEinfuegen extends JFrame {
         
         //Frameeinstellungen
         setSize(600, 400);
-        setLocation(900, 200);
+        this.getContentPane().setBackground(background);
+        blub.setBackground(background2);
+        setLocation(600, 300);
         setVisible(true);
     }
 
