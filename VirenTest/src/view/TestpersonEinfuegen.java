@@ -9,7 +9,7 @@ import persistence.TestpersonJavaDBMapper;
 import persistence.VerwaltungJavaDBMapper;
 
 public class TestpersonEinfuegen extends JFrame {
-    //Labels
+    //Label
     
     private JLabel nname;
     private JLabel vname;

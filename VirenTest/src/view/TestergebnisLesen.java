@@ -7,7 +7,7 @@ import java.awt.event.*;
 import persistence.TestpersonJavaDBMapper;
 
 public class TestergebnisLesen extends JFrame {
-    //Labels
+    //Label
     private JLabel idLabel;
     private JLabel infoLabel;
     //Tesxtfelder
