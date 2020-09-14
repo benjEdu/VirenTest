@@ -35,7 +35,10 @@ public class Testperson extends Person{
         this.testpersonId = testpersonId;
         this.adressId = adressId;
     }
-    
+
+    public Testperson(String nname, String vname, String email, String tel) {
+        super(nname, vname, email, tel);
+    }
     
 
     public int getTestpersonId() {

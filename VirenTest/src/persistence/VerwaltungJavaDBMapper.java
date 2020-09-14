@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -140,7 +141,9 @@ throw new UnsupportedOperationException("Not supported yet."); //To change body 
             }
         } catch (SQLException ex) {
             Logger.getLogger(VerwaltungJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } finally {
+        deleteConn(conn);
+    }
         return null;
     }
     
@@ -148,7 +151,41 @@ throw new UnsupportedOperationException("Not supported yet."); //To change body 
     //TODO Eigentlich ja nicht, oder? Datenschutz has left the Chat
     @Override
     public List<Testperson> lesenAlleTestpersonen() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Testperson> alleTestpersonen = new ArrayList<>();
+        Connection conn = getConn();
+        try{
+            PreparedStatement read = conn.prepareStatement("select * from testpersonen");
+            ResultSet rs = read.executeQuery();
+            while(rs.next()){
+                String Vname = rs.getString("vname");
+                String Nname = rs.getString("nname");
+                String Email = rs.getString("email");
+                String tel = rs.getString("tel");
+                int adressId = rs.getInt("adressId");
+                read = conn.prepareStatement("select * from adressen where adressId = ?");
+                read.setInt(1, adressId);
+                ResultSet rs2 = read.executeQuery();
+                Testperson tp;
+                if(rs2.next()){
+                    String strasse = rs2.getString("strasse");
+                    String hsNr = rs2.getString("hsNr");
+                    String stadt = rs2.getString("Stadt");
+                    String plz = rs2.getString("plz");
+                    String land = rs2.getString("land");
+                    tp = new Testperson(adressId, Nname, Vname, Email, tel, hsNr, strasse, stadt, plz, land);
+                }else{
+                    tp = new Testperson(Nname, Vname, Email, tel);
+                }
+                alleTestpersonen.add(tp);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(VerwaltungJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NullPointerException ex) {
+            Logger.getLogger(VerwaltungJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }finally {
+            deleteConn(conn);
+        }
+        return alleTestpersonen;
     }
     
     private Connection getConn() {

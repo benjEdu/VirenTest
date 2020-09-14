@@ -30,8 +30,14 @@ public abstract class Person {
         this.plz = plz;
         this.land = land;
     }
-    
-    
+
+    public Person(String nname, String vname, String email, String tel) {
+        this.nname = nname;
+        this.vname = vname;
+        this.email = email;
+        this.tel = tel;
+    }
+
 
     public String getNname() {
         return nname;

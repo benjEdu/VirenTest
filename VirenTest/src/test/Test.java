@@ -14,10 +14,8 @@ public class Test{
           
         Testperson tp = new Testperson(1, "Sentiten", "Dimitri", "test@testmail.com", "456498", "5", "laikestrasse", "Bonn", "9469", "Deutschelaaand");
         System.out.println(tp);
-        
-        //new TestergebnisLesen("Virentestcenter");
-        
-        new ViewLaborant("Virentestcenter");
+        List<Testperson> test = mapper.lesenAlleTestpersonen();
+        System.out.println(test);
     }
     
 }
