@@ -11,12 +11,12 @@ import java.util.logging.Logger;
 public class TestpersonJavaDBMapper implements ITestpersonMapper {
 
     @Override
-    public boolean ergebnisAbrufen(String testpersonId) {
+    public boolean ergebnisAbrufen(int testpersonId) {
 
         Connection conn = getConn();
         try {
             PreparedStatement read = conn.prepareStatement("select ergebniss from testergebnisse te NATURAL JOIN testpersonen tp where tp.testpersonId = ?");
-            read.setInt(1, Integer.parseInt(testpersonId));
+            read.setInt(1, testpersonId);
             ResultSet rs = read.executeQuery();
             boolean ergebnis;
             if (rs.next()) {
