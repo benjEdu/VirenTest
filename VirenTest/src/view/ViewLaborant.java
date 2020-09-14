@@ -6,16 +6,19 @@ import java.awt.event.*;
 import persistence.LaborantJavaDBMapper;
 
 public class ViewLaborant extends JFrame {
-
+    //Hintergrundfarbe
+    Color background = new Color(229, 255, 249);
+    Color background2 = new Color(194, 255, 241);
+    //Schriftart und -größe
+    Font ueberschriftFont = new Font("SansSerif", Font.BOLD, 25);
+    Font text = new Font("SansSerif", Font.BOLD, 17);
+    
     //Label
+    private JLabel ueberschrift;
     private JLabel idLabel;
-    private JLabel ergebnissLabel;
-    private JLabel infoLabel;
-    private JLabel infoLabel2;
+    private JLabel ergebnisLabel;
     //Textfelder
     private JTextField idText;
-    //Combobox
-    private JComboBox<String> ergebniss = new JComboBox<String>();
     //Radiobutton
     private JRadioButton positiv;
     private JRadioButton negativ;
@@ -30,17 +33,30 @@ public class ViewLaborant extends JFrame {
     }
 
     private void init() {
-        setLayout(new GridLayout(3, 2));
+        setLayout(new BorderLayout());
+        
+        JPanel panel = new JPanel(new GridLayout(2,2,0,10));
+        JPanel panel2 = new JPanel(new FlowLayout());
+        
+        //Überschrift
+        ueberschrift = new JLabel("Willkommen beim Virustestcenter");
+        ueberschrift.setHorizontalAlignment(JLabel.CENTER);
+        ueberschrift.setFont(ueberschriftFont);
+        
         //Label
         idLabel = new JLabel("Person(ID):");
         idText = new JTextField(10);
-        ergebnissLabel = new JLabel("Testergebnis");
-        infoLabel = new JLabel("");
+        ergebnisLabel = new JLabel("Testergebnis:");
         //RadioButton
         positiv = new JRadioButton("Test positiv", false);
         negativ = new JRadioButton("Test negativ", true);
         //Button
         einfuegen = new JButton("insert");
+        
+        idLabel.setFont(text);
+        ergebnisLabel.setFont(text);
+        positiv.setFont(text);
+        negativ.setFont(text);
 
         //Gruppierung RadioButton
         ButtonGroup ergebnisGroub = new ButtonGroup();
@@ -48,13 +64,16 @@ public class ViewLaborant extends JFrame {
         ergebnisGroub.add(negativ);
 
         //Zu Frame hinzufügen
-        add(idLabel);
-        add(idText);
-        add(ergebnissLabel);
-        add(positiv);
-        add(negativ);
-        add(einfuegen);
-        add(infoLabel);
+        add(ueberschrift, BorderLayout.NORTH);
+        panel.add(idLabel);
+        panel.add(idText);
+        panel.add(ergebnisLabel);
+        panel2.add(positiv);
+        panel2.add(negativ);
+        panel.add(panel2);
+        add(panel, BorderLayout.CENTER);
+        add(einfuegen, BorderLayout.SOUTH);
+        
         //Testergebnis negativ ausgewählt
         negativ.isSelected();
 
@@ -63,8 +82,14 @@ public class ViewLaborant extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Eigenschaften Frame
-        setSize(300, 200);
-        setLocation(900, 200);
+        setSize(600, 400);
+        this.getContentPane().setBackground(background);
+        panel.setBackground(background2);
+        panel2.setBackground(background2);
+        negativ.setBackground(background);
+        positiv.setBackground(background);
+        
+        setLocation(600, 300);
         setVisible(true);
     }
 
@@ -77,7 +102,6 @@ public class ViewLaborant extends JFrame {
             LaborantJavaDBMapper mapper = new LaborantJavaDBMapper();
             testPositiv = positiv.isSelected();
             boolean ergebnis = mapper.einfuegenTestergebnis(id, testPositiv);
-            infoLabel.setText(ergebnis + "");
             if(ergebnis){
                 idText.setText("");
                 negativ.isSelected();

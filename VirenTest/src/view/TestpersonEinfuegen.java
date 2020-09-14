@@ -51,7 +51,7 @@ public class TestpersonEinfuegen extends JFrame {
     private void init() {
         setLayout(new BorderLayout());
         
-        JPanel blub = new JPanel(new GridLayout(9,2));
+        JPanel panel = new JPanel(new GridLayout(9,2));
         
         
         //Überschrift
@@ -345,27 +345,27 @@ public class TestpersonEinfuegen extends JFrame {
         einfuegen = new JButton("insert");
         //zu Frame adden
         
-        blub.add(vname);
-        blub.add(vnameText);
-        blub.add(nname);
-        blub.add(nnameText);
-        blub.add(email);
-        blub.add(emailText);
-        blub.add(tel);
-        blub.add(telText);
-        blub.add(strasse);
-        blub.add(strasseText);
-        blub.add(hsNr);
-        blub.add(hsNrText);
-        blub.add(stadt);
-        blub.add(stadtText);
-        blub.add(plz);
-        blub.add(plzText);
-        blub.add(land);
-        blub.add(land2);
+        panel.add(vname);
+        panel.add(vnameText);
+        panel.add(nname);
+        panel.add(nnameText);
+        panel.add(email);
+        panel.add(emailText);
+        panel.add(tel);
+        panel.add(telText);
+        panel.add(strasse);
+        panel.add(strasseText);
+        panel.add(hsNr);
+        panel.add(hsNrText);
+        panel.add(stadt);
+        panel.add(stadtText);
+        panel.add(plz);
+        panel.add(plzText);
+        panel.add(land);
+        panel.add(land2);
         
         add(ueberschrift, BorderLayout.NORTH);
-        add(blub, BorderLayout.CENTER);
+        add(panel, BorderLayout.CENTER);
         add(einfuegen, BorderLayout.SOUTH);
         
         
@@ -377,7 +377,7 @@ public class TestpersonEinfuegen extends JFrame {
         //Frameeinstellungen
         setSize(600, 400);
         this.getContentPane().setBackground(background);
-        blub.setBackground(background2);
+        panel.setBackground(background2);
         setLocation(600, 300);
         setVisible(true);
     }
