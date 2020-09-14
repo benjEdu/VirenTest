@@ -37,16 +37,17 @@ public class ViewLaborant extends JFrame{
     private boolean testPositiv;
     
     private void init() {
-        setLayout(new GridLayout(3, 2));
+        setLayout(new GridLayout(4, 2));
         
         idLabel = new JLabel("Zu lesende Person (ID):");
         idText = new JTextField(10);
-        ergebnissLabel = new JLabel("Testergebniss eintragen (ergebniss)");
+        ergebnissLabel = new JLabel("Testergebniss eintragen (ergebniss)");   
         
         infoLabel = new JLabel("");
         infoLabel2 = new JLabel("");
         
         lesen = new JButton("read");
+
         positiv = new JRadioButton("Test positiv", false);
         negativ = new JRadioButton("Test negativ", true);
         
