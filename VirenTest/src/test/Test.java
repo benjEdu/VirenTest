@@ -3,6 +3,7 @@ package test;
 import application.Mitarbeiter;
 import application.Verwaltung;
 import view.TestergebnisLesen;
+import view.TestpersonEinfuegen;
 
 public class Test{
 
@@ -13,6 +14,7 @@ public class Test{
         */
         
         //new TestergebnisLesen("Virentestcenter");
+        new TestpersonEinfuegen("Virentestcenter");
     }
     
 }

@@ -129,7 +129,7 @@ throw new UnsupportedOperationException("Not supported yet."); //To change body 
                     String stadt = rs2.getString("Stadt");
                     String plz = rs2.getString("plz");
                     String land = rs2.getString("land");
-                    Testperson tp = new Testperson(adressId, Nname, Vname, Email, tel, hsNr, strasse, stadt, plz, land);
+                    Testperson tp = new Testperson( Nname, Vname, Email, tel, hsNr, strasse, stadt, plz, land);
                     return tp;
                 }
             }
@@ -150,7 +150,7 @@ throw new UnsupportedOperationException("Not supported yet."); //To change body 
         String userid = "VDB";
         String password = "123";
         String driver = "org.apache.derby.jdbc.ClientDriver";
-        String url = "jdbc:derby://localhost:1527/Virusdatenbank";
+        String url = "jdbc:derby://localhost:1527/Virendatenbank";
         Connection conn = null;
         try {
             Class.forName(driver);
