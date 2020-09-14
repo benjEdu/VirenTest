@@ -371,7 +371,17 @@ public class TestpersonEinfuegen extends JFrame {
             Testperson te = new Testperson(nname, vname, email, tel, hsNr, strasse, stadt, plz, landAuswahl);
             
             boolean ergebnis = mapper.einfuegenTestperson(te);
-            
+            if(ergebnis){
+                vnameText.setText("");
+                nnameText.setText("");
+                emailText.setText("");
+                telText.setText("");
+                strasseText.setText("");
+                hsNrText.setText("");
+                stadtText.setText("");
+                plzText.setText("");
+                land2.setSelectedItem("Deutschland");
+            }
             infoLabel.setText(ergebnis + "");
         }        
     }

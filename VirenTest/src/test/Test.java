@@ -19,8 +19,8 @@ public class Test{
         
         //new TestergebnisLesen("Virentestcenter");
         
-        new ViewLaborant("Virentestcenter");
-        //new TestpersonEinfuegen("Virentestcenter");
+        //new ViewLaborant("Virentestcenter");
+        new TestpersonEinfuegen("Virentestcenter");
         
         //mapper.einfuegenTestperson(tp);
         //List<Testperson> test = mapper.lesenAlleTestpersonen();

@@ -78,6 +78,10 @@ public class ViewLaborant extends JFrame {
             testPositiv = positiv.isSelected();
             boolean ergebnis = mapper.einfuegenTestergebnis(id, testPositiv);
             infoLabel.setText(ergebnis + "");
+            if(ergebnis){
+                idText.setText("");
+                negativ.isSelected();
+            }
         }
     }
 }
