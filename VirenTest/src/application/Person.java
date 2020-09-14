@@ -111,5 +111,12 @@ public abstract class Person {
         this.land = land;
     }
     
-    
+    @Override
+    public String toString(){
+        vname = this.getVname();
+        nname = this.getNname();
+        tel = this.getTel();
+        
+        return "Vorname: "+ vname+"\nNachname: "+nname+"\nTelefonnummer: "+tel+"\n";
+    }
 }
