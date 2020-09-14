@@ -311,10 +311,9 @@ public class TestpersonEinfuegen extends JFrame {
                  "Südafrika",
                  "Sambia",
                  "Zimbabwe"
-        };
-        
+        };        
         land2 = new JComboBox(landArray);
-        
+        land2.setSelectedItem("Deutschland");
         //Button
         einfuegen = new JButton("insert");
         //zu Frame adden
