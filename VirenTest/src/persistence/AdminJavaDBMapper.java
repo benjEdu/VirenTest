@@ -1,11 +1,16 @@
+
 package persistence;
 
+import application.Admin;
+import application.Laborant;
 import application.Mitarbeiter;
+import application.Verwaltung;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -68,23 +73,154 @@ public class AdminJavaDBMapper implements IAdminMapper{
 
     @Override
     public boolean aendernMitarbeiter(Mitarbeiter m) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection conn = getConn();
+        try {
+            int id = Integer.parseInt(m.getMitarbeiterId());
+            PreparedStatement select = conn.prepareStatement("select adressid from mitarbeiter where mitarbeiterid = ?");
+            select.setInt(1, id);
+            ResultSet rs = select.executeQuery();
+            
+            PreparedStatement update = conn.prepareStatement("update mitarbeiter set vname = ?, nname = ?, email = ?, tel = ? where mitarbeiterid = ?");
+            update.setString(1, m.getVname());
+            update.setString(2, m.getNname());
+            update.setString(3, m.getEmail());
+            update.setString(4, m.getTel());
+            update.setInt(5, id);
+            
+            update.executeUpdate();
+            
+            if(rs.next()){
+                update = conn.prepareStatement("update adressen set strasse = ?, hsnr = ?, stadt = ?, plz = ?, land = ? where adressid = ?");
+                update.setString(1, m.getStrasse());
+                update.setString(2, m.getHsNr());
+                update.setString(3, m.getStadt());
+                update.setString(4, m.getPlz());
+                update.setString(5, m.getLand());
+                update.setInt(6, rs.getInt(1));
+            }
+            
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        finally{
+            deleteConn(conn);
+        }
     }
 
     @Override
     public boolean loeschenMitarbeiter(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Mitarbeiter lesenMitarbeiter(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection conn = getConn();
+        try {
+            PreparedStatement select = conn.prepareStatement("select adressid from mitarbeiter where mitarbeiterid = ?");
+            select.setInt(1, id);
+            ResultSet rs = select.executeQuery();
+            
+            PreparedStatement delete = conn.prepareStatement("delete from mitarbeiter where mitarbeiterid = ?");
+            delete.setInt(1, id);
+            delete.executeUpdate();
+            
+            if(rs.next()){
+                delete = conn.prepareStatement("delete from adressen where adressid = ?");
+                delete.setInt(1, rs.getInt(1));
+                delete.executeUpdate();
+            }
+            
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        finally{
+            deleteConn(conn);
+        }
     }
 
     @Override
     public List<Mitarbeiter> lesenAlleMitarbeiter() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Mitarbeiter> alle = new ArrayList<>();
+        Connection conn = getConn();
+        try {
+            PreparedStatement select = conn.prepareStatement("select bezeichnung, mitarbeiterid, vname, nname, email, tel, adressid from mitarbeiter a, rollen b where a.rollenid = b.rollenid");
+            ResultSet rs = select.executeQuery();
+            while(rs.next()){
+                PreparedStatement select2 = conn.prepareStatement("select adressid, strasse, hsnr, stadt, plz, land from adressen where adressid = ?");
+                select2.setInt(1, rs.getInt(7));
+                ResultSet rs2 = select2.executeQuery();
+                Mitarbeiter p = null;
+                if(rs.getString(1).trim().equals("Verwaltung") ){
+                    p = new Verwaltung(rs.getString(2));
+                } else if(rs.getString(1).trim().equals("Admin")){
+                    p = new Admin(rs.getString(2));
+                } else if(rs.getString(1).trim().equals("Laborant")){
+                    p = new Laborant(rs.getString(2));
+                }
+                if(rs2.next()){
+                    p.setStrasse(rs2.getString(2));
+                    p.setHr(rs2.getString(3));
+                    p.setStadt(rs2.getString(4));
+                    p.setPlz(rs2.getString(5));
+                    p.setLand(rs2.getString(6));
+                }
+                p.setVname(rs.getString(3));
+                p.setNname(rs.getString(4));
+                p.setEmail(rs.getString(5));
+                p.setTel(rs.getString(6));
+                alle.add(p);
+            }
+            return alle;
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        finally{
+            deleteConn(conn);
+        }
     }
+
+    @Override
+    public Mitarbeiter lesenMitarbeiter(int id) {
+        Connection conn = getConn();
+        try {
+            Mitarbeiter p = null;
+            PreparedStatement select = conn.prepareStatement("select bezeichnung, mitarbeiterid, vname, nname, email, tel, adressid from mitarbeiter a, rollen b where a.rollenid = b.rollenid and mitarbeiterid = ?");
+            select.setInt(1, id);
+            ResultSet rs = select.executeQuery();
+            if(rs.next()){
+                if(rs.getString(1).trim().equals("Verwaltung") ){
+                    p = new Verwaltung(rs.getString(2));
+                } else if(rs.getString(1).trim().equals("Admin")){
+                    p = new Admin(rs.getString(2));
+                } else if(rs.getString(1).trim().equals("Laborant")){
+                    p = new Laborant(rs.getString(2));
+                }
+                PreparedStatement select2 = conn.prepareStatement("select adressid, strasse, hsnr, stadt, plz, land from adressen where adressid = ?");
+                select2.setInt(1, rs.getInt(7));
+                ResultSet rs2 = select2.executeQuery();
+                if(rs2.next()){
+                    p.setStrasse(rs2.getString(2));
+                    p.setHr(rs2.getString(3));
+                    p.setStadt(rs2.getString(4));
+                    p.setPlz(rs2.getString(5));
+                    p.setLand(rs2.getString(6));
+                }
+                p.setVname(rs.getString(3));
+                p.setNname(rs.getString(4));
+                p.setEmail(rs.getString(5));
+                p.setTel(rs.getString(6));
+            }
+            return p;
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+        finally{
+            deleteConn(conn);
+        }
+    }
+
+    
     
     private Connection getConn() {
         String userid = "VDB";
