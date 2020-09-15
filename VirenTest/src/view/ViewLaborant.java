@@ -57,6 +57,9 @@ public class ViewLaborant extends JFrame {
         ergebnisLabel.setFont(text);
         positiv.setFont(text);
         negativ.setFont(text);
+        
+        einfuegen.setBackground(background);
+        einfuegen.setFont(text);
 
         //Gruppierung RadioButton
         ButtonGroup ergebnisGroub = new ButtonGroup();
