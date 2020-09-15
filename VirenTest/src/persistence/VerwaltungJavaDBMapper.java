@@ -94,14 +94,40 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
     //Was genau soll geaendert werden?
     @Override
     public boolean aendernTestperson(Testperson tp) {
-throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection conn = getConn();
+        try{
+            PreparedStatement update = conn.prepareStatement("update testpersonen set vname=?, nname=?, email=?, tel=?, adressid=? where testpersonid=?");
+                    update.setString(1, tp.getVname());
+                    update.setString(2, tp.getNname());
+                    update.setString(3, tp.getEmail());
+                    update.setString(4, tp.getTel());
+                    update.setInt(5, tp.getAdressId());
+                    update.setInt(6, tp.getTestpersonId());
+                    update.executeUpdate();
+            update = conn.prepareStatement("update adressen set strasse=?, hsnr=?, stadt=?, plz=?, land=? where adressid=?");
+                    update.setString(1, tp.getStrasse());
+                    update.setString(2, tp.getHsNr());
+                    update.setString(3, tp.getStadt());
+                    update.setString(4, tp.getPlz());
+                    update.setString(5, tp.getLand());
+                    update.setInt(6, tp.getAdressId());
+                    update.executeUpdate();
+                    conn.commit();
+                    return true;
+        }catch (SQLException ex) {
+            Logger.getLogger(VerwaltungJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        finally{
+            deleteConn(conn);
+        }
     }
 
     @Override
     public boolean loeschenTestperson(int tpid) {
         Connection conn = getConn();
         try {
-            PreparedStatement delete = conn.prepareStatement("delete from testpersonen where id = ?");
+            PreparedStatement delete = conn.prepareStatement("delete from testpersonen where testpersonid = ?");
             delete.setInt(1, tpid);
             delete.executeUpdate();
             return true;
