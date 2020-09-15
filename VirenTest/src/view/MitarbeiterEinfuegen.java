@@ -455,8 +455,8 @@ public class MitarbeiterEinfuegen extends JFrame {
             m.setPlz(plz);
             m.setLand(landAuswahl);
             
-            boolean ergebnis = mapper.einfuegenMitarbeiter(m);
-            if(ergebnis){
+            String ergebnis = mapper.einfuegenMitarbeiter(m);
+            if(ergebnis.equals("Passt")){
                 vnameText.setText("");
                 nnameText.setText("");
                 emailText.setText("");
