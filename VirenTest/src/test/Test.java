@@ -1,5 +1,6 @@
 package test;
 
+import application.Login;
 import application.Mitarbeiter;
 import application.Testperson;
 import application.Verwaltung;
@@ -12,7 +13,22 @@ import view.TestpersonLoeschen;
 public class Test{
 
     public static void main(String[] args) {
-        
+
+        System.out.println(Login.hashPassword("Brombeere", "c8a2ebb85d364556ba4d78cb9c9cd408", 0));
+System.out.println();
+System.out.println(Login.hashPassword("Himbeere", "1a7041115399402e9022c0eb03143ec5", 0));
+System.out.println();
+System.out.println(Login.hashPassword("Erdbeere", "8ceb6b9c0971495d97520e37f969d471", 0));
+System.out.println();
+System.out.println(Login.hashPassword("Heidelbeere", "4d1e6125e8ba4383b003d91b584cf7fd", 0));
+System.out.println();
+System.out.println(Login.hashPassword("Banane", "7744724870154dfe8e8c05e5d357364e", 0));
+System.out.println();
+System.out.println(Login.hashPassword("Ananas", "6aa5b8269bba4a1985d51c2b2ac6c87d", 0));
+System.out.println();
+System.out.println(Login.hashPassword("Apfel", "ba4d00e5c835481d8312d927831d522f", 0));
+System.out.println();
+System.out.println(Login.hashPassword("Pfirsich", "63c5db93e725465aaa57a33acba533b0", 0));
         /*
         
         VerwaltungJavaDBMapper mapper = new VerwaltungJavaDBMapper();
@@ -48,7 +64,7 @@ public class Test{
         
         //new ViewLaborant("Virentestcenter");
         //new TestpersonEinfuegen("Virentestcenter");
-        new TestpersonLoeschen("Virentestcenter");
+        //new TestpersonLoeschen("Virentestcenter");
         
         //mapper.einfuegenTestperson(tp);
         //List<Testperson> test = mapper.lesenAlleTestpersonen();

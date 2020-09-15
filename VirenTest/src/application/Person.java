@@ -15,11 +15,13 @@ public abstract class Person {
     private String stadt;
     private String plz;
     private String land;
+    private String salt;
+    private String pwdHash;
 
     public Person() {
     }
 
-    public Person(String nname, String vname, String email, String tel, String hsNr, String strasse, String stadt, String plz, String land) {
+    public Person(String nname, String vname, String email, String tel, String hsNr, String strasse, String stadt, String plz, String land, String salt, String pwdHash) {
         this.nname = nname;
         this.vname = vname;
         this.email = email;
@@ -29,15 +31,26 @@ public abstract class Person {
         this.stadt = stadt;
         this.plz = plz;
         this.land = land;
+        this.salt = salt;
+        this.pwdHash = pwdHash;
     }
 
-    public Person(String nname, String vname, String email, String tel) {
+    public Person(String nname, String vname, String email, String tel, String salt, String pwdHash) {
         this.nname = nname;
         this.vname = vname;
         this.email = email;
         this.tel = tel;
+        this.salt = salt;
+        this.pwdHash = pwdHash;
     }
 
+    public String getSalt() {
+        return salt;
+    }
+
+    public String getPwdHash() {
+        return pwdHash;
+    }
 
     public String getNname() {
         return nname;
