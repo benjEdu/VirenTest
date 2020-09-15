@@ -12,8 +12,9 @@ public class Test{
 
     public static void main(String[] args) {
         VerwaltungJavaDBMapper mapper = new VerwaltungJavaDBMapper();
+        mapper.loeschenTestperson(1);
           
-        Testperson tp = new Testperson("Sentiten", "Dimitri", "test@testmail.com", "456498", "5", "laikestrasse", "Bonn", "9469", "Deutschelaaand");
+        /*Testperson tp = new Testperson("Sentiten", "Dimitri", "test@testmail.com", "456498", "5", "laikestrasse", "Bonn", "9469", "Deutschelaaand");
         Testperson tp2 = new Testperson("2Sentiten", "2Dimitri", "2test@testmail.com", "2456498", "25", "2laikestrasse", "2Bonn", "29469", "2Deutschelaaand");
         System.out.println(tp);
         System.out.println(tp2);
@@ -33,6 +34,6 @@ public class Test{
         
         System.out.println("\n\nLöschen beide");
         System.out.println(mapper.loeschenTestperson(tp.getTestpersonId()));
-        System.out.println(mapper.loeschenTestperson(tp2.getTestpersonId()));
+        System.out.println(mapper.loeschenTestperson(tp2.getTestpersonId()));*/
     }
 }

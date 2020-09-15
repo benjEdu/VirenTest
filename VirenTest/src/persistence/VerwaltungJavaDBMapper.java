@@ -126,7 +126,10 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
     public boolean loeschenTestperson(int tpid) {
         Connection conn = getConn();
         try {
-            PreparedStatement delete = conn.prepareStatement("delete from testpersonen where testpersonid = ?");
+            PreparedStatement delete = conn.prepareStatement("delete from testergebnisse where testpersonid = ?");
+            delete.setInt(1, tpid);
+            delete.executeUpdate();
+            delete = conn.prepareStatement("delete from testpersonen where testpersonid = ?");
             delete.setInt(1, tpid);
             delete.executeUpdate();
             return true;
