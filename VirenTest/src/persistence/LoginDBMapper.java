@@ -11,9 +11,9 @@ import persistence.DBConnectionPool;
  * @author z003ub8r
  */
 public class LoginDBMapper {
-    public String getSalt(int tpid){
+   /* public String getSalt(int tpid){
         
-    }
+    }*/
     
     
 }
