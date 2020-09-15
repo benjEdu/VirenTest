@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
 
     @Override
-    public boolean einfuegenTestperson(Testperson tp) {
+    public String einfuegenTestperson(Testperson tp) {
         int adressId = 0;
         Connection conn = getConn();
         
@@ -76,7 +76,7 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
                 int tpId = rs.getInt(1);
                 tp.setTestpersonId(tpId);
             }
-            return true;
+            return "Testperson erfolgreich eingefügt :)";
         } catch (SQLException ex) {
             Logger.getLogger(VerwaltungJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex);
             try{
@@ -84,7 +84,7 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
             }catch (SQLException exl){
                 Logger.getLogger(VerwaltungJavaDBMapper.class.getName()).log(Level.SEVERE, null, exl);
             }
-            return false;
+            return ex.toString();
         }
         finally{
             deleteConn(conn);
@@ -92,9 +92,10 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
     }
 
     @Override
-    public boolean aendernTestperson(Testperson tp) {
+    public String aendernTestperson(Testperson tp) {
         Connection conn = getConn();
         try{
+            
             PreparedStatement update = conn.prepareStatement("update testpersonen set vname=?, nname=?, email=?, tel=?, adressid=? where testpersonid=?");
                     update.setString(1, tp.getVname());
                     update.setString(2, tp.getNname());
@@ -112,10 +113,10 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
                     update.setInt(6, tp.getAdressId());
                     update.executeUpdate();
                     conn.commit();
-                    return true;
+                    return "Erfolgreich geändert :)";
         }catch (SQLException ex) {
             Logger.getLogger(VerwaltungJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
+            return ex.toString();
         }
         finally{
             deleteConn(conn);

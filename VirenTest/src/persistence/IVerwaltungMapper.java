@@ -13,9 +13,9 @@ import java.util.List;
  * @author benni
  */
 public interface IVerwaltungMapper {
-    public boolean einfuegenTestperson(Testperson p);
+    public String einfuegenTestperson(Testperson p);
     
-    public boolean aendernTestperson(Testperson p);
+    public String aendernTestperson(Testperson p);
     
     public boolean loeschenTestperson(int id);
     

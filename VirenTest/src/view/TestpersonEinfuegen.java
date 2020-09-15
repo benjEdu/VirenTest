@@ -401,8 +401,8 @@ public class TestpersonEinfuegen extends JFrame {
             
             Testperson te = new Testperson(nname, vname, email, tel, hsNr, strasse, stadt, plz, landAuswahl);
             
-            boolean ergebnis = mapper.einfuegenTestperson(te);
-            if(ergebnis){
+            String ergebnis = mapper.einfuegenTestperson(te);
+            if(ergebnis.equals("Testperson erfolgreich eingefügt :)")){
                 vnameText.setText("");
                 nnameText.setText("");
                 emailText.setText("");
