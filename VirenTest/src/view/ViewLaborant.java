@@ -36,7 +36,7 @@ public class ViewLaborant extends JFrame {
         setLayout(new BorderLayout());
         
         JPanel panel = new JPanel(new GridLayout(2,2,0,10));
-        JPanel panel2 = new JPanel(new FlowLayout());
+        JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         
         //Überschrift
         ueberschrift = new JLabel("Willkommen beim Virustestcenter");
