@@ -7,6 +7,7 @@ import java.util.List;
 import view.TestergebnisLesen;
 import persistence.VerwaltungJavaDBMapper;
 import view.TestpersonEinfuegen;
+import view.TestpersonLoeschen;
 
 public class Test{
 
@@ -47,6 +48,7 @@ public class Test{
         
         //new ViewLaborant("Virentestcenter");
         //new TestpersonEinfuegen("Virentestcenter");
+        new TestpersonLoeschen("Virentestcenter");
         
         //mapper.einfuegenTestperson(tp);
         //List<Testperson> test = mapper.lesenAlleTestpersonen();
