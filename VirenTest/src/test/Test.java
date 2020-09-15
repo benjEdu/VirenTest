@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package test;
 
 import application.Mitarbeiter;
