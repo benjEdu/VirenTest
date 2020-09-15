@@ -91,7 +91,6 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
         }
     }
 
-    //Was genau soll geaendert werden?
     @Override
     public boolean aendernTestperson(Testperson tp) {
         Connection conn = getConn();
@@ -174,8 +173,7 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
         return null;
     }
     
-
-    //TODO Eigentlich ja nicht, oder? Datenschutz has left the Chat
+    
     @Override
     public List<Testperson> lesenAlleTestpersonen() {
         List<Testperson> alleTestpersonen = new ArrayList<>();
