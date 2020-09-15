@@ -21,7 +21,7 @@ public class AdminVerwaltung {
         mapper = EinfacheDBFactory.getAdminMapper();
     }
     
-    public boolean einfuegenMitarbeiter(Mitarbeiter m){
+    public String einfuegenMitarbeiter(Mitarbeiter m){
         return mapper.einfuegenMitarbeiter(m);
     }
             
@@ -29,7 +29,7 @@ public class AdminVerwaltung {
        return mapper.loeschenMitarbeiter(id);
     }
     
-    public boolean aendernMitarbeiter(Mitarbeiter m){
+    public String aendernMitarbeiter(Mitarbeiter m){
         return mapper.aendernMitarbeiter(m);
     }
     
