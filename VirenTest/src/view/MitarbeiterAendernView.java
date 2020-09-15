@@ -87,33 +87,14 @@ public class MitarbeiterAendernView extends JFrame{
         hnrText = new JTextField(m.getHsNr());
         plzText = new JTextField(m.getPlz());
         
-        setLayout(new GridLayout(10, 2));
+        setLayout(new GridLayout(10,2));
         
         aendern = new JButton("Ändern");
         AendernButtonListener aendernListener = new AendernButtonListener();
         aendern.addActionListener(aendernListener);
         
-        add(ueberschrift);
-        add(bezeichnungLabel);
-        add(vNameLabel);
-        add(vNameText);
-        add(nNameLabel);
-        add(nNameText);
-        add(emailLabel);
-        add(emailText);
-        add(telLabel);
-        add(telText);
-        add(stadtLabel);
-        add(stadtText);
-        add(landLabel);
-        add(landText);
-        add(strasseLabel);
-        add(strasseText);
-        add(hnrLabel);
-        add(hnrText);
-        add(plzLabel);
-        add(plzText);
-        add(aendern);
+        
+        
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(900,800);
         this.getContentPane().setBackground(background);
@@ -125,7 +106,6 @@ public class MitarbeiterAendernView extends JFrame{
     private class AendernButtonListener implements ActionListener {
         @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(vNameText.getText());
                     Mitarbeiter m = null;
                     switch (bezeichnungLabel.getText()) {
                         case "Admin":
@@ -138,11 +118,12 @@ public class MitarbeiterAendernView extends JFrame{
                             m = new Laborant(idMit);
                             break;
                         default:
+                            break;
                     }
-                    //if(!vNameText.getText().isEmpty() && !vNameText.getText().equals("")){
+                    if(!vNameText.getText().isEmpty() && !vNameText.getText().equals("")){
                         
                         m.setVname(vNameText.getText());
-                    //}
+                    }
                     if(!nNameText.getText().isEmpty() && !nNameText.getText().equals("")){
                         m.setNname(nNameText.getText());
                     }
