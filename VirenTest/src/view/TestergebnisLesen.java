@@ -7,51 +7,60 @@ import java.awt.event.*;
 import persistence.TestpersonJavaDBMapper;
 
 public class TestergebnisLesen extends JFrame {
-    //Labels
-    private JLabel idLabel;
-    private JLabel infoLabel;
+
+    //Hintergrundfarbe
+    Color background = new Color(229, 255, 249);
+    //Schriftart und -größe
+    Font ueberschriftFont = new Font("SansSerif", Font.BOLD, 25);
+    Font text = new Font("SansSerif", Font.BOLD, 17);
+
+    //Label
+    private JLabel ausgabe;
+    private JLabel ueberschrift;
     //Tesxtfelder
-    private JTextField idText;
+
     //Buttons
-    private JButton lesen;
-    
+    private final int testpersonId;
+
     //Konstruktor
-    public TestergebnisLesen(String titel) {
+    public TestergebnisLesen(String titel, int id) {
         super(titel);
+        testpersonId = id;
         init();
     }
 
     private void init() {
-        setLayout(new GridLayout(3, 2));
+        setLayout(new BorderLayout());
+
+        //Überschrift
+        ueberschrift = new JLabel("Willkommen bei Ihrem Virustestcenter");
+        ueberschrift.setHorizontalAlignment(JLabel.CENTER);
+        ueberschrift.setFont(ueberschriftFont);
+
         //Label
-        idLabel = new JLabel("Zu lesende Person (ID):");
-        idText = new JTextField(10);
-        infoLabel = new JLabel("");
-        //Button
-        lesen = new JButton("read");
+        ausgabe = new JLabel("");
+        ausgabe.setHorizontalAlignment(JLabel.CENTER);
+        ausgabe.setFont(text);
+
         //zu Frame adden
-        add(idLabel);
-        add(idText);
-        add(lesen);
-        add(infoLabel);
-        //ActionListener für Button
-        MyActionListener listener = new MyActionListener();
-        lesen.addActionListener(listener);
+        add(ueberschrift, BorderLayout.NORTH);
+        add(ausgabe, BorderLayout.CENTER);
+
+        //Ergebnis Abrufen
+        TestpersonJavaDBMapper mapper = new TestpersonJavaDBMapper();
+        boolean testPositiv = mapper.ergebnisAbrufen(testpersonId);
+        //Angepasste Ausgabe an Ergebnis
+        if (testPositiv) {
+            ausgabe.setText("Das Ergebnis Ihres Tests ist positiv. Bitte begeben Sie sich für die kommenden zwei Wochen in Quarantäne.");
+        } else {
+            ausgabe.setText("Das Ergebnis Ihres Tests ist negativ.");
+        }
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //Frameeinstellungen
-        setSize(300, 200);
-        setLocation(900, 200);
+        setSize(600, 400);
+        this.getContentPane().setBackground(background);
+        setLocation(600, 300);
         setVisible(true);
-    }
-
-    private class MyActionListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            //Eingabe von Nutzer
-            String id = idText.getText();
-            TestpersonJavaDBMapper mapper = new TestpersonJavaDBMapper();
-            boolean ergebnis = mapper.ergebnisAbrufen(id);
-            infoLabel.setText(ergebnis + "");
-        }        
     }
 }
