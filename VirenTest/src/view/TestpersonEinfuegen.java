@@ -342,7 +342,7 @@ public class TestpersonEinfuegen extends JFrame {
         land2 = new JComboBox(landArray);
         land2.setSelectedItem("Deutschland");
         //Button
-        einfuegen = new JButton("insert");
+        einfuegen = new JButton("Einfügen");
         //zu Frame adden
         
         panel.add(vname);

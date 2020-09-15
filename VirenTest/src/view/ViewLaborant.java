@@ -51,7 +51,7 @@ public class ViewLaborant extends JFrame {
         positiv = new JRadioButton("Test positiv", false);
         negativ = new JRadioButton("Test negativ", true);
         //Button
-        einfuegen = new JButton("insert");
+        einfuegen = new JButton("Einfügen");
         
         idLabel.setFont(text);
         ergebnisLabel.setFont(text);

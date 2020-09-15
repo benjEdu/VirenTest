@@ -32,7 +32,7 @@ public class TestpersonLoeschen extends JFrame {
     private void init() {
         setLayout(new BorderLayout());
         
-        JPanel panel = new JPanel(new GridLayout(9,2));
+        JPanel panel = new JPanel(new GridLayout(2,1));
         
         
         //Überschrift
@@ -41,7 +41,7 @@ public class TestpersonLoeschen extends JFrame {
         ueberschrift.setFont(ueberschriftFont);
         
         //Label
-        id = new JLabel("Nachname:");
+        id = new JLabel("Id der Testperson, die gelöscht werden soll:");
         idText = new JTextField(10);
         
         id.setFont(text);
@@ -77,12 +77,8 @@ public class TestpersonLoeschen extends JFrame {
         public void actionPerformed(ActionEvent e) {
             //Eingabe von Nutzer
             int id = Integer.parseInt(idText.getText());
-            
-            
             VerwaltungJavaDBMapper mapper = new VerwaltungJavaDBMapper();
-            
-            
-            
+
             boolean ergebnis = mapper.loeschenTestperson(id);
             if(ergebnis){
                 idText.setText("");
