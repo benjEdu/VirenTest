@@ -22,14 +22,27 @@ import java.util.logging.Logger;
  * @author benni
  */
 public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
+    
+    private boolean emailVergeben(Connection conn, Testperson tp) throws SQLException{
+        PreparedStatement readMail = conn.prepareStatement("select * from testpersonen where email=?");
+        readMail.setString(1, tp.getEmail());
+        ResultSet rs = readMail.executeQuery();
+        if(rs.next()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     @Override
     public String einfuegenTestperson(Testperson tp) {
         int adressId = 0;
         Connection conn = getConn();
-        
         try{
             conn.setAutoCommit(false);
+            if(emailVergeben(conn,tp)){
+                return "Diese Email-Adresse ist bereits vergeben";
+            }
             //Adresse der Testperson einfuegen
             PreparedStatement insert = conn.prepareStatement("insert into adressen(strasse,hsnr,stadt,plz,land)values(?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
             insert.setString(1, tp.getStrasse());
@@ -95,7 +108,10 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
     public String aendernTestperson(Testperson tp) {
         Connection conn = getConn();
         try{
-            
+            conn.setAutoCommit(false);
+            if(emailVergeben(conn,tp)){
+                return "Diese Email-Adresse ist bereits vergeben";
+            }
             PreparedStatement update = conn.prepareStatement("update testpersonen set vname=?, nname=?, email=?, tel=?, adressid=? where testpersonid=?");
                     update.setString(1, tp.getVname());
                     update.setString(2, tp.getNname());
