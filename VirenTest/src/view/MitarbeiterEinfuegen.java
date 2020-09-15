@@ -1,14 +1,17 @@
 package view;
 
+import application.Admin;
+import application.Laborant;
+import application.Mitarbeiter;
 import application.Testperson;
-import application.VerwaltungVerwaltung;
+import application.Verwaltung;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import persistence.TestpersonJavaDBMapper;
+import persistence.AdminJavaDBMapper;
 import persistence.VerwaltungJavaDBMapper;
 
-public class TestpersonEinfuegen extends JFrame {
+public class MitarbeiterEinfuegen extends JFrame {
     //Hintergrundfarbe
     Color background = new Color(229, 255, 249);
     Color background2 = new Color(194, 255, 241);
@@ -16,6 +19,9 @@ public class TestpersonEinfuegen extends JFrame {
     Font ueberschriftFont = new Font("SansSerif", Font.BOLD, 25);
     Font text = new Font("SansSerif", Font.BOLD, 17);
     
+    Boolean adminB;
+    Boolean laborantB;
+    Boolean verwaltungB;
     //Label
     private JLabel ueberschrift;
     private JLabel nname;
@@ -27,7 +33,7 @@ public class TestpersonEinfuegen extends JFrame {
     private JLabel stadt; 
     private JLabel plz; 
     private JLabel land;
-    private JLabel infoLabel;
+    private JLabel rolle;
     //Tesxtfelder
     private JTextField nnameText;
     private JTextField vnameText;
@@ -39,11 +45,15 @@ public class TestpersonEinfuegen extends JFrame {
     private JTextField plzText; 
     //Combobox
     private JComboBox land2;
+    //RadioButton
+    private JRadioButton admin;
+    private JRadioButton laborant;
+    private JRadioButton verwaltung;
     //Buttons
     private JButton einfuegen;
     
     //Konstruktor
-    public TestpersonEinfuegen(String titel) {
+    public MitarbeiterEinfuegen(String titel) {
         super(titel);
         init();
     }
@@ -51,7 +61,9 @@ public class TestpersonEinfuegen extends JFrame {
     private void init() {
         setLayout(new BorderLayout());
         
-        JPanel panel = new JPanel(new GridLayout(9,2));
+        JPanel panel = new JPanel(new GridLayout(11,2));
+        
+        JPanel panel2 = new JPanel(new GridLayout(1,3));
         
         
         //Überschrift
@@ -86,7 +98,18 @@ public class TestpersonEinfuegen extends JFrame {
         
         land = new JLabel("Land:");
         
-        infoLabel = new JLabel("");
+        rolle = new JLabel("RollenId:");
+        
+        //RadioButton
+        admin = new JRadioButton("Admin", false);
+        laborant = new JRadioButton("Laborant", false);
+        verwaltung = new JRadioButton("Verwaltung", true);
+        
+        //Gruppierung RadioButton
+        ButtonGroup ergebnisGroub = new ButtonGroup();
+        ergebnisGroub.add(admin);
+        ergebnisGroub.add(laborant);
+        ergebnisGroub.add(verwaltung);
         
         nname.setFont(text);
         vname.setFont(text);
@@ -97,6 +120,10 @@ public class TestpersonEinfuegen extends JFrame {
         stadt.setFont(text);
         plz.setFont(text);
         land.setFont(text);
+        rolle.setFont(text);
+        admin.setFont(text);
+        laborant.setFont(text);
+        verwaltung.setFont(text);
 
         
         //ComboBox
@@ -361,6 +388,11 @@ public class TestpersonEinfuegen extends JFrame {
         panel.add(stadtText);
         panel.add(plz);
         panel.add(plzText);
+        panel.add(rolle);
+        panel2.add(verwaltung);
+        panel2.add(laborant);
+        panel2.add(admin);
+        panel.add(panel2);
         panel.add(land);
         panel.add(land2);
         
@@ -378,6 +410,9 @@ public class TestpersonEinfuegen extends JFrame {
         setSize(600, 400);
         this.getContentPane().setBackground(background);
         panel.setBackground(background2);
+        verwaltung.setBackground(background2);
+        laborant.setBackground(background2);
+        admin.setBackground(background2);
         setLocation(600, 300);
         setVisible(true);
     }
@@ -394,15 +429,34 @@ public class TestpersonEinfuegen extends JFrame {
             String hsNr = hsNrText.getText();
             String stadt = stadtText.getText();
             String plz = plzText.getText();
+            adminB = admin.isSelected();
+            laborantB = laborant.isSelected();
+            verwaltungB = verwaltung.isSelected();
             String landAuswahl = land2.getSelectedItem() + "";
             
+            Mitarbeiter m;
+            AdminJavaDBMapper mapper = new AdminJavaDBMapper();
             
-            VerwaltungJavaDBMapper mapper = new VerwaltungJavaDBMapper();
+            if(adminB){
+                m = new Admin("einfuegen");
+            } else if(laborantB){
+                m = new Laborant("einfuegen");
+            } else{
+                m = new Verwaltung("einfuegen");
+            }
+
+            m.setVname(vname);
+            m.setNname(nname);
+            m.setEmail(email);
+            m.setTel(tel);
+            m.setStrasse(strasse);
+            m.setHr(hsNr);
+            m.setStadt(stadt);
+            m.setPlz(plz);
+            m.setLand(landAuswahl);
             
-            Testperson te = new Testperson(nname, vname, email, tel, hsNr, strasse, stadt, plz, landAuswahl);
-            
-            String ergebnis = mapper.einfuegenTestperson(te);
-            if(ergebnis.equals("Testperson erfolgreich eingefügt :)")){
+            boolean ergebnis = mapper.einfuegenMitarbeiter(m);
+            if(ergebnis){
                 vnameText.setText("");
                 nnameText.setText("");
                 emailText.setText("");
@@ -411,9 +465,9 @@ public class TestpersonEinfuegen extends JFrame {
                 hsNrText.setText("");
                 stadtText.setText("");
                 plzText.setText("");
+                verwaltung.isSelected();
                 land2.setSelectedItem("Deutschland");
             }
-            infoLabel.setText(ergebnis + "");
         }        
     }
 }

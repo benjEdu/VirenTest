@@ -22,14 +22,27 @@ import java.util.logging.Logger;
  * @author benni
  */
 public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
+    
+    private boolean emailVergeben(Connection conn, Testperson tp) throws SQLException{
+        PreparedStatement readMail = conn.prepareStatement("select * from testpersonen where email=?");
+        readMail.setString(1, tp.getEmail());
+        ResultSet rs = readMail.executeQuery();
+        if(rs.next()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     @Override
-    public boolean einfuegenTestperson(Testperson tp) {
+    public String einfuegenTestperson(Testperson tp) {
         int adressId = 0;
         Connection conn = getConn();
-        
         try{
             conn.setAutoCommit(false);
+            if(emailVergeben(conn,tp)){
+                return "Diese Email-Adresse ist bereits vergeben";
+            }
             //Adresse der Testperson einfuegen
             PreparedStatement insert = conn.prepareStatement("insert into adressen(strasse,hsnr,stadt,plz,land)values(?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
             insert.setString(1, tp.getStrasse());
@@ -76,7 +89,7 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
                 int tpId = rs.getInt(1);
                 tp.setTestpersonId(tpId);
             }
-            return true;
+            return "Testperson erfolgreich eingefügt :)";
         } catch (SQLException ex) {
             Logger.getLogger(VerwaltungJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex);
             try{
@@ -84,7 +97,7 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
             }catch (SQLException exl){
                 Logger.getLogger(VerwaltungJavaDBMapper.class.getName()).log(Level.SEVERE, null, exl);
             }
-            return false;
+            return ex.toString();
         }
         finally{
             deleteConn(conn);
@@ -92,9 +105,13 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
     }
 
     @Override
-    public boolean aendernTestperson(Testperson tp) {
+    public String aendernTestperson(Testperson tp) {
         Connection conn = getConn();
         try{
+            conn.setAutoCommit(false);
+            if(emailVergeben(conn,tp)){
+                return "Diese Email-Adresse ist bereits vergeben";
+            }
             PreparedStatement update = conn.prepareStatement("update testpersonen set vname=?, nname=?, email=?, tel=?, adressid=? where testpersonid=?");
                     update.setString(1, tp.getVname());
                     update.setString(2, tp.getNname());
@@ -112,10 +129,10 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
                     update.setInt(6, tp.getAdressId());
                     update.executeUpdate();
                     conn.commit();
-                    return true;
+                    return "Erfolgreich geändert :)";
         }catch (SQLException ex) {
             Logger.getLogger(VerwaltungJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
+            return ex.toString();
         }
         finally{
             deleteConn(conn);
@@ -126,7 +143,10 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
     public boolean loeschenTestperson(int tpid) {
         Connection conn = getConn();
         try {
-            PreparedStatement delete = conn.prepareStatement("delete from testpersonen where testpersonid = ?");
+            PreparedStatement delete = conn.prepareStatement("delete from testergebnisse where testpersonid = ?");
+            delete.setInt(1, tpid);
+            delete.executeUpdate();
+            delete = conn.prepareStatement("delete from testpersonen where testpersonid = ?");
             delete.setInt(1, tpid);
             delete.executeUpdate();
             return true;

@@ -1,9 +1,3 @@
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 import application.AdminVerwaltung;
@@ -18,8 +12,18 @@ import javax.swing.*;
  * @author benni
  */
 public class MitarbeiterVerwaltungView extends JFrame{
+    
+    //Hintergrundfarbe
+    Color background = new Color(229, 255, 249);
+    Color background2 = new Color(194, 255, 241);
+    //Schriftart und -größe
+    Font ueberschriftFont = new Font("SansSerif", Font.BOLD, 25);
+    Font text = new Font("SansSerif", Font.BOLD, 17);
+    
+    private JLabel ueberschrift;
     private AdminVerwaltung av;
     private JTable table;
+    
     
     
     public MitarbeiterVerwaltungView(String titel){
@@ -29,6 +33,12 @@ public class MitarbeiterVerwaltungView extends JFrame{
     }
     
     private void init(){
+        
+        //Überschrift
+        ueberschrift = new JLabel("Willkommen beim Virustestcenter");
+        ueberschrift.setHorizontalAlignment(JLabel.CENTER);
+        ueberschrift.setFont(ueberschriftFont);
+        
         String[] columnNames = {"Mitarbeiter-ID",
                         "Vorname",
                         "Nachname",
@@ -56,12 +66,16 @@ public class MitarbeiterVerwaltungView extends JFrame{
             data3[i][9] = data.get(i).getLand();
         }
         
-        setLayout(new GridLayout(1,1));
+        setLayout(new BorderLayout());
         table = new JTable(data3, columnNames);
-        add(table);
+        table.setFont(text);
+        table.setBackground(background2);
+        add(ueberschrift, BorderLayout.NORTH);
+        add(table, BorderLayout.CENTER);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800,600);
-        setLocation(400,400);
+        setSize(1000,500);
+        this.getContentPane().setBackground(background);
+        setLocation(550,300);
         setVisible(true);
     }
     
