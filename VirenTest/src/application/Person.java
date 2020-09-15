@@ -14,7 +14,7 @@ public abstract class Person {
     private String strasse;
     private String stadt;
     private String plz;
-    private String land;
+    String land;
 
     public Person() {
     }
