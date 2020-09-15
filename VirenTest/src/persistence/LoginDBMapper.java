@@ -12,7 +12,7 @@ import persistence.DBConnectionPool;
  */
 public class LoginDBMapper {
     public String getSalt(int tpid){
-        
+        return ";";
     }
     
     
