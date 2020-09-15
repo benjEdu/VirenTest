@@ -9,6 +9,7 @@ import persistence.VerwaltungJavaDBMapper;
 import view.MitarbeiterEinfuegen;
 import view.TestpersonEinfuegen;
 import view.TestpersonLoeschen;
+import view.TestpersonenVerwaltungView;
 
 public class Test{
 
@@ -56,5 +57,7 @@ public class Test{
         //List<Testperson> test = mapper.lesenAlleTestpersonen();
         //System.out.println(test);
         //mapper.lesenTestperson(1);
+        
+        new TestpersonenVerwaltungView("Virentestcenter");
     }
 }
