@@ -35,7 +35,7 @@ public class MitarbeiterVerwaltungView extends JFrame{
     private void init(){
         
         //Überschrift
-        ueberschrift = new JLabel("Willkommen beim Virustestcenter");
+        ueberschrift = new JLabel("Willkommen beim Virentestcenter");
         ueberschrift.setHorizontalAlignment(JLabel.CENTER);
         ueberschrift.setFont(ueberschriftFont);
         

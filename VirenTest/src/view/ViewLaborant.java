@@ -39,7 +39,7 @@ public class ViewLaborant extends JFrame {
         JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         
         //Überschrift
-        ueberschrift = new JLabel("Willkommen beim Virustestcenter");
+        ueberschrift = new JLabel("Willkommen beim Virentestcenter");
         ueberschrift.setHorizontalAlignment(JLabel.CENTER);
         ueberschrift.setFont(ueberschriftFont);
         

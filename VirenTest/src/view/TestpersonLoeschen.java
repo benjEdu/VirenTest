@@ -36,7 +36,7 @@ public class TestpersonLoeschen extends JFrame {
         
         
         //Überschrift
-        ueberschrift = new JLabel("Willkommen beim Virustestcenter");
+        ueberschrift = new JLabel("Willkommen beim Virentestcenter");
         ueberschrift.setHorizontalAlignment(JLabel.CENTER);
         ueberschrift.setFont(ueberschriftFont);
         
