@@ -93,7 +93,27 @@ public class MitarbeiterAendernView extends JFrame{
         AendernButtonListener aendernListener = new AendernButtonListener();
         aendern.addActionListener(aendernListener);
         
-        
+        add(ueberschrift);
+        add(bezeichnungLabel);
+        add(vNameLabel);
+        add(vNameText);
+        add(nNameLabel);
+        add(nNameText);
+        add(emailLabel);
+        add(emailText);
+        add(telLabel);
+        add(telText);
+        add(stadtLabel);
+        add(stadtText);
+        add(landLabel);
+        add(landText);
+        add(strasseLabel);
+        add(strasseText);
+        add(hnrLabel);
+        add(hnrText);
+        add(plzLabel);
+        add(plzText);
+        add(aendern);
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(900,800);
