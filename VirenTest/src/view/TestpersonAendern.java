@@ -140,11 +140,11 @@ public class TestpersonAendern extends JFrame {
         add(panel3, BorderLayout.SOUTH);
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(900, 800);
+        setSize(800, 500);
         this.getContentPane().setBackground(background);
         panel2.setBackground(background2);
         panel3.setBackground(background2);
-        setLocation(400, 400);
+        setLocation(550, 300);
         setVisible(true);
 
     }

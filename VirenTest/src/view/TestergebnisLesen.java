@@ -56,9 +56,9 @@ public class TestergebnisLesen extends JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //Frameeinstellungen
-        setSize(600, 400);
+        setSize(800, 500);
         this.getContentPane().setBackground(background);
-        setLocation(600, 300);
+        setLocation(550, 300);
         setVisible(true);
     }
 }

@@ -65,7 +65,7 @@ public class TestpersonenVerwaltungView extends JFrame {
 
         setSize(600, 400);
         this.getContentPane().setBackground(background);
-        setLocation(600, 300);
+        setLocation(650, 300);
         setVisible(true);
     }
 

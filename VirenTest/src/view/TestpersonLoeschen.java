@@ -87,7 +87,7 @@ public class TestpersonLoeschen extends JFrame {
         this.getContentPane().setBackground(background);
         panel.setBackground(background2);
         panel2.setBackground(background);
-        setLocation(600, 300);
+        setLocation(650, 300);
         setVisible(true);
     }
 
