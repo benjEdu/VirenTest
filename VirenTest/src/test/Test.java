@@ -1,12 +1,16 @@
 package test;
 
+import application.Laborant;
 import application.Mitarbeiter;
+import application.Person;
 import application.Testperson;
 import application.Verwaltung;
 import java.util.List;
 import view.TestergebnisLesen;
 import persistence.VerwaltungJavaDBMapper;
+import view.MitarbeiterAendernView;
 import view.MitarbeiterEinfuegen;
+import view.MitarbeiterVerwaltungView;
 import view.TestpersonEinfuegen;
 import view.TestpersonLoeschen;
 import view.TestpersonenVerwaltungView;
@@ -84,6 +88,19 @@ public class Test{
         
         //new TestpersonAendern("Virentestcenter", tp2);
         
+       Mitarbeiter tp = new Laborant("15");
+       tp.setEmail("test");
+       tp.setHr("1");
+       tp.setLand("DE");
+       tp.setNname("test");
+       tp.setPlz("test");
+       tp.setStadt("test");
+       tp.setStrasse("test");
+       tp.setTel("test");
+       tp.setVname("test");
+       
+       new MitarbeiterVerwaltungView("Virentestcenter");
+       //new MitarbeiterAendernView("Virentestcenter", tp);
        
     }
 }

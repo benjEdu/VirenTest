@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 import application.Admin;
@@ -24,8 +19,9 @@ public class MitarbeiterAendernView extends JFrame {
     Font text = new Font("SansSerif", Font.BOLD, 17);
     private JLabel ueberschrift;
 
-    private AdminVerwaltung av;
+    private final AdminVerwaltung av;
 
+    private JLabel rolleLabel;
     private JLabel vNameLabel;
     private JLabel nNameLabel;
     private JLabel emailLabel;
@@ -64,6 +60,7 @@ public class MitarbeiterAendernView extends JFrame {
         ueberschrift.setHorizontalAlignment(JLabel.CENTER);
         ueberschrift.setFont(ueberschriftFont);
 
+        rolleLabel = new JLabel("Rolle");
         vNameLabel = new JLabel("Vorname");
         nNameLabel = new JLabel("Nachname");
         emailLabel = new JLabel("Email");
@@ -86,11 +83,24 @@ public class MitarbeiterAendernView extends JFrame {
         hnrText = new JTextField(m.getHsNr());
         plzText = new JTextField(m.getPlz());
 
+        rolleLabel.setFont(text);
+        vNameLabel.setFont(text);
+        nNameLabel.setFont(text);
+        emailLabel.setFont(text);
+        telLabel.setFont(text);
+        stadtLabel.setFont(text);
+        landLabel.setFont(text);
+        strasseLabel.setFont(text);
+        hnrLabel.setFont(text);
+        plzLabel.setFont(text);
+        bezeichnungLabel.setFont(text);
+        
+                
         setLayout(new BorderLayout());
         
-        JPanel panel2 = new JPanel(new GridLayout(12, 2));
+        JPanel panel2 = new JPanel(new GridLayout(10, 2));
         
-        JPanel panel3 = new JPanel(new GridLayout(2, 2));
+        JPanel panel3 = new JPanel(new FlowLayout());
 
         aendern = new JButton("Ändern");
         zurueck = new JButton("Zurück");
@@ -107,6 +117,7 @@ public class MitarbeiterAendernView extends JFrame {
         zurueck.addActionListener(listener2);
 
         add(ueberschrift, BorderLayout.NORTH);
+        panel2.add(rolleLabel);
         panel2.add(bezeichnungLabel);
         panel2.add(vNameLabel);
         panel2.add(vNameText);
@@ -126,8 +137,8 @@ public class MitarbeiterAendernView extends JFrame {
         panel2.add(hnrText);
         panel2.add(plzLabel);
         panel2.add(plzText);
-        panel3.add(aendern);
         panel3.add(zurueck);
+        panel3.add(aendern);
         add(panel2, BorderLayout.CENTER);
         add(panel3, BorderLayout.SOUTH);
         
@@ -135,6 +146,7 @@ public class MitarbeiterAendernView extends JFrame {
         setSize(900, 800);
         this.getContentPane().setBackground(background);
         panel2.setBackground(background2);
+        panel3.setBackground(background2);
         setLocation(400, 400);
         setVisible(true);
 
