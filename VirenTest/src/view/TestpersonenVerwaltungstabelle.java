@@ -48,10 +48,11 @@ public class TestpersonenVerwaltungstabelle extends JFrame{
                         "Postleitzahl",
                         "Stadt",
                         "Land",
+                        "AdressId"
         };
         List<Testperson> data = vv.lesenAlleTestpersonen();
         Testperson[] data2 = data.toArray(new Testperson[0]);
-        String[][] data3 = new String[data2.length][10];
+        String[][] data3 = new String[data2.length][11];
         for(int i = 0; i < data.size(); i++){
             data3[i][0] = String.valueOf(data.get(i).getTestpersonId());
             data3[i][1] = data.get(i).getVname();
@@ -63,6 +64,7 @@ public class TestpersonenVerwaltungstabelle extends JFrame{
             data3[i][7] = data.get(i).getPlz();
             data3[i][8] = data.get(i).getStadt();
             data3[i][9] = data.get(i).getLand();
+            data3[i][10] = String.valueOf(data.get(i).getAdressId());
         }
         
         setLayout(new BorderLayout());
@@ -141,6 +143,7 @@ public class TestpersonenVerwaltungstabelle extends JFrame{
                     tp.setPlz((String)table.getValueAt(table.getSelectedRow(), 7));
                     tp.setStadt((String)table.getValueAt(table.getSelectedRow(), 8));
                     tp.setLand((String)table.getValueAt(table.getSelectedRow(), 9));
+                    tp.setAdressId(Integer.parseInt((String)table.getValueAt(table.getSelectedRow(), 10)));
                     setVisible(false);
                     new TestpersonAendern("Virentestcenter", tp);
                 } catch (ArrayIndexOutOfBoundsException ex){

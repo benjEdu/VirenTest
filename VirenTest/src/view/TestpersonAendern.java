@@ -43,7 +43,7 @@ public class TestpersonAendern extends JFrame {
     private JButton aendern;
     private JButton zurueck;
     
-    private Testperson testperson;
+    private int adressId;
 
     public TestpersonAendern(String titel, Testperson tp) {
         super(titel);
@@ -53,7 +53,8 @@ public class TestpersonAendern extends JFrame {
 
     private void init(Testperson tp) {
 
-        testperson = tp;
+        adressId = tp.getAdressId();
+        
         //Überschrift
         ueberschrift = new JLabel("Willkommen beim Virustestcenter");
         ueberschrift.setHorizontalAlignment(JLabel.CENTER);
@@ -153,6 +154,7 @@ public class TestpersonAendern extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             Testperson tp = new Testperson(idTp);
+            System.out.println(idTp);
             if (vNameText.getText().trim() != null && !vNameText.getText().trim().isEmpty()) {
                 tp.setVname(vNameText.getText());
                 if (emailText.getText().trim() != null && !vNameText.getText().trim().isEmpty()) {
@@ -171,6 +173,7 @@ public class TestpersonAendern extends JFrame {
                                             tp.setPlz(plzText.getText());
                                             if (nNameText.getText().trim() != null && !nNameText.getText().trim().isEmpty()) {
                                                 tp.setNname(nNameText.getText());
+                                                tp.setAdressId(adressId);
                                                 vv.aendernTestperson(tp);
                                                 setVisible(false);
                                                 new TestpersonenVerwaltungstabelle("Virentestcenter");

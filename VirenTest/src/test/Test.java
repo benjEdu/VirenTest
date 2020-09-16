@@ -104,7 +104,7 @@ public class Test{
        //new MitarbeiterAendernView("Virentestcenter", tp);
        */
         
-        
+        /*
         Testperson tp2 = new Testperson(17);
         tp2.setEmail("test");
         tp2.setHr("1");
@@ -129,9 +129,12 @@ public class Test{
         
         VerwaltungJavaDBMapper mapper = new VerwaltungJavaDBMapper();
         System.out.println(tp2.toString());
+        System.out.println(mapper.aendernTestperson(tp3));
         mapper.aendernTestperson(tp3);
         System.out.println(tp2.toString());
         
-       //new TestpersonenVerwaltungstabelle("Virentestcenter");
+       
+                */
+        new TestpersonenVerwaltungstabelle("Virentestcenter");
     }
 }
