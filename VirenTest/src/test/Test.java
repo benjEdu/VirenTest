@@ -11,6 +11,7 @@ import view.TestpersonEinfuegen;
 import view.TestpersonLoeschen;
 import view.TestpersonenVerwaltungView;
 import view.ViewLaborant;
+import view.TestpersonAendern;
 
 public class Test{
 
@@ -20,7 +21,7 @@ public class Test{
         
         VerwaltungJavaDBMapper mapper = new VerwaltungJavaDBMapper();
           
-        Testperson tp = new Testperson("Sentiten", "Dimitri", "test@testmail.com", "456498", "5", "laikestrasse", "Bonn", "9469", "Deutschelaaand");
+        
         Testperson tp2 = new Testperson("2Sentiten", "2Dimitri", "2test@testmail.com", "2456498", "25", "2laikestrasse", "2Bonn", "29469", "2Deutschelaaand");
         System.out.println(tp);
         System.out.println(tp2);
@@ -52,14 +53,16 @@ public class Test{
         //new ViewLaborant("Virentestcenter");
         //new TestpersonEinfuegen("Virentestcenter");
         //new TestpersonLoeschen("Virentestcenter");
-        new MitarbeiterEinfuegen("Virentestcenter");
+        //new MitarbeiterEinfuegen("Virentestcenter");
         
         //mapper.einfuegenTestperson(tp);
         //List<Testperson> test = mapper.lesenAlleTestpersonen();
         //System.out.println(test);
         //mapper.lesenTestperson(1);
         
-        //new TestpersonenVerwaltungView("Virentestcenter");
+        new TestpersonenVerwaltungView("Virentestcenter");
+        //Testperson tp = new Testperson("Sentiten", "Dimitri", "test@testmail.com", "456498", "5", "laikestrasse", "Bonn", "9469", "Deutschelaaand");
+        //new TestpersonAendern("Virentestcenter", tp);
         
        
     }

@@ -5,6 +5,9 @@
  */
 package persistence;
 
+import application.Testperson;
+import java.util.List;
+
 /**
  *
  * @author benni
