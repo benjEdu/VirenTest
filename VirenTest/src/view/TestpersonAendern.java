@@ -1,13 +1,7 @@
-/*package view;
+package view;
 
 
-import application.Admin;
-import application.AdminVerwaltung;
-import application.Laborant;
-import application.Mitarbeiter;
 import application.Testperson;
-import application.TestpersonenVerwaltung;
-import application.Verwaltung;
 import application.VerwaltungVerwaltung;
 import javax.swing.*;
 import java.awt.*;
@@ -24,7 +18,7 @@ public class TestpersonAendern extends JFrame{
     Font text = new Font("SansSerif", Font.BOLD, 17);
     private JLabel ueberschrift;
     
-    private VerwaltungVerwaltung vv;
+    private final VerwaltungVerwaltung vv;
     
     private JLabel vNameLabel;
     private JLabel nNameLabel;
@@ -35,8 +29,6 @@ public class TestpersonAendern extends JFrame{
     private JLabel strasseLabel;
     private JLabel hnrLabel;
     private JLabel plzLabel;
-    private JLabel bezeichnungLabel;
-    private String idMit;
     
     private JTextField vNameText;
     private JTextField nNameText;
@@ -50,6 +42,8 @@ public class TestpersonAendern extends JFrame{
     
     private JButton aendern;
     
+    private Testperson te2;
+    
     public TestpersonAendern(String titel, Testperson te){
         super(titel);
         vv = new VerwaltungVerwaltung();
@@ -57,6 +51,8 @@ public class TestpersonAendern extends JFrame{
     }
     
     private void init(Testperson te){
+        
+        te2 = te;
         
         //Überschrift
         ueberschrift = new JLabel("Willkommen beim Virustestcenter");
@@ -120,39 +116,38 @@ public class TestpersonAendern extends JFrame{
     private class AendernButtonListener implements ActionListener {
         @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(vNameText.getText());
-                    Testperson te = null;
+                    
                     
                     if(!vNameText.getText().isEmpty() && !vNameText.getText().equals("")){
                         
-                        te.setVname(vNameText.getText());
+                        te2.setVname(vNameText.getText());
                     }
                     if(!nNameText.getText().isEmpty() && !nNameText.getText().equals("")){
-                        te.setNname(nNameText.getText());
+                        te2.setNname(nNameText.getText());
                     }
                     if(!emailText.getText().isEmpty() && !emailText.getText().equals("")){
-                        te.setEmail(emailText.getText());
+                        te2.setEmail(emailText.getText());
                     }
                     if(!telText.getText().isEmpty() && !telText.getText().equals("")){
-                        te.setTel(telText.getText());
+                        te2.setTel(telText.getText());
                     }
                     if(!stadtText.getText().isEmpty() && !stadtText.getText().equals("")){
-                        te.setStadt(stadtText.getText());
+                        te2.setStadt(stadtText.getText());
                     }
                     if(!landText.getText().isEmpty() && !landText.getText().equals("")){
-                        te.setLand(landText.getText());
+                        te2.setLand(landText.getText());
                     }
                     if(!strasseText.getText().isEmpty() && !strasseText.getText().equals("")){
-                        te.setStrasse(strasseText.getText());
+                        te2.setStrasse(strasseText.getText());
                     }
                     if(!hnrText.getText().isEmpty() && !hnrText.getText().equals("")){
-                        te.setHr(hnrText.getText());
+                        te2.setHr(hnrText.getText());
                     }
                     if(!plzText.getText().isEmpty() && !plzText.getText().equals("")){
-                        te.setPlz(plzText.getText());
+                        te2.setPlz(plzText.getText());
                     }
-                    
-                    vv.aendernTestperson(te);
+                    System.out.println(te2.getVname());
+                    vv.aendernTestperson(te2);
                     
                     setVisible(false);
                     new TestpersonenVerwaltungView("Verwaltung");
@@ -161,4 +156,3 @@ public class TestpersonAendern extends JFrame{
             }
     }
 }
-*/

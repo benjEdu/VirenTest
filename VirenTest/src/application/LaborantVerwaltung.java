@@ -18,4 +18,8 @@ public class LaborantVerwaltung {
     public LaborantVerwaltung(){
         mapper = EinfacheDBFactory.getLaborantMapper();
     }
+    
+    public boolean einfuegenTestergebnis(String id, boolean ergebnis){
+        return mapper.einfuegenTestergebnis(id, ergebnis);
+    }
 }

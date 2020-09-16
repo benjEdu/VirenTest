@@ -1,6 +1,7 @@
 package view;
 
 import application.Testperson;
+import application.VerwaltungVerwaltung;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -17,6 +18,8 @@ public class TestpersonEinfuegen extends JFrame {
     Font ueberschriftFont = new Font("SansSerif", Font.BOLD, 25);
     Font text = new Font("SansSerif", Font.BOLD, 17);
 
+    private final VerwaltungVerwaltung vv;
+    
     //Label
     private JLabel ueberschrift;
     private JLabel nname;
@@ -47,6 +50,7 @@ public class TestpersonEinfuegen extends JFrame {
     //Konstruktor
     public TestpersonEinfuegen(String titel) {
         super(titel);
+        vv = new VerwaltungVerwaltung();
         init();
     }
 
@@ -410,11 +414,9 @@ public class TestpersonEinfuegen extends JFrame {
             String plz = plzText.getText();
             String landAuswahl = land2.getSelectedItem() + "";
 
-            VerwaltungJavaDBMapper mapper = new VerwaltungJavaDBMapper();
-
             Testperson te = new Testperson(nname, vname, email, tel, hsNr, strasse, stadt, plz, landAuswahl);
 
-            String ergebnis = mapper.einfuegenTestperson(te);
+            String ergebnis = vv.einfuegenTestperson(te);
             if (ergebnis.equals("Testperson erfolgreich eingefügt :)")) {
                 vnameText.setText("");
                 nnameText.setText("");

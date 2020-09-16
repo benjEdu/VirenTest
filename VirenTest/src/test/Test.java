@@ -48,7 +48,7 @@ public class Test{
         //Testperson tp = new Testperson("Sentiten", "Dimitri", "test@testmail.com", "456498", "5", "laikestrasse", "Bonn", "9469", "Deutschelaaand");
         //System.out.println(tp);
         
-        //new TestergebnisLesen("Virentestcenter", 2);
+        //new TestergebnisLesen("Virentestcenter", 1);
         
         //new ViewLaborant("Virentestcenter");
         //new TestpersonEinfuegen("Virentestcenter");
@@ -60,9 +60,11 @@ public class Test{
         //System.out.println(test);
         //mapper.lesenTestperson(1);
         
-        new TestpersonenVerwaltungView("Virentestcenter");
-        //Testperson tp = new Testperson("Sentiten", "Dimitri", "test@testmail.com", "456498", "5", "laikestrasse", "Bonn", "9469", "Deutschelaaand");
-        //new TestpersonAendern("Virentestcenter", tp);
+        //new TestpersonenVerwaltungView("Virentestcenter");
+        //Testperson tp = new Testperson("Sentiten", "Dimitri", "test@testmail.com", "456498", "5", "laikestrasse", "Bonn", "9469", "Deutschland");
+        //Testperson tp2 = new Testperson(17);
+        
+        //new TestpersonAendern("Virentestcenter", tp2);
         
        
     }
