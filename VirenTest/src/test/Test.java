@@ -16,6 +16,7 @@ import view.TestpersonLoeschen;
 import view.TestpersonenVerwaltungView;
 import view.ViewLaborant;
 import view.TestpersonAendern;
+import view.TestpersonenVerwaltungstabelle;
 
 public class Test{
 
@@ -41,7 +42,7 @@ public class Test{
         LoginView lv = new LoginView("Login");
         
         
-        VerwaltungJavaDBMapper mapper = new VerwaltungJavaDBMapper();
+        
           
         
         Testperson tp2 = new Testperson("2Sentiten", "2Dimitri", "2test@testmail.com", "2456498", "25", "2laikestrasse", "2Bonn", "29469", "2Deutschelaaand");
@@ -85,9 +86,9 @@ public class Test{
         //new TestpersonenVerwaltungView("Virentestcenter");
         //Testperson tp = new Testperson("Sentiten", "Dimitri", "test@testmail.com", "456498", "5", "laikestrasse", "Bonn", "9469", "Deutschland");
         //Testperson tp2 = new Testperson(17);
-        
         //new TestpersonAendern("Virentestcenter", tp2);
         
+        /*
        Mitarbeiter tp = new Laborant("15");
        tp.setEmail("test");
        tp.setHr("1");
@@ -101,6 +102,40 @@ public class Test{
        
        new MitarbeiterVerwaltungView("Virentestcenter");
        //new MitarbeiterAendernView("Virentestcenter", tp);
+       */
+        
+        /*
+        Testperson tp2 = new Testperson(17);
+        tp2.setEmail("test");
+        tp2.setHr("1");
+        tp2.setLand("DE");
+        tp2.setNname("test");
+        tp2.setPlz("test");
+        tp2.setStadt("test");
+        tp2.setStrasse("test");
+        tp2.setTel("test");
+        tp2.setVname("test");
+        
+        Testperson tp3 = new Testperson(17);
+        tp3.setEmail("bla");
+        tp3.setHr("bla");
+        tp3.setLand("bla");
+        tp3.setNname("bla");
+        tp3.setPlz("bla");
+        tp3.setStadt("bla");
+        tp3.setStrasse("bla");
+        tp3.setTel("bla");
+        tp3.setVname("bla");
+        
+        VerwaltungJavaDBMapper mapper = new VerwaltungJavaDBMapper();
+        System.out.println(tp2.toString());
+        System.out.println(mapper.aendernTestperson(tp3));
+        mapper.aendernTestperson(tp3);
+        System.out.println(tp2.toString());
+        
        
-    }
+                */
+        //new TestpersonenVerwaltungstabelle("Virentestcenter");
+        
+        new MitarbeiterVerwaltungView("Virentestcenter");    }
 }

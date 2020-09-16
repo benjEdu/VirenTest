@@ -90,14 +90,14 @@ public class ViewLaborant extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Eigenschaften Frame
-        setSize(600, 400);
+        setSize(800, 500);
         this.getContentPane().setBackground(background);
         panel.setBackground(background2);
         panel2.setBackground(background2);
         negativ.setBackground(background);
         positiv.setBackground(background);
         
-        setLocation(600, 300);
+        setLocation(550, 300);
         setVisible(true);
     }
 
