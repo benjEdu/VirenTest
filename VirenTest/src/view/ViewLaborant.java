@@ -39,7 +39,7 @@ public class ViewLaborant extends JFrame {
         JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         
         //Überschrift
-        ueberschrift = new JLabel("Willkommen beim Virustestcenter");
+        ueberschrift = new JLabel("Willkommen beim Virentestcenter");
         ueberschrift.setHorizontalAlignment(JLabel.CENTER);
         ueberschrift.setFont(ueberschriftFont);
         
@@ -57,6 +57,9 @@ public class ViewLaborant extends JFrame {
         ergebnisLabel.setFont(text);
         positiv.setFont(text);
         negativ.setFont(text);
+        
+        einfuegen.setBackground(background);
+        einfuegen.setFont(text);
 
         //Gruppierung RadioButton
         ButtonGroup ergebnisGroub = new ButtonGroup();

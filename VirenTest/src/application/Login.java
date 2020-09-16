@@ -7,6 +7,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
+import java.util.UUID;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -54,5 +55,10 @@ public class Login {
             }	
         }
         return generatedPassword;
+    }
+    
+    //generiert einen zufälligen 32 Zeichen langen String, der als Salt dient
+    public static String getSalt(){
+        return UUID.randomUUID().toString().replace("-", "");
     }
 }

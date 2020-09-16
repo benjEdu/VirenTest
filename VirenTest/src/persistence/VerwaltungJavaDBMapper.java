@@ -69,8 +69,8 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
             
             //generiert einen zufälligen 32 Zeichen langen String, der als Salt dient
             //Moin Benny
-            final String salt = UUID.randomUUID().toString().replace("-", "");
-            String pwdHash = Login.hashPassword(salt, tp.getPwdHash());
+            final String salt = Login.getSalt();
+            String pwdHash = Login.hashPassword(salt, tp.getPwd());
             
             PreparedStatement insert = conn.prepareStatement("insert into testpersonen (vname, nname, email, tel,adressId, salt, pwdhash) values (?,?,?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
             insert.setString(1, tp.getVname());

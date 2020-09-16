@@ -14,9 +14,9 @@ import java.util.List;
  * @author benni
  */
 public interface IAdminMapper {
-    public boolean einfuegenMitarbeiter (Mitarbeiter m);
+    public String einfuegenMitarbeiter (Mitarbeiter m);
     
-    public boolean aendernMitarbeiter (Mitarbeiter m);
+    public String aendernMitarbeiter (Mitarbeiter m);
     
     public boolean loeschenMitarbeiter (int id);
     

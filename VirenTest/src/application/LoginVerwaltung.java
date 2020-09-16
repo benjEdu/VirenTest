@@ -5,8 +5,9 @@
  */
 package application;
 
+import persistence.EinfacheDBFactory;
 import persistence.LoginDBMapper;
-
+import persistence.ILoginMapper;
 /**
  *
  * @author z003ub8r
@@ -14,12 +15,12 @@ import persistence.LoginDBMapper;
 public class LoginVerwaltung {
     private final ILoginMapper mapper;
     
-    public PersonenVerwaltung(){
-        mapper = LoginDBMapper();
+    public LoginVerwaltung(){
+        mapper = EinfacheDBFactory.getLoginMapper();
         
     }
     
-    public boolean einfuegenPerson(Person p){
-        return mapper.einfuegenPerson(p);
+    public Person einloggen(String email, String pwd){
+        return mapper.einloggen(email, pwd);
     }
 }

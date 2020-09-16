@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package application;
 
-/**
- *
- * @author benni
- */
 public class Testperson extends Person{
 
     private int testpersonId;
@@ -20,6 +11,7 @@ public class Testperson extends Person{
         this.adressId = adressId;
     }
     
+    //Todo Anzahl Konstruktoren reduzieren
     public Testperson(int testpersonId) {
         super();
         this.testpersonId = testpersonId;
@@ -38,6 +30,10 @@ public class Testperson extends Person{
 
     public Testperson(String nname, String vname, String email, String tel, String salt, String pwdHash) {
         super(nname, vname, email, tel, salt, pwdHash);
+    }
+
+    public Testperson(String nname, String vname, String email, String tel, String hsNr, String strasse, String stadt, String plz, String land, String pwd){
+        super(nname, vname, email, tel, hsNr, strasse, stadt, plz, land, pwd);
     }
     
 

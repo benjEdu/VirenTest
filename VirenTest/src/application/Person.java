@@ -17,7 +17,10 @@ public abstract class Person {
     private String land;
     private String salt;
     private String pwdHash;
+    private String pwd;
 
+    
+    //TODO Anzahl Personen reduzieren
     public Person() {
     }
 
@@ -44,12 +47,30 @@ public abstract class Person {
         this.pwdHash = pwdHash;
     }
 
+    public Person(String nname, String vname, String email, String tel, String hsNr, String strasse, String stadt, String plz, String land, String pwd) {
+        this.nname = nname;
+        this.vname = vname;
+        this.email = email;
+        this.tel = tel;
+        this.hsNr = hsNr;
+        this.strasse = strasse;
+        this.stadt = stadt;
+        this.plz = plz;
+        this.land = land;
+        this.pwd = pwd;
+    }
+    
+    
     public String getSalt() {
         return salt;
     }
 
     public String getPwdHash() {
         return pwdHash;
+    }
+    
+    public String getPwd(){
+        return pwd;
     }
 
     public String getNname() {

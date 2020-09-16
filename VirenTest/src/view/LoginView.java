@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import persistence.VerwaltungJavaDBMapper;
 import static sun.misc.ClassFileTransformer.add;
@@ -31,7 +32,7 @@ public class LoginView extends JFrame{
     private JLabel pwdLabel;
     private JLabel messageLabel;
     private JTextField emailText;
-    private JTextField pwdText;
+    private JPasswordField pwdField;
     private JButton login;
     private LoginVerwaltung lv;
 
@@ -55,11 +56,11 @@ public class LoginView extends JFrame{
         messageLabel.setForeground(Color.white);
         add(messageLabel);
         
-        emailText = new JTextField(10);
+        emailText = new JTextField(30);
         add(emailText);
         
-        pwdText = new JTextField(10);
-        add(pwdText);
+        pwdField = new JPasswordField(60);
+        add(pwdField);
         
         login = new JButton("Login");
         MyActionListener listener = new MyActionListener();
@@ -67,7 +68,7 @@ public class LoginView extends JFrame{
         add(login);
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(490,83);
+        setSize(800,200);
         setLocation(900,200);
         setVisible(true);
     }
@@ -76,9 +77,15 @@ public class LoginView extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e){
             String email = emailText.getText();
-            String pwd = pwdText.getText();
+            char[] charpwd = pwdField.getPassword();
+            String pwd = "";
+            for(char c : charpwd){
+                pwd = pwd+c;
+            }
             try{
-                Person p = lv.login(email, pwd);
+                System.out.println(email);
+                System.out.println(pwd);
+                Person p = lv.einloggen(email, pwd);
             }catch (NullPointerException ex){
                 Logger.getLogger(LoginView.class.getName()).log(Level.SEVERE, null, ex);
                 messageLabel.setBackground(Color.red);

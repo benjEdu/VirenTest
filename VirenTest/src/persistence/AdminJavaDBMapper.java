@@ -4,6 +4,7 @@ package persistence;
 import application.Admin;
 import application.Laborant;
 import application.Mitarbeiter;
+import application.Testperson;
 import application.Verwaltung;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,10 +22,24 @@ import java.util.logging.Logger;
  */
 public class AdminJavaDBMapper implements IAdminMapper{
 
+    private boolean emailVergeben(Connection conn, Mitarbeiter m) throws SQLException{
+        PreparedStatement readMail = conn.prepareStatement("select * from mitarbeiter where email=?");
+        readMail.setString(1, m.getEmail());
+        ResultSet rs = readMail.executeQuery();
+        if(rs.next()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
     @Override
-    public boolean einfuegenMitarbeiter(Mitarbeiter m) {
+    public String einfuegenMitarbeiter(Mitarbeiter m) {
         Connection conn = getConn();
         try {
+            if(emailVergeben(conn, m)){
+                return "E-Mail bereits vergeben";
+            }
             Integer adressId = null;
             PreparedStatement insertAdresse = conn.prepareStatement("insert into adressen (strasse, hsnr, stadt, plz, land) values (?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
             insertAdresse.setString(1, m.getStrasse());
@@ -56,7 +71,7 @@ public class AdminJavaDBMapper implements IAdminMapper{
             insert.setInt(6, adressId);
             insert.executeUpdate();
             conn.commit();
-            return true;
+            return "Passt";
         } catch (SQLException ex) {
             Logger.getLogger(AdminJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex);
             try {
@@ -64,7 +79,7 @@ public class AdminJavaDBMapper implements IAdminMapper{
             } catch (SQLException ex1) {
                 Logger.getLogger(AdminJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex1);
             }
-            return false;
+            return "Läuft nicht";
         }
         finally{
             deleteConn(conn);
@@ -72,9 +87,12 @@ public class AdminJavaDBMapper implements IAdminMapper{
     }
 
     @Override
-    public boolean aendernMitarbeiter(Mitarbeiter m) {
+    public String aendernMitarbeiter(Mitarbeiter m) {
         Connection conn = getConn();
         try {
+            if(emailVergeben(conn, m)){
+                return "E-Mail bereits vergeben";
+            }
             int id = Integer.parseInt(m.getMitarbeiterId());
             PreparedStatement select = conn.prepareStatement("select adressid from mitarbeiter where mitarbeiterid = ?");
             select.setInt(1, id);
@@ -99,10 +117,10 @@ public class AdminJavaDBMapper implements IAdminMapper{
                 update.setInt(6, rs.getInt(1));
             }
             
-            return true;
+            return "Passt";
         } catch (SQLException ex) {
             Logger.getLogger(AdminJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
+            return "Läuft nicht";
         }
         finally{
             deleteConn(conn);
