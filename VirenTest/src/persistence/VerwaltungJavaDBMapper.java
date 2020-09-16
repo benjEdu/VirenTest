@@ -29,11 +29,13 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
         PreparedStatement readMail = conn.prepareStatement("select * from testpersonen where email=?");
         readMail.setString(1, tp.getEmail());
         ResultSet rs = readMail.executeQuery();
-        if(rs.next()){
-            return true;
-        }else{
-            return false;
+        while(rs.next()){
+            int tpid = rs.getInt("testpersonid");
+            if(tp.getTestpersonId()!=tpid){
+                return true;
+            }
         }
+        return false;
     }
 
     @Override

@@ -81,6 +81,8 @@ public class MitarbeiterVerwaltungView extends JFrame{
         }
         
         setLayout(new BorderLayout());
+        JPanel panel2 = new JPanel(new FlowLayout());
+        
         table = new JTable(data3, columnNames){
             @Override
             public boolean isCellEditable(int x, int y) {
@@ -89,7 +91,7 @@ public class MitarbeiterVerwaltungView extends JFrame{
         };
         table.setCellSelectionEnabled(false);
         
-        delete = new JButton("Delete");
+        delete = new JButton("Löschen");
         DeleteButtonListener deleteListener = new DeleteButtonListener();
         delete.addActionListener(deleteListener);
         
@@ -99,16 +101,23 @@ public class MitarbeiterVerwaltungView extends JFrame{
         AendernButtonListener aendernListener = new AendernButtonListener();
         aendern.addActionListener(aendernListener);
         
+        aendern.setFont(text);
+        aendern.setBackground(background);
+        delete.setFont(text);
+        delete.setBackground(background);
+        
         table.setFont(text);
         table.setBackground(background2);
         add(ueberschrift, BorderLayout.NORTH);
         add(table, BorderLayout.CENTER);
-        add(delete, BorderLayout.WEST);
-        add(infoLabel, BorderLayout.PAGE_END);
-        add(aendern, BorderLayout.EAST);
+        panel2.add(delete);
+        panel2.add(aendern);
+        panel2.add(infoLabel);
+        add(panel2, BorderLayout.SOUTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(900,800);
         this.getContentPane().setBackground(background);
+        panel2.setBackground(background2);
         setLocation(400,400);
         setVisible(true);
         
