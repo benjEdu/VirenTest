@@ -3,15 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package persistence;
-
-import application.Testperson;
-import java.util.List;
+package application;
 
 /**
  *
  * @author benni
  */
-public interface ITestpersonMapper {
-    public boolean ergebnisAbrufen(int testpersonId);
+public class Admin extends Mitarbeiter{
+
+    public Admin(String mitarbeiterId) {
+        super(mitarbeiterId);
+    }
+    
+    
+    
 }
