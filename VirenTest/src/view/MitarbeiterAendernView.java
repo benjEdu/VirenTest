@@ -39,6 +39,7 @@ public class MitarbeiterAendernView extends JFrame{
     private JLabel plzLabel;
     private JLabel bezeichnungLabel;
     private String idMit;
+    private JLabel infoLabel;
     
     private JTextField vNameText;
     private JTextField nNameText;
@@ -74,6 +75,7 @@ public class MitarbeiterAendernView extends JFrame{
         strasseLabel = new JLabel("Straße");
         hnrLabel = new JLabel("Hausnummer");
         plzLabel = new JLabel("Postleitzahl");
+        infoLabel = new JLabel();
         bezeichnungLabel = new JLabel(m.getClass().getSimpleName());
         idMit = m.getMitarbeiterId();
         
@@ -87,7 +89,7 @@ public class MitarbeiterAendernView extends JFrame{
         hnrText = new JTextField(m.getHsNr());
         plzText = new JTextField(m.getPlz());
         
-        setLayout(new GridLayout(10,2));
+        setLayout(new GridLayout(12,2));
         
         aendern = new JButton("Ändern");
         AendernButtonListener aendernListener = new AendernButtonListener();
@@ -114,7 +116,7 @@ public class MitarbeiterAendernView extends JFrame{
         add(plzLabel);
         add(plzText);
         add(aendern);
-        
+        add(infoLabel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(900,800);
         this.getContentPane().setBackground(background);
@@ -126,55 +128,53 @@ public class MitarbeiterAendernView extends JFrame{
     private class AendernButtonListener implements ActionListener {
         @Override
             public void actionPerformed(ActionEvent e) {
-                    Mitarbeiter m = null;
+                    Mitarbeiter mit = null;
                     switch (bezeichnungLabel.getText()) {
                         case "Admin":
-                            m = new Admin(idMit);
+                            mit = new Admin(idMit);
                             break;
                         case "Verwaltung":
-                            m = new Verwaltung(idMit);
+                            mit = new Verwaltung(idMit);
                             break;
                         case "Laborant":
-                            m = new Laborant(idMit);
+                            mit = new Laborant(idMit);
                             break;
                         default:
                             break;
                     }
-                    if(!vNameText.getText().isEmpty() && !vNameText.getText().equals("")){
-                        
-                        m.setVname(vNameText.getText());
-                    }
-                    if(!nNameText.getText().isEmpty() && !nNameText.getText().equals("")){
-                        m.setNname(nNameText.getText());
-                    }
-                    if(!emailText.getText().isEmpty() && !emailText.getText().equals("")){
-                        m.setEmail(emailText.getText());
-                    }
-                    if(!telText.getText().isEmpty() && !telText.getText().equals("")){
-                        m.setTel(telText.getText());
-                    }
-                    if(!stadtText.getText().isEmpty() && !stadtText.getText().equals("")){
-                        m.setStadt(stadtText.getText());
-                    }
-                    if(!landText.getText().isEmpty() && !landText.getText().equals("")){
-                        m.setLand(landText.getText());
-                    }
-                    if(!strasseText.getText().isEmpty() && !strasseText.getText().equals("")){
-                        m.setStrasse(strasseText.getText());
-                    }
-                    if(!hnrText.getText().isEmpty() && !hnrText.getText().equals("")){
-                        m.setHr(hnrText.getText());
-                    }
-                    if(!plzText.getText().isEmpty() && !plzText.getText().equals("")){
-                        m.setPlz(plzText.getText());
-                    }
                     
-                    av.aendernMitarbeiter(m);
-                    
-                    setVisible(false);
-                    new MitarbeiterVerwaltungView("Verwaltung");
-                
-                
+                    if(vNameText.getText().trim() != null && !vNameText.getText().trim().isEmpty()){
+                        mit.setVname(vNameText.getText());
+                        if(emailText.getText().trim() != null && !vNameText.getText().trim().isEmpty()){
+                            mit.setEmail(emailText.getText());
+                            if(telText.getText().trim() != null && !vNameText.getText().trim().isEmpty()){
+                                mit.setTel(telText.getText());
+                                if(stadtText.getText().trim() != null && !vNameText.getText().trim().isEmpty()){
+                                    mit.setStadt(stadtText.getText());
+                                    if(landText.getText().trim() != null && !vNameText.getText().trim().isEmpty()){
+                                        mit.setLand(landText.getText());
+                                        if(strasseText.getText().trim() != null && !vNameText.getText().trim().isEmpty()){
+                                            mit.setStrasse(strasseText.getText());
+                                            if(hnrText.getText().trim() != null && !vNameText.getText().trim().isEmpty()){
+                                                mit.setHr(hnrText.getText());
+                                                if(plzText.getText().trim() != null && !vNameText.getText().trim().isEmpty()){
+                                                    mit.setPlz(plzText.getText());
+                                                    if(nNameText.getText().trim() != null && !nNameText.getText().trim().isEmpty()){
+                                                        mit.setNname(nNameText.getText());
+                                                        av.aendernMitarbeiter(mit);
+                                                        setVisible(false);
+                                                        new MitarbeiterVerwaltungView("Verwaltung");
+                                                    }
+                                                    
+                                                    
+                                                } 
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
             }
     }
 }
