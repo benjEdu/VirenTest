@@ -7,6 +7,7 @@ package test;
 
 import application.Testperson;
 import persistence.VerwaltungJavaDBMapper;
+import view.LoginView;
 
 /**
  *
@@ -14,13 +15,15 @@ import persistence.VerwaltungJavaDBMapper;
  */
 public class TestpersonTest {
     public static void main(String[] args){
+        /*
         VerwaltungJavaDBMapper mapper = new VerwaltungJavaDBMapper();
         Testperson tp = new Testperson("Sentiten", "Dimitri", "test@testmail.com", "456498", "5", "laikestrasse", "Bonn", "94649", "Deutschelaaand", "Passwort");
         Testperson tp2 = new Testperson("2Sentiten", "2Dimitri", "2test@testmail.com", "2456498", "25", "2laikestrasse", "2Bonn", "29469", "2Deutschelaaand", "Passwort2");
         Testperson tp3 = new Testperson("3Sentiten", "3Dimitri", "3test@testmail.com", "3456498", "35", "3laikestrasse", "3Bonn", "39469", "3Deutschelaaand", "Passwort3");
     
         System.out.println(einfuegenTest(mapper, tp));
-        System.out.println(aendernTest(mapper, tp, tp2));
+        System.out.println(aendernTest(mapper, tp, tp2));*/
+        LoginView lv = new LoginView("Titel");
         
     
     }

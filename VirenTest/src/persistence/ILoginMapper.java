@@ -1,8 +1,9 @@
 package persistence;
 
 import application.Person;
+import application.Testperson;
 
 
 public interface ILoginMapper {
-    public Person einloggen(String email, String pwd);
+    public Testperson einloggen(String email, String pwd);
 }

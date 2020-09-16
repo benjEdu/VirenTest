@@ -7,6 +7,7 @@ package view;
 
 import application.LoginVerwaltung;
 import application.Person;
+import application.Testperson;
 import static com.sun.glass.ui.Cursor.setVisible;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -20,8 +21,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import persistence.VerwaltungJavaDBMapper;
-import static sun.misc.ClassFileTransformer.add;
 
 /**
  *
@@ -51,16 +50,16 @@ public class LoginView extends JFrame{
         
         pwdLabel = new JLabel("Passwort:");
         add(pwdLabel);
-        
-        messageLabel = new JLabel();
-        messageLabel.setForeground(Color.white);
-        add(messageLabel);
-        
+
         emailText = new JTextField(30);
         add(emailText);
         
         pwdField = new JPasswordField(60);
         add(pwdField);
+        
+        messageLabel = new JLabel();
+        messageLabel.setForeground(Color.white);
+        add(messageLabel);
         
         login = new JButton("Login");
         MyActionListener listener = new MyActionListener();
@@ -85,10 +84,14 @@ public class LoginView extends JFrame{
             try{
                 System.out.println(email);
                 System.out.println(pwd);
-                Person p = lv.einloggen(email, pwd);
+                Testperson tp = lv.einloggen(email, pwd);
+                System.out.println(tp.getTestpersonId());
+                TestergebnisLesen tl = new TestergebnisLesen("Testergebnis", tp.getTestpersonId());
+                setVisible(false);
+                dispose();  
             }catch (NullPointerException ex){
-                Logger.getLogger(LoginView.class.getName()).log(Level.SEVERE, null, ex);
-                messageLabel.setBackground(Color.red);
+                Logger.getLogger(LoginView.class.getName()).log(Level.FINE, null, ex);
+                messageLabel.setForeground(Color.red);
                 messageLabel.setText("Email oder Passwort falsch!");
             }
             System.out.println("Erfolgreich eingefügt.");

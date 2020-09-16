@@ -27,9 +27,18 @@ public class Testperson extends Person{
         this.testpersonId = testpersonId;
         this.adressId = adressId;
     }
+    
+    public Testperson(int adressId, String nname, String vname, String email, String tel, String hsNr, String strasse, String stadt, String plz, String land) {
+        super(nname, vname, email, tel, hsNr, strasse, stadt, plz, land);
+        this.testpersonId = testpersonId;
+        this.adressId = adressId;
+    }
 
     public Testperson(String nname, String vname, String email, String tel, String salt, String pwdHash) {
         super(nname, vname, email, tel, salt, pwdHash);
+    }
+    public Testperson(String nname, String vname, String email, String tel) {
+        super(nname, vname, email, tel);
     }
 
     public Testperson(String nname, String vname, String email, String tel, String hsNr, String strasse, String stadt, String plz, String land, String pwd){
