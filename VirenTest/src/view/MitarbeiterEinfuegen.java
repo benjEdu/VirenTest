@@ -3,13 +3,11 @@ package view;
 import application.Admin;
 import application.Laborant;
 import application.Mitarbeiter;
-import application.Testperson;
 import application.Verwaltung;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import persistence.AdminJavaDBMapper;
-import persistence.VerwaltungJavaDBMapper;
 
 public class MitarbeiterEinfuegen extends JFrame {
     //Hintergrundfarbe
@@ -51,6 +49,7 @@ public class MitarbeiterEinfuegen extends JFrame {
     private JRadioButton verwaltung;
     //Buttons
     private JButton einfuegen;
+    private JButton zurueck;
     
     //Konstruktor
     public MitarbeiterEinfuegen(String titel) {
@@ -64,6 +63,8 @@ public class MitarbeiterEinfuegen extends JFrame {
         JPanel panel = new JPanel(new GridLayout(11,2));
         
         JPanel panel2 = new JPanel(new GridLayout(1,3));
+        
+        JPanel panel3 = new JPanel(new FlowLayout());
         
         
         //Überschrift
@@ -370,6 +371,13 @@ public class MitarbeiterEinfuegen extends JFrame {
         land2.setSelectedItem("Deutschland");
         //Button
         einfuegen = new JButton("Einfügen");
+        zurueck = new JButton("Zurück");
+        
+        einfuegen.setFont(text);
+        einfuegen.setBackground(background2);
+        zurueck.setFont(text);
+        zurueck.setBackground(background2);
+        
         //zu Frame adden
         
         panel.add(vname);
@@ -396,14 +404,19 @@ public class MitarbeiterEinfuegen extends JFrame {
         panel.add(land);
         panel.add(land2);
         
+        panel3.add(zurueck);
+        panel3.add(einfuegen);
+        
         add(ueberschrift, BorderLayout.NORTH);
         add(panel, BorderLayout.CENTER);
-        add(einfuegen, BorderLayout.SOUTH);
+        add(panel3, BorderLayout.SOUTH);
         
         
         //ActionListener für Button
         MyActionListener listener = new MyActionListener();
         einfuegen.addActionListener(listener);
+        MyActionListener2 listener2 = new MyActionListener2();
+        zurueck.addActionListener(listener2);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         //Frameeinstellungen
@@ -413,6 +426,7 @@ public class MitarbeiterEinfuegen extends JFrame {
         verwaltung.setBackground(background2);
         laborant.setBackground(background2);
         admin.setBackground(background2);
+        panel3.setBackground(background);
         setLocation(600, 300);
         setVisible(true);
     }
@@ -468,6 +482,14 @@ public class MitarbeiterEinfuegen extends JFrame {
                 verwaltung.isSelected();
                 land2.setSelectedItem("Deutschland");
             }
+        }        
+    }
+    
+    private class MyActionListener2 implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            setVisible(false);
+            new MitarbeiterVerwaltungView("Virentestcenter");
         }        
     }
 }

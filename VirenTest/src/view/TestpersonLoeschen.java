@@ -22,6 +22,7 @@ public class TestpersonLoeschen extends JFrame {
 
     //Buttons
     private JButton loeschen;
+    private JButton zurueck;
     
     //Konstruktor
     public TestpersonLoeschen(String titel) {
@@ -33,6 +34,8 @@ public class TestpersonLoeschen extends JFrame {
         setLayout(new BorderLayout());
         
         JPanel panel = new JPanel(new GridLayout(2,1));
+        
+        JPanel panel2 = new JPanel(new FlowLayout());
         
         
         //Überschrift
@@ -48,26 +51,37 @@ public class TestpersonLoeschen extends JFrame {
 
         //Button
         loeschen = new JButton("Löschen");
+        zurueck = new JButton("Zurück");
+        
+        loeschen.setFont(text);
+        loeschen.setBackground(background2);
+        zurueck.setFont(text);
+        zurueck.setBackground(background2);
+        
         //zu Frame adden
         
         panel.add(id);
         panel.add(idText);
 
-        
+        panel2.add(zurueck);
+        panel2.add(loeschen);
         add(ueberschrift, BorderLayout.NORTH);
         add(panel, BorderLayout.CENTER);
-        add(loeschen, BorderLayout.SOUTH);
+        add(panel2, BorderLayout.SOUTH);
         
         
         //ActionListener für Button
         MyActionListener listener = new MyActionListener();
+        MyActionListener2 listener2 = new MyActionListener2();
         loeschen.addActionListener(listener);
+        zurueck.addActionListener(listener2);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         //Frameeinstellungen
         setSize(600, 400);
         this.getContentPane().setBackground(background);
         panel.setBackground(background2);
+        panel2.setBackground(background);
         setLocation(600, 300);
         setVisible(true);
     }
@@ -83,6 +97,14 @@ public class TestpersonLoeschen extends JFrame {
             if(ergebnis){
                 idText.setText("");
             }
+        }        
+    }
+    
+    private class MyActionListener2 implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            setVisible(false);
+            new TestpersonenVerwaltungView("Virentestcenter");
         }        
     }
 }

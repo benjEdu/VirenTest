@@ -1,5 +1,6 @@
 package application;
 
+import java.util.List;
 import persistence.EinfacheDBFactory;
 import persistence.ITestpersonMapper;
 
@@ -9,4 +10,8 @@ public class TestpersonenVerwaltung {
     public TestpersonenVerwaltung() {
         mapper = EinfacheDBFactory.getTestpersonMapper();
     }
+    public boolean ergebnisAbrufen(int testpersonId){
+        return mapper.ergebnisAbrufen(testpersonId);
+    }
+    
 }

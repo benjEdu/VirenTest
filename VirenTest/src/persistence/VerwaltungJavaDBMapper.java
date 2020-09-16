@@ -6,6 +6,7 @@
  */
 package persistence;
 
+import application.Login;
 import application.Testperson;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -57,16 +59,6 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
             if(rs.next()){
                 adressId = rs.getInt(1);
             }
-            /*
-            //Von der DB vergebene AdressID abfragen
-            PreparedStatement select = conn.prepareStatement("select adressid from adressen where strasse = ? and where hsnr = ? and where plz");
-            select.setString(1, tp.getStrasse());
-            select.setString(2, tp.getHsNr());
-            select.setString(3, tp.getPlz());
-            ResultSet rs = select.executeQuery();
-            if(rs.next()){
-                adressId = rs.getInt("adressId");
-            }   */
         }catch (SQLException exl){
                 Logger.getLogger(VerwaltungJavaDBMapper.class.getName()).log(Level.SEVERE, null, exl);
         }
@@ -74,12 +66,20 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
         //Testperson selbst einfuegen
         try {
             conn.setAutoCommit(false);
-            PreparedStatement insert = conn.prepareStatement("insert into testpersonen (vname, nname, email, tel,adressId) values (?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+            
+            //generiert einen zufälligen 32 Zeichen langen String, der als Salt dient
+            //Moin Benny
+            final String salt = Login.getSalt();
+            String pwdHash = Login.hashPassword(salt, tp.getPwd());
+            
+            PreparedStatement insert = conn.prepareStatement("insert into testpersonen (vname, nname, email, tel,adressId, salt, pwdhash) values (?,?,?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
             insert.setString(1, tp.getVname());
             insert.setString(2, tp.getNname());
             insert.setString(3, tp.getEmail());
             insert.setString(4, tp.getTel());
             insert.setInt(5, adressId);
+            insert.setString(6, salt);
+            insert.setString(7, pwdHash);
             insert.executeUpdate();
             conn.commit();
             ResultSet rs = insert.getGeneratedKeys();
@@ -172,6 +172,8 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
                 String Email = rs.getString("email");
                 String tel = rs.getString("tel");
                 int adressId = rs.getInt("adressId");
+                String salt = rs.getString("salt");
+                String pwdHash = rs.getString("pwdHash");
                 read = conn.prepareStatement("select * from adressen where adressId = ?");
                 read.setInt(1, adressId);
                 ResultSet rs2 = read.executeQuery();
@@ -181,7 +183,7 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
                     String stadt = rs2.getString("Stadt");
                     String plz = rs2.getString("plz");
                     String land = rs2.getString("land");
-                    Testperson tp = new Testperson(adressId, Nname, Vname, Email, tel, hsNr, strasse, stadt, plz, land);
+                    Testperson tp = new Testperson(adressId, Nname, Vname, Email, tel, hsNr, strasse, stadt, plz, land, salt, pwdHash);
                     return tp;
                 }
             }
@@ -207,6 +209,8 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
                 String Email = rs.getString("email");
                 String tel = rs.getString("tel");
                 int adressId = rs.getInt("adressId");
+                String salt = rs.getString("salt");
+                String pwdHash = rs.getString("pwdHash");
                 read = conn.prepareStatement("select * from adressen where adressId = ?");
                 read.setInt(1, adressId);
                 ResultSet rs2 = read.executeQuery();
@@ -217,9 +221,9 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
                     String stadt = rs2.getString("Stadt");
                     String plz = rs2.getString("plz");
                     String land = rs2.getString("land");
-                    tp = new Testperson(adressId, Nname, Vname, Email, tel, hsNr, strasse, stadt, plz, land);
+                    tp = new Testperson(adressId, Nname, Vname, Email, tel, hsNr, strasse, stadt, plz, land, salt, pwdHash);
                 }else{
-                    tp = new Testperson(Nname, Vname, Email, tel);
+                    tp = new Testperson(Nname, Vname, Email, tel, salt, pwdHash);
                 }
                 alleTestpersonen.add(tp);
             }

@@ -1,20 +1,39 @@
 package test;
 
+import application.Login;
 import application.Mitarbeiter;
 import application.Testperson;
 import application.Verwaltung;
 import java.util.List;
 import view.TestergebnisLesen;
 import persistence.VerwaltungJavaDBMapper;
+import view.LoginView;
 import view.MitarbeiterEinfuegen;
 import view.TestpersonEinfuegen;
 import view.TestpersonLoeschen;
 import view.TestpersonenVerwaltungView;
+import view.ViewLaborant;
 
 public class Test{
 
     public static void main(String[] args) {
-        
+
+        System.out.println("Brombeere: "+Login.hashPassword("Brombeere", "c8a2ebb85d364556ba4d78cb9c9cd408", 0));
+        System.out.println();
+        System.out.println("Himbeere: "+Login.hashPassword("Himbeere", "1a7041115399402e9022c0eb03143ec5", 0));
+        System.out.println();
+        System.out.println("Erdbeere: "+Login.hashPassword("Erdbeere", "8ceb6b9c0971495d97520e37f969d471", 0));
+        System.out.println();
+        System.out.println("Heidelbeere: "+Login.hashPassword("Heidelbeere", "4d1e6125e8ba4383b003d91b584cf7fd", 0));
+        System.out.println();
+        System.out.println("Banane: "+Login.hashPassword("Banane", "7744724870154dfe8e8c05e5d357364e", 0));
+        System.out.println();
+        System.out.println("Ananas: "+Login.hashPassword("Ananas", "6aa5b8269bba4a1985d51c2b2ac6c87d", 0));
+        System.out.println();
+        System.out.println("Apfel: "+Login.hashPassword("Apfel", "ba4d00e5c835481d8312d927831d522f", 0));
+        System.out.println();
+        System.out.println("Pfirsich: "+Login.hashPassword("Pfirsich", "63c5db93e725465aaa57a33acba533b0", 0));
+        LoginView lv = new LoginView("Login");
         /*
         
         VerwaltungJavaDBMapper mapper = new VerwaltungJavaDBMapper();
@@ -58,6 +77,8 @@ public class Test{
         //System.out.println(test);
         //mapper.lesenTestperson(1);
         
-        new TestpersonenVerwaltungView("Virentestcenter");
+        //new TestpersonenVerwaltungView("Virentestcenter");
+        
+       
     }
 }
