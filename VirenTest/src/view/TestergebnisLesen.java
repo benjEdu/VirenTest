@@ -3,7 +3,6 @@ package view;
 import application.TestpersonenVerwaltung;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import persistence.TestpersonJavaDBMapper;
 
 public class TestergebnisLesen extends JFrame {
@@ -17,19 +16,19 @@ public class TestergebnisLesen extends JFrame {
     //Label
     private JLabel ausgabe;
     private JLabel ueberschrift;
-    //Tesxtfelder
 
-    //Buttons
-    private final int testpersonId;
-
+    private final TestpersonenVerwaltung tv;
+    
     //Konstruktor
     public TestergebnisLesen(String titel, int id) {
         super(titel);
-        testpersonId = id;
-        init();
+        tv = new TestpersonenVerwaltung();
+        init(id);
     }
 
-    private void init() {
+    private void init(int testpersonenId) {
+        int testpersonId = testpersonenId;
+        
         setLayout(new BorderLayout());
 
         //Überschrift
@@ -47,11 +46,10 @@ public class TestergebnisLesen extends JFrame {
         add(ausgabe, BorderLayout.CENTER);
 
         //Ergebnis Abrufen
-        TestpersonJavaDBMapper mapper = new TestpersonJavaDBMapper();
-        boolean testPositiv = mapper.ergebnisAbrufen(testpersonId);
+        boolean testPositiv = tv.ergebnisAbrufen(testpersonId);
         //Angepasste Ausgabe an Ergebnis
         if (testPositiv) {
-            ausgabe.setText("Das Ergebnis Ihres Tests ist positiv. Bitte begeben Sie sich für die kommenden zwei Wochen in Quarantäne.");
+            ausgabe.setText("Das Ergebnis Ihres Tests ist positiv.");
         } else {
             ausgabe.setText("Das Ergebnis Ihres Tests ist negativ.");
         }

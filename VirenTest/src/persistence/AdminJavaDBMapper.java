@@ -23,11 +23,15 @@ import java.util.logging.Logger;
 public class AdminJavaDBMapper implements IAdminMapper{
 
     private boolean emailVergeben(Connection conn, Mitarbeiter m) throws SQLException{
-        PreparedStatement readMail = conn.prepareStatement("select * from mitarbeiter where email=?");
+        PreparedStatement readMail = conn.prepareStatement("select mitarbeiterid from mitarbeiter where email=?");
         readMail.setString(1, m.getEmail());
         ResultSet rs = readMail.executeQuery();
         if(rs.next()){
-            return true;
+            if(m.getMitarbeiterId().equals(rs.getString(1))){
+                return false;
+            } else {
+                return true;
+            }
         }else{
             return false;
         }
@@ -115,6 +119,7 @@ public class AdminJavaDBMapper implements IAdminMapper{
                 update.setString(4, m.getPlz());
                 update.setString(5, m.getLand());
                 update.setInt(6, rs.getInt(1));
+                update.executeUpdate();
             }
             
             return "Passt";

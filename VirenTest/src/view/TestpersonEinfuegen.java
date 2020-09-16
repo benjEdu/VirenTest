@@ -1,13 +1,12 @@
 package view;
 
-import application.Login;
 import application.Testperson;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import persistence.VerwaltungJavaDBMapper;
-import view.TestpersonenVerwaltungView;
+import application.VerwaltungVerwaltung;
 
+import application.VerwaltungVerwaltung;
 public class TestpersonEinfuegen extends JFrame {
 
     //Hintergrundfarbe
@@ -18,6 +17,8 @@ public class TestpersonEinfuegen extends JFrame {
     Font ueberschriftFont = new Font("SansSerif", Font.BOLD, 25);
     Font text = new Font("SansSerif", Font.BOLD, 17);
 
+    private final VerwaltungVerwaltung vv;
+    
     //Label
     private JLabel ueberschrift;
     private JLabel nname;
@@ -30,7 +31,6 @@ public class TestpersonEinfuegen extends JFrame {
     private JLabel stadt;
     private JLabel plz;
     private JLabel land;
-    private JLabel infoLabel;
     //Tesxtfelder
     private JTextField nnameText;
     private JTextField vnameText;
@@ -50,6 +50,7 @@ public class TestpersonEinfuegen extends JFrame {
     //Konstruktor
     public TestpersonEinfuegen(String titel) {
         super(titel);
+        vv = new VerwaltungVerwaltung();
         init();
     }
 
@@ -94,8 +95,6 @@ public class TestpersonEinfuegen extends JFrame {
         plzText = new JTextField(6);
 
         land = new JLabel("Land:");
-
-        infoLabel = new JLabel("");
 
         nname.setFont(text);
         vname.setFont(text);
@@ -423,11 +422,9 @@ public class TestpersonEinfuegen extends JFrame {
                 pwd = pwd+c;
             }
 
-            VerwaltungJavaDBMapper mapper = new VerwaltungJavaDBMapper();
-
             Testperson te = new Testperson(nname, vname, email, tel, hsNr, strasse, stadt, plz, landAuswahl, pwd);
 
-            String ergebnis = mapper.einfuegenTestperson(te);
+            String ergebnis = vv.einfuegenTestperson(te);
             if (ergebnis.equals("Testperson erfolgreich eingefügt :)")) {
                 vnameText.setText("");
                 nnameText.setText("");
@@ -439,7 +436,6 @@ public class TestpersonEinfuegen extends JFrame {
                 plzText.setText("");
                 land2.setSelectedItem("Deutschland");
             }
-            infoLabel.setText(ergebnis + "");
         }
     }
 

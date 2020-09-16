@@ -1,5 +1,7 @@
 package view;
 
+import application.LaborantVerwaltung;
+import application.VerwaltungVerwaltung;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -12,6 +14,8 @@ public class ViewLaborant extends JFrame {
     //Schriftart und -größe
     Font ueberschriftFont = new Font("SansSerif", Font.BOLD, 25);
     Font text = new Font("SansSerif", Font.BOLD, 17);
+    
+    private final LaborantVerwaltung lv;
     
     //Label
     private JLabel ueberschrift;
@@ -29,6 +33,7 @@ public class ViewLaborant extends JFrame {
 
     public ViewLaborant(String titel) {
         super(titel);
+        lv = new LaborantVerwaltung();
         init();
     }
 
@@ -102,9 +107,8 @@ public class ViewLaborant extends JFrame {
         public void actionPerformed(ActionEvent e) {
             //Eingabe von Nutzer
             String id = idText.getText();
-            LaborantJavaDBMapper mapper = new LaborantJavaDBMapper();
             testPositiv = positiv.isSelected();
-            boolean ergebnis = mapper.einfuegenTestergebnis(id, testPositiv);
+            boolean ergebnis = lv.einfuegenTestergebnis(id, testPositiv);
             if(ergebnis){
                 idText.setText("");
                 negativ.isSelected();
