@@ -57,7 +57,7 @@ public class TestpersonEinfuegen extends JFrame {
     private void init() {
         setLayout(new BorderLayout());
 
-        JPanel panel = new JPanel(new GridLayout(9, 2));
+        JPanel panel = new JPanel(new GridLayout(10, 2));
 
         JPanel panel2 = new JPanel(new FlowLayout());
 
@@ -99,6 +99,7 @@ public class TestpersonEinfuegen extends JFrame {
         nname.setFont(text);
         vname.setFont(text);
         email.setFont(text);
+        pwd.setFont(text);
         tel.setFont(text);
         strasse.setFont(text);
         hsNr.setFont(text);
@@ -429,6 +430,7 @@ public class TestpersonEinfuegen extends JFrame {
                 vnameText.setText("");
                 nnameText.setText("");
                 emailText.setText("");
+                pwdField.setText("");
                 telText.setText("");
                 strasseText.setText("");
                 hsNrText.setText("");

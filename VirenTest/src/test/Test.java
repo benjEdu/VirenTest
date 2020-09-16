@@ -83,7 +83,7 @@ public class Test{
         //System.out.println(test);
         //mapper.lesenTestperson(1);
         
-        //new TestpersonenVerwaltungView("Virentestcenter");
+        new TestpersonenVerwaltungView("Virentestcenter");
         //Testperson tp = new Testperson("Sentiten", "Dimitri", "test@testmail.com", "456498", "5", "laikestrasse", "Bonn", "9469", "Deutschland");
         //Testperson tp2 = new Testperson(17);
         //new TestpersonAendern("Virentestcenter", tp2);
@@ -135,6 +135,6 @@ public class Test{
         
        
                 */
-        new TestpersonenVerwaltungstabelle("Virentestcenter");
+        //new TestpersonenVerwaltungstabelle("Virentestcenter");
     }
 }

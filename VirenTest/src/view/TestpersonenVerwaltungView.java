@@ -83,7 +83,7 @@ public class TestpersonenVerwaltungView extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             setVisible(false);
-
+            new TestpersonenVerwaltungstabelle("Virentestcenter");
         }
     }
 

@@ -23,6 +23,7 @@ public class TestpersonenVerwaltungstabelle extends JFrame{
     private JButton delete;
     private JLabel infoLabel;
     private JButton aendern;
+     private JButton zurueck;
     
     
     public TestpersonenVerwaltungstabelle(String titel){
@@ -78,6 +79,7 @@ public class TestpersonenVerwaltungstabelle extends JFrame{
         };
         table.setCellSelectionEnabled(false);
         
+        zurueck = new JButton("Zurück");
         delete = new JButton("Löschen");
         DeleteButtonListener deleteListener = new DeleteButtonListener();
         delete.addActionListener(deleteListener);
@@ -88,6 +90,11 @@ public class TestpersonenVerwaltungstabelle extends JFrame{
         AendernButtonListener aendernListener = new AendernButtonListener();
         aendern.addActionListener(aendernListener);
         
+        MyActionListener2 listener2 = new MyActionListener2();
+        zurueck.addActionListener(listener2);
+        
+        zurueck.setFont(text);
+        zurueck.setBackground(background);
         aendern.setFont(text);
         aendern.setBackground(background);
         delete.setFont(text);
@@ -97,6 +104,7 @@ public class TestpersonenVerwaltungstabelle extends JFrame{
         table.setBackground(background2);
         add(ueberschrift, BorderLayout.NORTH);
         add(table, BorderLayout.CENTER);
+        panel2.add(zurueck);
         panel2.add(delete);
         panel2.add(aendern);
         panel2.add(infoLabel);
@@ -151,6 +159,14 @@ public class TestpersonenVerwaltungstabelle extends JFrame{
                 }
                 
             }
+    }
+    
+     private class MyActionListener2 implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            setVisible(false);
+            new TestpersonenVerwaltungView("Virentestcenter");
+        }        
     }
     
 }
