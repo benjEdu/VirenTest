@@ -163,7 +163,7 @@ public class MitarbeiterVerwaltungView extends JFrame{
                     m.setStadt((String)table.getValueAt(table.getSelectedRow(), 8));
                     m.setLand((String)table.getValueAt(table.getSelectedRow(), 9));
                     setVisible(false);
-                    new MitarbeiterAendernView("Verwaltung", m);
+                    new MitarbeiterAendernView("Mitarbeiter ändern", m);
                 } catch (ArrayIndexOutOfBoundsException ex){
                     infoLabel.setText("Mitarbeiter auswählen");
                 }

@@ -25,4 +25,8 @@ public class EinfacheDBFactory {
     public static ILaborantMapper getLaborantMapper(){
         return new LaborantJavaDBMapper();
     }
+    
+    public static ILoginMapper getLoginMapper(){
+        return new LoginDBMapper();
+    }
 }

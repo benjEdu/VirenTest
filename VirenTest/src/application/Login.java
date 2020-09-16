@@ -7,6 +7,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
+import java.util.UUID;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -18,7 +19,7 @@ public class Login {
     private static final String pepper = "fjdasiopfjdisaopjfifdsaf4dhallowerauchimmerdasliestsa89f48s9daf45dsaf4dsa89f4ds8a9dospajfoipas";
 	
     /*Insgesamt wird der Hash iterationen-mal wiederholt gehasht. Hierdurch erhoeht sich die Komplexitaet
-    Eigentlich sollte der Wert um einiges groesser als 5 sein, aber fuer dieses Studiumsprojekt reicht das locker
+    Eigentlich sollte der Wert um einiges groesser als 5 sein, aber fuer dieses SPE-Projekt reicht das locker
     Den Wert von Iterationen nicht aendern, sonst koennen sich bestehende Nutzer nicht mehr einloggen!!!*/
     private static final int iterationen = 5; //!!ACHTUNG!!
 
@@ -54,5 +55,10 @@ public class Login {
             }	
         }
         return generatedPassword;
+    }
+    
+    //generiert einen zufälligen 32 Zeichen langen String, der als Salt dient
+    public static String getSalt(){
+        return UUID.randomUUID().toString().replace("-", "");
     }
 }
