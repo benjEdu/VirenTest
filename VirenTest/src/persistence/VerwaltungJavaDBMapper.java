@@ -204,6 +204,7 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
             PreparedStatement read = conn.prepareStatement("select * from testpersonen");
             ResultSet rs = read.executeQuery();
             while(rs.next()){
+                int tpId = rs.getInt("testpersonId");
                 String Vname = rs.getString("vname");
                 String Nname = rs.getString("nname");
                 String Email = rs.getString("email");
@@ -222,6 +223,7 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
                     String plz = rs2.getString("plz");
                     String land = rs2.getString("land");
                     tp = new Testperson(adressId, Nname, Vname, Email, tel, hsNr, strasse, stadt, plz, land, salt, pwdHash);
+                    tp.setTestpersonId(tpId);
                 }else{
                     tp = new Testperson(Nname, Vname, Email, tel, salt, pwdHash);
                 }
