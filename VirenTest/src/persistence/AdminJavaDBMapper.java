@@ -112,16 +112,14 @@ public class AdminJavaDBMapper implements IAdminMapper{
             update.executeUpdate();
             
             if(rs.next()){
-                System.out.println(rs.getInt(1));
                 update = conn.prepareStatement("update adressen set strasse = ?, hsnr = ?, stadt = ?, plz = ?, land = ? where adressid = ?");
                 update.setString(1, m.getStrasse());
                 update.setString(2, m.getHsNr());
                 update.setString(3, m.getStadt());
-                System.out.println(m.getStadt());
                 update.setString(4, m.getPlz());
                 update.setString(5, m.getLand());
                 update.setInt(6, rs.getInt(1));
-                System.out.println(rs.getInt(1));
+                update.executeUpdate();
             }
             
             return "Passt";
