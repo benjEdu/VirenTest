@@ -14,7 +14,7 @@ import java.sql.SQLException;
  * @author z003ub8r
  */
 public class DBConnectionPool {
-    protected Connection getConn() {
+    static protected Connection getConn() {
         String userid = "VDB";
         String password = "123";
         String driver = "org.apache.derby.jdbc.ClientDriver";
@@ -31,7 +31,7 @@ public class DBConnectionPool {
         return conn;
     }
 
-    protected void deleteConn(Connection conn) {
+    static protected void deleteConn(Connection conn) {
         // solange noch kein Pool vorhanden 
         // nicht threadsafe
         try {

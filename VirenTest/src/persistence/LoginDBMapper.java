@@ -5,6 +5,12 @@
  */
 package persistence;
 import application.Person;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import persistence.DBConnectionPool;
 
 /**
@@ -19,6 +25,25 @@ public class LoginDBMapper implements ILoginMapper{
 
     @Override
     public Person einloggen(String email, String pwd) {
+        Connection conn = DBConnectionPool.getConn();
+        try{
+            PreparedStatement read = conn.prepareStatement("select * from testpersonen where email=?");
+            ResultSet rs = read.executeQuery();
+            
+            if(rs.next()){
+                String dbEmail = rs.getString("email");
+                String dbPwdHash = rs.getString("pwdhash");
+                String dbSalt = rs.getString("salt");
+                
+            }else{
+                return null;
+            }
+        }catch (SQLException exl){
+            Logger.getLogger(VerwaltungJavaDBMapper.class.getName()).log(Level.SEVERE, null, exl);
+        }finally{
+            DBConnectionPool.deleteConn(conn);
+        }
+        
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
