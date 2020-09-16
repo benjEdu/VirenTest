@@ -4,7 +4,6 @@ package persistence;
 import application.Admin;
 import application.Laborant;
 import application.Mitarbeiter;
-import application.Testperson;
 import application.Verwaltung;
 import java.sql.Connection;
 import java.sql.DriverManager;
