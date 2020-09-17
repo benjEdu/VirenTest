@@ -109,7 +109,7 @@ public class MitarbeiterLesen extends JFrame {
         zurueck.addActionListener(zurückListener);
         
         zurueck.setFont(text);
-        zurueck.setBackground(background2);
+        zurueck.setBackground(background);
         
         add(ueberschrift, BorderLayout.NORTH);
         panel.add(vNameLabel);
@@ -136,7 +136,7 @@ public class MitarbeiterLesen extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 500);
         this.getContentPane().setBackground(background);
-        panel.setBackground(background);
+        panel.setBackground(background2);
         setLocation(550, 300);
         setVisible(true);
     }
