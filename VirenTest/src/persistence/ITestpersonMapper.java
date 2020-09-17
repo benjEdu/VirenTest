@@ -15,3 +15,5 @@ import java.util.List;
 public interface ITestpersonMapper {
     public boolean ergebnisAbrufen(int testpersonId);
 }
+
+
