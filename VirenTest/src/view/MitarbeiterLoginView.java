@@ -85,6 +85,10 @@ public class MitarbeiterLoginView extends JFrame{
                 System.out.println(pwd);
                 Mitarbeiter m = lv.mitarbeiterEinloggen(email, pwd);
                 
+                //Falls Email oder Passwort falsch sind wird eine NPE geworfen
+                if(m==null){
+                    throw new NullPointerException();
+                }
                 //Todo, je nach Rollenid auf unterschiedliche GUIs weiterleiten
                 if(m instanceof Admin){
                     MitarbeiterVerwaltungView mvv = new MitarbeiterVerwaltungView("Mitarbeiterverwaltung");
@@ -93,6 +97,7 @@ public class MitarbeiterLoginView extends JFrame{
                 }else if(m instanceof Laborant){
                     ViewLaborant vl = new ViewLaborant("Testergebnis ändern");
                 }
+                System.out.println("Erfolgreich eingeloggt.");
                 setVisible(false);
                 dispose();  
             }catch (NullPointerException ex){
@@ -100,7 +105,6 @@ public class MitarbeiterLoginView extends JFrame{
                 messageLabel.setForeground(Color.red);
                 messageLabel.setText("Email oder Passwort falsch!");
             }
-            System.out.println("Erfolgreich eingeloggt.");
         }
     }
 }

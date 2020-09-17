@@ -48,7 +48,7 @@ public class LoginDBMapper implements ILoginMapper{
                 String pwdHash = Login.hashPassword(pwd, dbSalt);
                 if(pwdHash.equals(dbPwdHash)){
                     String rollenId = rs.getString("rollenid");
-                    String mitarbeiterId = rs.getString("mitarbieterid");
+                    String mitarbeiterId = Integer.toString(rs.getInt("mitarbeiterid"));
                     switch(rollenId){
                         case "1":
                             Admin a = new Admin(mitarbeiterId);
