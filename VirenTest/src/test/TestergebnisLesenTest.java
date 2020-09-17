@@ -29,25 +29,26 @@ public class TestergebnisLesenTest {
         TestpersonenVerwaltung tpv = new TestpersonenVerwaltung();
         LaborantVerwaltung lv = new LaborantVerwaltung();
         VerwaltungVerwaltung vv = new VerwaltungVerwaltung();
-        
-        int i = getMaxId();
-        System.out.println(i);
-        
-        /*
-                                                                                                                                                                                                                                                                       
-        Testperson tp1 = new Testperson("Sentiten", "Dimitri", "test@testmail.com", "456498", "5", "laikestrasse", "Bonn", "94649", "Deutschland", "Passwort", 16);
-        Testperson tp2 = new Testperson("2Sentiten", "2Dimitri", "2test@testmail.com", "2456498", "25", "2laikestrasse", "2Bonn", "29469", "2Deutschland", "Passwort2", 17);
-        
+                                                                                                                                                                                                                                                                                     
+        Testperson tp1 = new Testperson("Sentiten", "Dimitri", "test@testmail.com", "456498", "5", "laikestrasse", "Bonn", "94649", "Deutschland", "Passwort");
+        Testperson tp2 = new Testperson("2Sentiten", "2Dimitri", "2test@testmail.com", "2456498", "25", "2laikestrasse", "2Bonn", "29469", "2Deutschland", "Passwort2");
+               
         vv.einfuegenTestperson(tp1);
         vv.einfuegenTestperson(tp2);
         
-        lv.einfuegenTestergebnis("16" , true);
-        lv.einfuegenTestergebnis("17", false);
+        int i = getMaxId();
         
-        ergebnisAbrufenTestPositiv(tpv, 16);
-        ergebnisAbrufenTestNegativ(tpv, 17);
+        String tpId1 = String.valueOf(i-1);
+        String tpId2 = String.valueOf(i);
         
-        */
+        lv.einfuegenTestergebnis(tpId1, true);
+        lv.einfuegenTestergebnis(tpId2, false);
+        
+        ergebnisAbrufenTestPositiv(tpv, i-1);
+        ergebnisAbrufenTestNegativ(tpv, i);
+        
+        vv.loeschenTestperson(i-1);
+        vv.loeschenTestperson(i);
                 
         System.out.println("Test TestergebnisLesen beendet");
     }
@@ -76,9 +77,10 @@ public class TestergebnisLesenTest {
     public static int getMaxId () {
         Connection conn = getConn();
         try {
-            PreparedStatement search = conn.prepareStatement("select MAX(testpersonId) AS Alle FROM testpersonen");
-            ResultSet rs = search.executeQuery();
-            int max = rs.getInt("Alle");
+            PreparedStatement read = conn.prepareStatement("select MAX(testpersonId) AS alle FROM testpersonen");
+            ResultSet rs = read.executeQuery();
+            rs.next();
+            int max = rs.getInt("alle");
             return max;
         } catch(SQLException ex){
             Logger.getLogger(LaborantJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex);
