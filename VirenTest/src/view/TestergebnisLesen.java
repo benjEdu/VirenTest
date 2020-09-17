@@ -3,11 +3,14 @@ package view;
 import application.TestpersonenVerwaltung;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class TestergebnisLesen extends JFrame {
 
     //Hintergrundfarbe
     Color background = new Color(229, 255, 249);
+    Color background2 = new Color(194, 255, 241);
     //Schriftart und -größe
     Font ueberschriftFont = new Font("SansSerif", Font.BOLD, 25);
     Font text = new Font("SansSerif", Font.BOLD, 17);
@@ -15,6 +18,8 @@ public class TestergebnisLesen extends JFrame {
     //Label
     private JLabel ausgabe;
     private JLabel ueberschrift;
+    
+    private JButton ausloggen;
 
     private final TestpersonenVerwaltung tv;
     
@@ -40,9 +45,17 @@ public class TestergebnisLesen extends JFrame {
         ausgabe.setHorizontalAlignment(JLabel.CENTER);
         ausgabe.setFont(text);
 
+        ausloggen = new JButton("Ausloggen");
+        ausloggen.setFont(text);
+        ausloggen.setBackground(background2);
+        
+        ausloggenActionListener ausloggenListener = new ausloggenActionListener();
+        ausloggen.addActionListener(ausloggenListener);
+        
         //zu Frame adden
         add(ueberschrift, BorderLayout.NORTH);
         add(ausgabe, BorderLayout.CENTER);
+        add(ausloggen, BorderLayout.SOUTH);
 
         //Ergebnis Abrufen
         boolean testPositiv = tv.ergebnisAbrufen(testpersonId);
@@ -59,5 +72,13 @@ public class TestergebnisLesen extends JFrame {
         this.getContentPane().setBackground(background);
         setLocation(550, 300);
         setVisible(true);
+    }
+    
+    private class ausloggenActionListener implements ActionListener {
+        
+        public void actionPerformed(ActionEvent e) {
+            setVisible(false);
+            new VirenTestcenterView("Virentestcenter");
+        }
     }
 }

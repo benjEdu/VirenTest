@@ -36,6 +36,7 @@ public class MitarbeiterVerwaltungView extends JFrame {
     private JButton lesen;
     private JLabel infoLabel;
     private JButton aendern;
+    private JButton ausloggen;
 
     public MitarbeiterVerwaltungView(String titel) {
         super(titel);
@@ -113,6 +114,10 @@ public class MitarbeiterVerwaltungView extends JFrame {
         aendern = new JButton("Ändern");
         AendernButtonListener aendernListener = new AendernButtonListener();
         aendern.addActionListener(aendernListener);
+        
+        ausloggen = new JButton("Ausloggen");
+        ausloggenActionListener ausloggenListener = new ausloggenActionListener();
+        ausloggen.addActionListener(ausloggenListener);
 
         aendern.setFont(text);
         aendern.setBackground(background);
@@ -122,13 +127,16 @@ public class MitarbeiterVerwaltungView extends JFrame {
         delete.setBackground(background);
         lesen.setFont(text);
         lesen.setBackground(background);
+        ausloggen.setFont(text);
+        ausloggen.setBackground(background);
 
-        mitarbeiterLesen = new JTextField("MitarbeiterID für 'Lesen' eingeben");
+        mitarbeiterLesen = new JTextField("MitarbeiterID für 'Lesen'");
 
         table.setFont(text);
         table.setBackground(background2);
         add(ueberschrift, BorderLayout.NORTH);
         add(table, BorderLayout.CENTER);
+        panel2.add(ausloggen);
         panel2.add(delete);
         panel2.add(aendern);
         panel2.add(mitarbeiterLesen);
@@ -249,6 +257,14 @@ public class MitarbeiterVerwaltungView extends JFrame {
         public void actionPerformed(ActionEvent e) {
             setVisible(false);
             new MitarbeiterEinfuegen("Virentestcenter");
+        }
+    }
+    
+    private class ausloggenActionListener implements ActionListener {
+        
+        public void actionPerformed(ActionEvent e) {
+            setVisible(false);
+            new VirenTestcenterView("Virentestcenter");
         }
     }
 
