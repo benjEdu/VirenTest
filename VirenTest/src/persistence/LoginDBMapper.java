@@ -31,8 +31,8 @@ public class LoginDBMapper implements ILoginMapper{
         try{
             //Todo: Woher wissen wir, ob eine Person ein Mitarbeiter, oder eine Testperson ist? 
             //Derweil ist die Funktion nur fuer eine Testperson geschrieben
-            PreparedStatement read = conn.prepareStatement("select * from testpersonen where email=?");
-            read.setString(1, email);
+            PreparedStatement read = conn.prepareStatement("select * from testpersonen where LOWER(email)=?");
+            read.setString(1, email.toLowerCase());
             ResultSet rs = read.executeQuery();
             //Email ist unique, daher kann hier nur maximalein Ergebnis vorliegen
             if(rs.next()){
