@@ -31,7 +31,7 @@ public class VerwaltungVerwaltung {
         return mapper.lesenTestperson(tpid);
     }
     
-    List<Testperson> lesenAlleTestpersonen(){
+    public List<Testperson> lesenAlleTestpersonen(){
         return mapper.lesenAlleTestpersonen();
     }
 }
