@@ -31,7 +31,7 @@ import view.VirenTestcenterView;
  */
 public class AdminTest {
      public static void main(String[] args) throws SQLException {
-         AdminJavaDBMapper mapper = new AdminJavaDBMapper();
+        /* AdminJavaDBMapper mapper = new AdminJavaDBMapper();
          
          // Aquivalenzklasse Standard: 
         // id Zahl >0 <=1000
@@ -96,6 +96,6 @@ public class AdminTest {
             System.out.println(ex.toString());
         }
         
-        
+        */
      }
 }
