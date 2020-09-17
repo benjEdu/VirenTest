@@ -16,7 +16,10 @@ import application.Mitarbeiter;
 import application.Verwaltung;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 
@@ -62,7 +65,12 @@ public class MitarbeiterVerwaltungView extends JFrame{
                         "Land",
                         "Bezeichnunug"
         };
-        List<Mitarbeiter> data = av.lesenAlleMitarbeiter();
+        List<Mitarbeiter> data = null;
+        try {
+            data = av.lesenAlleMitarbeiter();
+        } catch (SQLException ex) {
+            infoLabel.setText("Auslesen fehlgeschlagen");
+        }
         Mitarbeiter[] data2 = data.toArray(new Mitarbeiter[0]);
         String[][] data3 = new String[data2.length][11];
         for(int i = 0; i < data.size(); i++){
@@ -129,14 +137,20 @@ public class MitarbeiterVerwaltungView extends JFrame{
                 Integer mId = null;
                 try{
                     mId = Integer.parseInt((String)table.getValueAt(table.getSelectedRow(), 0));
-                    boolean ergebnis = av.loeschenMitarbeiter(mId);
+                    boolean ergebnis = false;
+                    try {
+                        ergebnis = av.loeschenMitarbeiter(mId);
+                    } catch (SQLException ex) {
+                        infoLabel.setText("Löschen fehlgeschlagen");
+                    }
+                    if(ergebnis){
+                        infoLabel.setText("Löschen erfolgreich");
+                    }
                     setVisible(false);
                     new MitarbeiterVerwaltungView("Verwaltung");
                 } catch (ArrayIndexOutOfBoundsException ex){
                     infoLabel.setText("Mitarbeiter auswählen");
                 }
-                
-                
             }
         }
     
