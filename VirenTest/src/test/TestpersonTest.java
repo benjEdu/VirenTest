@@ -16,10 +16,11 @@ import view.TestpersonenLoginView;
  */
 public class TestpersonTest {
     public static void main(String[] args){
-        System.out.println(alleTesten);
+        System.out.println(alleTesten());
+        MitarbeiterLoginView mlv =  new MitarbeiterLoginView("blabla");
     }
     
-    public String alleTesten(){
+    public static String alleTesten(){
         String testergebnis = "";
         VerwaltungJavaDBMapper mapper = new VerwaltungJavaDBMapper();
         Testperson tp = new Testperson("Sentiten", "Dimitri", "test@testmail.com", "456498", "5", "laikestrasse", "Bonn", "94649", "Deutschelaaand", "Passwort");
