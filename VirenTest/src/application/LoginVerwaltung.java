@@ -20,7 +20,7 @@ public class LoginVerwaltung {
         
     }
     
-    public Person einloggen(String email, String pwd){
+    public Testperson einloggen(String email, String pwd){
         return mapper.einloggen(email, pwd);
     }
 }
