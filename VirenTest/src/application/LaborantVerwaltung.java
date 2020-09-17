@@ -5,6 +5,7 @@
  */
 package application;
 
+import java.sql.SQLException;
 import persistence.EinfacheDBFactory;
 import persistence.ILaborantMapper;
 
@@ -19,7 +20,10 @@ public class LaborantVerwaltung {
         mapper = EinfacheDBFactory.getLaborantMapper();
     }
     
-    public boolean einfuegenTestergebnis(String id, boolean ergebnis){
+    public boolean einfuegenTestergebnis(String id, boolean ergebnis) throws SQLException{
         return mapper.einfuegenTestergebnis(id, ergebnis);
+    }
+    public boolean aendernTestergebnis(String id, boolean ergebnis ) throws SQLException {
+        return mapper.aendernTestergebnis(id, ergebnis);
     }
 }

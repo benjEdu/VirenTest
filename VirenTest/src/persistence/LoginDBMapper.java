@@ -102,6 +102,7 @@ public class LoginDBMapper implements ILoginMapper{
                         String plz = rs2.getString("plz");
                         String land = rs2.getString("land");
                         tp = new Testperson(adressId, Nname, Vname, Email, tel, hsNr, strasse, stadt, plz, land);
+                        tp.setTestpersonId(rs.getInt("testpersonid"));
                     }else{
                         tp = new Testperson(Nname, Vname, Email, tel);
                     }

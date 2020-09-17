@@ -4,6 +4,9 @@ import application.LaborantVerwaltung;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ViewLaborant extends JFrame {
     //Hintergrundfarbe
@@ -119,7 +122,16 @@ public class ViewLaborant extends JFrame {
             //Eingabe von Nutzer
             String id = idText.getText();
             testPositiv = positiv.isSelected();
-            boolean ergebnis = lv.einfuegenTestergebnis(id, testPositiv);
+            boolean ergebnis = false;
+            try {
+                ergebnis = lv.einfuegenTestergebnis(id, testPositiv);
+            } catch (SQLException ex) {
+                try {
+                    ergebnis = lv.aendernTestergebnis(id, testPositiv);
+                } catch (SQLException ex1) {
+                    System.out.println("Geht nicht");
+                }
+            }
             if(ergebnis){
                 idText.setText("");
                 negativ.isSelected();

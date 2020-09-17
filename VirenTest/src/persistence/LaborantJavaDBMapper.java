@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 public class LaborantJavaDBMapper implements ILaborantMapper{
 
     @Override
-    public boolean einfuegenTestergebnis(String id, boolean ergebnis) {
+    public boolean einfuegenTestergebnis(String id, boolean ergebnis) throws SQLException{
                 Connection conn = getConn();
         try {
             PreparedStatement insert = conn.prepareStatement("insert into testergebnisse (testpersonId, ergebniss) values (?,?)");
@@ -26,29 +26,29 @@ public class LaborantJavaDBMapper implements ILaborantMapper{
             insert.executeUpdate();
             
         } catch(SQLException ex){
-            Logger.getLogger(LaborantJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
+            throw new SQLException(ex);
         }
         return true;
     }
     
-    public boolean aendernTestergebnis(int id, boolean ergebnis ) {
+    @Override
+    public boolean aendernTestergebnis(String id, boolean ergebnis ) throws SQLException{
         Connection conn = getConn();
         try {
-            PreparedStatement insert = conn.prepareStatement("update testergebnisse set ergebnis = ? where id = ?");
-            insert.setInt(1, id);            
-            insert.setBoolean(2, ergebnis);
-            insert.executeUpdate();
+            PreparedStatement insert = conn.prepareStatement("update testergebnisse set ergebniss = ? where testpersonid = ?");
+            insert.setBoolean(1, ergebnis);
+            insert.setString(2, id);            
+            
+           /* insert.executeUpdate();
             PreparedStatement delete = conn.prepareStatement("delete from testergebnisse where id = ?");
-            delete.setInt(1, id);
+            delete.setString(1, id);
             delete.executeUpdate();
             insert = conn.prepareStatement("insert into testergebnisse (id, testergebnisse) values (?,?)");
-            insert.setInt(1, id);
-            
+            insert.setString(1, id);*/
+            insert.executeUpdate();
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(LaborantJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
+            throw new SQLException(ex);
         } 
     }
     

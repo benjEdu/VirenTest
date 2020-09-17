@@ -58,12 +58,14 @@ public class TestergebnisLesen extends JFrame {
         add(ausloggen, BorderLayout.SOUTH);
 
         //Ergebnis Abrufen
-        boolean testPositiv = tv.ergebnisAbrufen(testpersonId);
+        String testPositiv = tv.ergebnisAbrufen(testpersonId);
         //Angepasste Ausgabe an Ergebnis
-        if (testPositiv) {
+        if (testPositiv.equals("Positiv")) {
             ausgabe.setText("Das Ergebnis Ihres Tests ist positiv.");
-        } else {
+        }else if (testPositiv.equals("Negativ")) {
             ausgabe.setText("Das Ergebnis Ihres Tests ist negativ.");
+        } else {
+            ausgabe.setText("Das Ergebnis Ihres Tests ist noch nicht vorhanden.");
         }
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
