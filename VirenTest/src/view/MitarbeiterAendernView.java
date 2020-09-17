@@ -8,6 +8,9 @@ import application.Verwaltung;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MitarbeiterAendernView extends JFrame {
 
@@ -189,7 +192,11 @@ public class MitarbeiterAendernView extends JFrame {
                                             mit.setPlz(plzText.getText());
                                             if (nNameText.getText().trim() != null && !nNameText.getText().trim().isEmpty()) {
                                                 mit.setNname(nNameText.getText());
-                                                av.aendernMitarbeiter(mit);
+                                                try {
+                                                    av.aendernMitarbeiter(mit);
+                                                } catch (SQLException ex) {
+                                                    System.out.println(ex.toString());
+                                                }
                                                 setVisible(false);
                                                 new MitarbeiterVerwaltungView("Verwaltung");
                                             }

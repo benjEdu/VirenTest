@@ -4,9 +4,13 @@
  * and open the template in the editor.
  */
 package persistence;
+import application.Admin;
+import application.Laborant;
 import application.Login;
+import application.Mitarbeiter;
 import application.Person;
 import application.Testperson;
+import application.Verwaltung;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +18,9 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import persistence.DBConnectionPool;
+import view.MitarbeiterVerwaltungView;
+import view.TestpersonenVerwaltungView;
+import view.ViewLaborant;
 
 /**
  *
@@ -25,12 +32,50 @@ public class LoginDBMapper implements ILoginMapper{
         
     }
 
-    @Override
-    public Testperson einloggen(String email, String pwd) {
+    @Override 
+    public Mitarbeiter mitarbeiterEinloggen(String email, String pwd){
         Connection conn = DBConnectionPool.getConn();
         try{
-            //Todo: Woher wissen wir, ob eine Person ein Mitarbeiter, oder eine Testperson ist? 
-            //Derweil ist die Funktion nur fuer eine Testperson geschrieben
+            PreparedStatement read = conn.prepareStatement("select * from mitarbeiter where LOWER(email)=?");
+            read.setString(1, email.toLowerCase());
+            ResultSet rs = read.executeQuery();
+            //Email ist unique, daher kann hier nur maximalein Ergebnis vorliegen
+            if(rs.next()){
+                String dbPwdHash = rs.getString("pwdhash");
+                String dbSalt = rs.getString("salt");
+                
+                //Eingegebenes Passwort hashen
+                String pwdHash = Login.hashPassword(pwd, dbSalt);
+                if(pwdHash.equals(dbPwdHash)){
+                    String rollenId = rs.getString("rollenid");
+                    String mitarbeiterId = Integer.toString(rs.getInt("mitarbeiterid"));
+                    switch(rollenId){
+                        case "1":
+                            Admin a = new Admin(mitarbeiterId);
+                            return a;
+                        case "2":
+                            Verwaltung v = new Verwaltung(mitarbeiterId);
+                            return v;
+                        case "3":
+                            Laborant l = new Laborant(mitarbeiterId);
+                            return l;
+                    }
+                }
+            }
+            //Falls die Email nicht gefunden wurde, oder das Passwort falsch ist
+            return null;
+        }catch (SQLException exl){
+            Logger.getLogger(VerwaltungJavaDBMapper.class.getName()).log(Level.SEVERE, null, exl);
+            return null;
+        }finally{
+            DBConnectionPool.deleteConn(conn);
+        }
+    }
+    
+    @Override
+    public Testperson testpersonEinloggen(String email, String pwd) {
+        Connection conn = DBConnectionPool.getConn();
+        try{
             PreparedStatement read = conn.prepareStatement("select * from testpersonen where LOWER(email)=?");
             read.setString(1, email.toLowerCase());
             ResultSet rs = read.executeQuery();
@@ -68,12 +113,9 @@ public class LoginDBMapper implements ILoginMapper{
             return null;
         }catch (SQLException exl){
             Logger.getLogger(VerwaltungJavaDBMapper.class.getName()).log(Level.SEVERE, null, exl);
+            return null;
         }finally{
             DBConnectionPool.deleteConn(conn);
         }
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
+    }  
 }
