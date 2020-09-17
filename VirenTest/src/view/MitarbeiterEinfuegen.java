@@ -7,6 +7,9 @@ import application.Verwaltung;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import persistence.AdminJavaDBMapper;
 
 public class MitarbeiterEinfuegen extends JFrame {
@@ -25,6 +28,7 @@ public class MitarbeiterEinfuegen extends JFrame {
     private JLabel nname;
     private JLabel vname;
     private JLabel email; 
+    private JLabel pwd;
     private JLabel tel;
     private JLabel hsNr; 
     private JLabel strasse; 
@@ -36,11 +40,12 @@ public class MitarbeiterEinfuegen extends JFrame {
     private JTextField nnameText;
     private JTextField vnameText;
     private JTextField emailText; 
+    private JPasswordField pwdField;
     private JTextField telText;
     private JTextField hsNrText; 
     private JTextField strasseText; 
     private JTextField stadtText; 
-    private JTextField plzText; 
+    private JTextField plzText;
     //Combobox
     private JComboBox land2;
     //RadioButton
@@ -82,6 +87,9 @@ public class MitarbeiterEinfuegen extends JFrame {
         email = new JLabel("E-Mail:");
         emailText = new JTextField(60);
         
+        pwd = new JLabel("Passwort:");
+        pwdField = new JPasswordField();
+        
         tel = new JLabel("Telefonnummer:");
         telText = new JTextField(20);
         
@@ -115,6 +123,7 @@ public class MitarbeiterEinfuegen extends JFrame {
         nname.setFont(text);
         vname.setFont(text);
         email.setFont(text);
+        pwd.setFont(text);
         tel.setFont(text);
         strasse.setFont(text);
         hsNr.setFont(text);
@@ -386,6 +395,8 @@ public class MitarbeiterEinfuegen extends JFrame {
         panel.add(nnameText);
         panel.add(email);
         panel.add(emailText);
+        panel.add(pwd);
+        panel.add(pwdField);
         panel.add(tel);
         panel.add(telText);
         panel.add(strasse);
@@ -469,7 +480,12 @@ public class MitarbeiterEinfuegen extends JFrame {
             m.setPlz(plz);
             m.setLand(landAuswahl);
             
-            String ergebnis = mapper.einfuegenMitarbeiter(m);
+            String ergebnis = null;
+            try {
+                ergebnis = mapper.einfuegenMitarbeiter(m);
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
             if(ergebnis.equals("Passt")){
                 vnameText.setText("");
                 nnameText.setText("");
