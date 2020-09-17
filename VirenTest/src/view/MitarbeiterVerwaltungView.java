@@ -16,10 +16,7 @@ import application.Mitarbeiter;
 import application.Verwaltung;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 
 
@@ -65,12 +62,7 @@ public class MitarbeiterVerwaltungView extends JFrame{
                         "Land",
                         "Bezeichnunug"
         };
-        List<Mitarbeiter> data = null;
-        try {
-            data = av.lesenAlleMitarbeiter();
-        } catch (SQLException ex) {
-            System.out.println(ex.toString());
-        }
+        List<Mitarbeiter> data = av.lesenAlleMitarbeiter();
         Mitarbeiter[] data2 = data.toArray(new Mitarbeiter[0]);
         String[][] data3 = new String[data2.length][11];
         for(int i = 0; i < data.size(); i++){
@@ -89,6 +81,7 @@ public class MitarbeiterVerwaltungView extends JFrame{
         }
         
         setLayout(new BorderLayout());
+        JPanel panel2 = new JPanel(new FlowLayout());
         
         table = new JTable(data3, columnNames){
             @Override
@@ -98,8 +91,7 @@ public class MitarbeiterVerwaltungView extends JFrame{
         };
         table.setCellSelectionEnabled(false);
         
-        
-        delete = new JButton("Delete");
+        delete = new JButton("Löschen");
         DeleteButtonListener deleteListener = new DeleteButtonListener();
         delete.addActionListener(deleteListener);
         
@@ -109,17 +101,24 @@ public class MitarbeiterVerwaltungView extends JFrame{
         AendernButtonListener aendernListener = new AendernButtonListener();
         aendern.addActionListener(aendernListener);
         
+        aendern.setFont(text);
+        aendern.setBackground(background);
+        delete.setFont(text);
+        delete.setBackground(background);
+        
         table.setFont(text);
         table.setBackground(background2);
         add(ueberschrift, BorderLayout.NORTH);
         add(table, BorderLayout.CENTER);
-        add(delete, BorderLayout.WEST);
-        add(infoLabel, BorderLayout.PAGE_END);
-        add(aendern, BorderLayout.EAST);
+        panel2.add(delete);
+        panel2.add(aendern);
+        panel2.add(infoLabel);
+        add(panel2, BorderLayout.SOUTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(900,800);
+        setSize(1200, 500);
         this.getContentPane().setBackground(background);
-        setLocation(400,400);
+        panel2.setBackground(background2);
+        setLocation(400,300);
         setVisible(true);
         
     }
@@ -130,15 +129,7 @@ public class MitarbeiterVerwaltungView extends JFrame{
                 Integer mId = null;
                 try{
                     mId = Integer.parseInt((String)table.getValueAt(table.getSelectedRow(), 0));
-                    boolean ergebnis = false;
-                    try {
-                        ergebnis = av.loeschenMitarbeiter(mId);
-                    } catch (SQLException ex) {
-                        infoLabel.setText("Löschen fehlgeschlagen");
-                    }
-                    if(ergebnis){
-                        infoLabel.setText("Löschen erfolgreich");
-                    }
+                    boolean ergebnis = av.loeschenMitarbeiter(mId);
                     setVisible(false);
                     new MitarbeiterVerwaltungView("Verwaltung");
                 } catch (ArrayIndexOutOfBoundsException ex){
