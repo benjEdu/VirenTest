@@ -6,13 +6,11 @@
 package persistence;
 
 import application.Person;
+import application.Testperson;
 
-/**
- *
- * @author z003ub8r
- */
+
 public interface ILoginMapper {
-    Person einloggen(String email, String pwd);
+    public Testperson einloggen(String email, String pwd);
 }
 
 
