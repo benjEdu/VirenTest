@@ -420,21 +420,21 @@ public class MitarbeiterAendernView extends JFrame {
             }
 
             if (vNameText.getText().trim() != null && !vNameText.getText().trim().isEmpty()) {
-                mit.setVname(vNameText.getText());
+                mit.setVname(vNameText.getText().trim());
                 if (emailText.getText().trim() != null && !emailText.getText().trim().isEmpty()) {
-                    mit.setEmail(emailText.getText());
+                    mit.setEmail(emailText.getText().trim());
                     if (telText.getText().trim() != null && !telText.getText().trim().isEmpty()) {
-                        mit.setTel(telText.getText());
+                        mit.setTel(telText.getText().trim());
                         if (stadtText.getText().trim() != null && !stadtText.getText().trim().isEmpty()) {
-                            mit.setStadt(stadtText.getText());
+                            mit.setStadt(stadtText.getText().trim());
                             if (strasseText.getText().trim() != null && !strasseText.getText().trim().isEmpty()) {
-                                mit.setStrasse(strasseText.getText());
+                                mit.setStrasse(strasseText.getText().trim());
                                 if (hnrText.getText().trim() != null && !hnrText.getText().trim().isEmpty()) {
-                                    mit.setHr(hnrText.getText());
+                                    mit.setHr(hnrText.getText().trim());
                                     if (plzText.getText().trim() != null && !plzText.getText().trim().isEmpty()) {
-                                        mit.setPlz(plzText.getText());
+                                        mit.setPlz(plzText.getText().trim());
                                         if (nNameText.getText().trim() != null && !nNameText.getText().trim().isEmpty()) {
-                                            mit.setNname(nNameText.getText());
+                                            mit.setNname(nNameText.getText().trim());
                                             String landAuswahl = land2.getSelectedItem() + "";
                                             mit.setLand(landAuswahl);
                                             try {

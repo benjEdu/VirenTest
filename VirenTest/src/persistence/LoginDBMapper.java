@@ -43,7 +43,6 @@ public class LoginDBMapper implements ILoginMapper{
             if(rs.next()){
                 String dbPwdHash = rs.getString("pwdhash");
                 String dbSalt = rs.getString("salt");
-                
                 //Eingegebenes Passwort hashen
                 String pwdHash = Login.hashPassword(pwd, dbSalt);
                 if(pwdHash.equals(dbPwdHash)){
