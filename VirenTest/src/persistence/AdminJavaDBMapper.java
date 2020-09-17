@@ -3,6 +3,7 @@ package persistence;
 
 import application.Admin;
 import application.Laborant;
+import application.Login;
 import application.Mitarbeiter;
 import application.Verwaltung;
 import java.sql.Connection;
@@ -12,8 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -64,17 +63,21 @@ public class AdminJavaDBMapper implements IAdminMapper{
                 rollenId = rs.getInt(1);
             }
             
-            
-            PreparedStatement insert = conn.prepareStatement("insert into mitarbeiter (vname, nname, email, tel, rollenid, adressid) values (?,?,?,?,?,?)");
+            final String salt = Login.getSalt();
+            System.out.println(salt);
+            String pwdHash = Login.hashPassword(m.getPwd(), salt);
+            PreparedStatement insert = conn.prepareStatement("insert into mitarbeiter (vname, nname, email, tel, rollenid, adressid, salt, pwdhash) values (?,?,?,?,?,?,?,?)");
             insert.setString(1, m.getVname());
             insert.setString(2, m.getNname());
             insert.setString(3, m.getEmail());
             insert.setString(4, m.getTel());
             insert.setInt(5, rollenId);
             insert.setInt(6, adressId);
+            insert.setString(7, salt);
+            insert.setString(8, pwdHash);
             insert.executeUpdate();
             conn.commit();
-            return "Passt";
+            return "Eingefügt";
         } catch (SQLException ex) {
             try {
                 conn.rollback();
@@ -95,7 +98,12 @@ public class AdminJavaDBMapper implements IAdminMapper{
             if(emailVergeben(conn, m)){
                 return "E-Mail bereits vergeben";
             }
-            int id = Integer.parseInt(m.getMitarbeiterId());
+            Integer id = null;
+            if(m.getMitarbeiterId() != null){
+                id = Integer.parseInt(m.getMitarbeiterId());
+            } else {
+                return "Mitarbeiter nicht gefunden";
+            }
             PreparedStatement select = conn.prepareStatement("select adressid from mitarbeiter where mitarbeiterid = ?");
             select.setInt(1, id);
             ResultSet rs = select.executeQuery();

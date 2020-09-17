@@ -37,7 +37,7 @@ public class AdminTest {
         // id Zahl >0 <=1000
         // Name mit korrekten Zeichen keine überflüssigen Blanks
         // korrekte Zeichen: a-Z, Umlaute, ß,à ....
-        /*Mitarbeiter ad1 = new Admin("test");
+        Mitarbeiter ad1 = new Admin("test");
         Mitarbeiter ad2 = new Admin(null);
         
         Mitarbeiter ad3 = new Admin("test");
@@ -51,26 +51,51 @@ public class AdminTest {
         ad3.setTel("0174");
         ad3.setVname("test");
         
+        Mitarbeiter ad4 = new Admin("8");
+        ad3.setEmail("test");
+        ad3.setHr("test");
+        ad3.setLand("test");
+        ad3.setNname("test");
+        ad3.setPlz("81549");
+        ad3.setStadt("MUC");
+        ad3.setStrasse("test");
+        ad3.setTel("0174");
+        ad3.setVname("test");
+        
+        Mitarbeiter ad5 = new Admin(null);
+        
         try{
             String testAd1 = mapper.einfuegenMitarbeiter(ad1);
-            System.out.println(testAd1);
         } catch (SQLException ex){
             System.out.println(ex.toString());
         }
         try{
             String testAd2 = mapper.einfuegenMitarbeiter(ad2);
-            System.out.println(testAd2);
         } catch (SQLException ex){
             System.out.println(ex.toString());
         }
         try{
             String testAd3 = mapper.einfuegenMitarbeiter(ad3);
-            System.out.println(testAd3);
         } catch (SQLException ex){
             System.out.println(ex.toString());
-        } */
+        }
         
-        new VirenTestcenterView("Start-View");
-         
+        try{
+            String testAd4 = mapper.aendernMitarbeiter(ad4);
+        } catch (SQLException ex){
+            System.out.println(ex.toString());
+        }
+        try{
+            String testAd5 = mapper.aendernMitarbeiter(ad5);
+        } catch (SQLException ex){
+            System.out.println(ex.toString());
+        }
+        try{
+            boolean testAd6 = mapper.loeschenMitarbeiter(8);
+        } catch (SQLException ex){
+            System.out.println(ex.toString());
+        }
+        
+        
      }
 }
