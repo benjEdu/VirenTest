@@ -10,6 +10,7 @@ import view.TestergebnisLesen;
 import persistence.VerwaltungJavaDBMapper;
 import view.MitarbeiterAendernView;
 import view.MitarbeiterEinfuegen;
+import view.MitarbeiterLesen;
 import view.MitarbeiterVerwaltungView;
 import view.TestpersonEinfuegen;
 import view.TestpersonLoeschen;
@@ -140,6 +141,21 @@ public class Test{
         
         //new MitarbeiterVerwaltungView("Virentestcenter"); 
         
-        new VirenTestcenterView("Virentestcenter");
+        //new VirenTestcenterView("Virentestcenter");
+        
+        /*
+        Mitarbeiter tp = new Laborant("15");
+       tp.setEmail("test");
+       tp.setHr("1");
+       tp.setLand("DE");
+       tp.setNname("test");
+       tp.setPlz("test");
+       tp.setStadt("test");
+       tp.setStrasse("test");
+       tp.setTel("test");
+       tp.setVname("test");
+       
+        new MitarbeiterLesen("Virentestcenter", tp);
+                */
 }
 }

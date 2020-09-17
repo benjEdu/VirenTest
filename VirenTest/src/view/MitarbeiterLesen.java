@@ -2,24 +2,30 @@ package view;
 
  
 
-import application.Admin;
-import application.AdminVerwaltung;
 import application.Mitarbeiter;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
+import javax.swing.JPanel;
 
  
 
 public class MitarbeiterLesen extends JFrame {
 
- 
+    //Hintergrundfarbe
+    Color background = new Color(229, 255, 249);
+    Color background2 = new Color(194, 255, 241);
+    //Schriftart und -größe
+    Font ueberschriftFont = new Font("SansSerif", Font.BOLD, 25);
+    Font text = new Font("SansSerif", Font.BOLD, 17);
 
-   // private AdminVerwaltung av;
+    private JLabel ueberschrift;
     private JLabel vNameLabel;
     private JLabel nNameLabel;
     private JLabel emailLabel;
@@ -29,8 +35,6 @@ public class MitarbeiterLesen extends JFrame {
     private JLabel strasseLabel;
     private JLabel hnrLabel;
     private JLabel plzLabel;
-    private JLabel bezeichnungLabel;
-    private String idMit;
 
  
 
@@ -44,7 +48,7 @@ public class MitarbeiterLesen extends JFrame {
     private JLabel hnrText;
     private JLabel plzText;  
 
-    private JButton zurück;
+    private JButton zurueck;
 
  
 
@@ -56,7 +60,15 @@ public class MitarbeiterLesen extends JFrame {
  
 
     private void init(Mitarbeiter m) {
-        setLayout(new GridLayout(10, 2));
+        
+        //Überschrift
+        ueberschrift = new JLabel("Willkommen beim Virentestcenter");
+        ueberschrift.setHorizontalAlignment(JLabel.CENTER);
+        ueberschrift.setFont(ueberschriftFont);
+        
+        setLayout(new BorderLayout());
+        
+        JPanel panel = new JPanel(new GridLayout(10, 2));
 
  
 
@@ -68,9 +80,17 @@ public class MitarbeiterLesen extends JFrame {
         landLabel = new JLabel("Land");
         strasseLabel = new JLabel("Straße");
         hnrLabel = new JLabel("Hausnummer");
-        plzLabel = new JLabel("Postleitzahl");
-        idMit = m.getMitarbeiterId();   
+        plzLabel = new JLabel("Postleitzahl"); 
 
+        vNameLabel.setFont(text);
+        nNameLabel.setFont(text);
+        emailLabel.setFont(text);
+        telLabel.setFont(text);
+        stadtLabel.setFont(text);
+        landLabel.setFont(text);
+        strasseLabel.setFont(text);
+        hnrLabel.setFont(text);
+        plzLabel.setFont(text);
  
 
         vNameText = new JLabel(m.getVname());
@@ -84,39 +104,44 @@ public class MitarbeiterLesen extends JFrame {
         plzText = new JLabel(m.getPlz());
 
  
-        zurück = new JButton("Zurück");
-        MitarbeiterLesen.zurückButtonListener zurückListener = new MitarbeiterLesen.zurückButtonListener();
-        zurück.addActionListener(zurückListener);
+        zurueck = new JButton("Zurück");
+        MitarbeiterLesen.zurueckButtonListener zurückListener = new MitarbeiterLesen.zurueckButtonListener();
+        zurueck.addActionListener(zurückListener);
         
+        zurueck.setFont(text);
+        zurueck.setBackground(background2);
         
-         
-         add(vNameLabel);
-         add(vNameText);
-         add(nNameLabel);
-         add(nNameText);
-         add(emailLabel);
-         add(emailText);
-         add(telLabel);
-         add(telText);
-         add(stadtLabel);
-         add(stadtText);
-         add(landLabel);
-         add(landText);
-         add(strasseLabel);
-         add(strasseText);
-         add(hnrLabel);
-         add(hnrText);
-         add(plzLabel);
-         add(plzText);
-        add(zurück);
+        add(ueberschrift, BorderLayout.NORTH);
+        panel.add(vNameLabel);
+        panel.add(vNameText);
+        panel.add(nNameLabel);
+        panel.add(nNameText);
+        panel.add(emailLabel);
+        panel.add(emailText);
+        panel.add(telLabel);
+        panel.add(telText);
+        panel.add(stadtLabel);
+        panel.add(stadtText);
+        panel.add(landLabel);
+        panel.add(landText);
+        panel.add(strasseLabel);
+        panel.add(strasseText);
+        panel.add(hnrLabel);
+        panel.add(hnrText);
+        panel.add(plzLabel);
+        panel.add(plzText);
+        add(panel, BorderLayout.CENTER);
+        add(zurueck, BorderLayout.SOUTH);
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 500);
+        this.getContentPane().setBackground(background);
+        panel.setBackground(background);
         setLocation(550, 300);
         setVisible(true);
     }
     
-    private class zurückButtonListener implements ActionListener {
+    private class zurueckButtonListener implements ActionListener {
         
         public void actionPerformed(ActionEvent e) {
             setVisible(false);

@@ -1,11 +1,9 @@
 package view;
 
 import application.LaborantVerwaltung;
-import application.VerwaltungVerwaltung;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import persistence.LaborantJavaDBMapper;
 
 public class ViewLaborant extends JFrame {
     //Hintergrundfarbe
