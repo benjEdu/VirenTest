@@ -6,6 +6,7 @@
  */
 package application;
 
+import java.sql.SQLException;
 import java.util.List;
 import persistence.EinfacheDBFactory;
 import persistence.IAdminMapper;
@@ -21,23 +22,23 @@ public class AdminVerwaltung {
         mapper = EinfacheDBFactory.getAdminMapper();
     }
     
-    public String einfuegenMitarbeiter(Mitarbeiter m){
+    public String einfuegenMitarbeiter(Mitarbeiter m) throws SQLException{
         return mapper.einfuegenMitarbeiter(m);
     }
             
-    public boolean loeschenMitarbeiter(int id){
+    public boolean loeschenMitarbeiter(int id) throws SQLException{
        return mapper.loeschenMitarbeiter(id);
     }
     
-    public String aendernMitarbeiter(Mitarbeiter m){
+    public String aendernMitarbeiter(Mitarbeiter m) throws SQLException{
         return mapper.aendernMitarbeiter(m);
     }
     
-    public List<Mitarbeiter> lesenAlleMitarbeiter(){
+    public List<Mitarbeiter> lesenAlleMitarbeiter() throws SQLException{
         return mapper.lesenAlleMitarbeiter();
     }
     
-    public Mitarbeiter lesenMitarbeiter(int id){
+    public Mitarbeiter lesenMitarbeiter(int id) throws SQLException{
         return mapper.lesenMitarbeiter(id);
     }
             
