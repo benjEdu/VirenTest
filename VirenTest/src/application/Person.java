@@ -46,6 +46,13 @@ public abstract class Person {
         this.salt = salt;
         this.pwdHash = pwdHash;
     }
+    
+    public Person(String nname, String vname, String email, String tel) {
+        this.nname = nname;
+        this.vname = vname;
+        this.email = email;
+        this.tel = tel;
+    }
 
     public Person(String nname, String vname, String email, String tel, String hsNr, String strasse, String stadt, String plz, String land, String pwd) {
         this.nname = nname;
@@ -58,6 +65,18 @@ public abstract class Person {
         this.plz = plz;
         this.land = land;
         this.pwd = pwd;
+    }
+    
+    public Person(String nname, String vname, String email, String tel, String hsNr, String strasse, String stadt, String plz, String land) {
+        this.nname = nname;
+        this.vname = vname;
+        this.email = email;
+        this.tel = tel;
+        this.hsNr = hsNr;
+        this.strasse = strasse;
+        this.stadt = stadt;
+        this.plz = plz;
+        this.land = land;
     }
     
     
