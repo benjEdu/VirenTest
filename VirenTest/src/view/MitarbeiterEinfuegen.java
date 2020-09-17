@@ -8,18 +8,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import persistence.AdminJavaDBMapper;
 
 public class MitarbeiterEinfuegen extends JFrame {
+
     //Hintergrundfarbe
+
     Color background = new Color(229, 255, 249);
     Color background2 = new Color(194, 255, 241);
     //Schriftart und -größe
     Font ueberschriftFont = new Font("SansSerif", Font.BOLD, 25);
     Font text = new Font("SansSerif", Font.BOLD, 17);
-    
+
     Boolean adminB;
     Boolean laborantB;
     Boolean verwaltungB;
@@ -27,24 +27,25 @@ public class MitarbeiterEinfuegen extends JFrame {
     private JLabel ueberschrift;
     private JLabel nname;
     private JLabel vname;
-    private JLabel email; 
+    private JLabel email;
     private JLabel pwd;
     private JLabel tel;
-    private JLabel hsNr; 
-    private JLabel strasse; 
-    private JLabel stadt; 
-    private JLabel plz; 
+    private JLabel hsNr;
+    private JLabel strasse;
+    private JLabel stadt;
+    private JLabel plz;
     private JLabel land;
     private JLabel rolle;
+    private JLabel infoLabel;
     //Tesxtfelder
     private JTextField nnameText;
     private JTextField vnameText;
-    private JTextField emailText; 
+    private JTextField emailText;
     private JPasswordField pwdField;
     private JTextField telText;
-    private JTextField hsNrText; 
-    private JTextField strasseText; 
-    private JTextField stadtText; 
+    private JTextField hsNrText;
+    private JTextField strasseText;
+    private JTextField stadtText;
     private JTextField plzText;
     //Combobox
     private JComboBox land2;
@@ -55,7 +56,7 @@ public class MitarbeiterEinfuegen extends JFrame {
     //Buttons
     private JButton einfuegen;
     private JButton zurueck;
-    
+
     //Konstruktor
     public MitarbeiterEinfuegen(String titel) {
         super(titel);
@@ -64,62 +65,64 @@ public class MitarbeiterEinfuegen extends JFrame {
 
     private void init() {
         setLayout(new BorderLayout());
-        
-        JPanel panel = new JPanel(new GridLayout(11,2));
-        
-        JPanel panel2 = new JPanel(new GridLayout(1,3));
-        
+
+        JPanel panel = new JPanel(new GridLayout(11, 2));
+
+        JPanel panel2 = new JPanel(new GridLayout(1, 3));
+
         JPanel panel3 = new JPanel(new FlowLayout());
-        
-        
+
         //Überschrift
         ueberschrift = new JLabel("Willkommen beim Virentestcenter");
         ueberschrift.setHorizontalAlignment(JLabel.CENTER);
         ueberschrift.setFont(ueberschriftFont);
-        
+
         //Label
         nname = new JLabel("Nachname:");
         nnameText = new JTextField(30);
-        
+
         vname = new JLabel("Vorname:");
         vnameText = new JTextField(30);
-        
+
         email = new JLabel("E-Mail:");
         emailText = new JTextField(60);
-        
+
         pwd = new JLabel("Passwort:");
         pwdField = new JPasswordField();
-        
+
         tel = new JLabel("Telefonnummer:");
         telText = new JTextField(20);
-        
+
         strasse = new JLabel("Straße:");
-        strasseText = new JTextField(40);       
-        
+        strasseText = new JTextField(40);
+
         hsNr = new JLabel("Hausnummer:");
         hsNrText = new JTextField(5);
-        
+
         stadt = new JLabel("Stadt:");
         stadtText = new JTextField(5);
-        
+
         plz = new JLabel("Postleitzahl:");
         plzText = new JTextField(6);
-        
+
         land = new JLabel("Land:");
-        
+
         rolle = new JLabel("RollenId:");
-        
+
+        //InfoLabel
+        infoLabel = new JLabel();
+
         //RadioButton
         admin = new JRadioButton("Admin", false);
         laborant = new JRadioButton("Laborant", false);
         verwaltung = new JRadioButton("Verwaltung", true);
-        
+
         //Gruppierung RadioButton
         ButtonGroup ergebnisGroub = new ButtonGroup();
         ergebnisGroub.add(admin);
         ergebnisGroub.add(laborant);
         ergebnisGroub.add(verwaltung);
-        
+
         nname.setFont(text);
         vname.setFont(text);
         email.setFont(text);
@@ -135,260 +138,258 @@ public class MitarbeiterEinfuegen extends JFrame {
         laborant.setFont(text);
         verwaltung.setFont(text);
 
-        
         //ComboBox
-        String landArray[] = {"AD","AE",
-                 "Afghanistan",
-                 "Antigua und Barbuda",
-                 "Anguilla",
-                 "Albanien",
-                 "Armenien",
-                 "Niederländische Antillen",
-                 "Angola",
-                 "Antarktis",
-                 "Argentinien",
-                 "Amerikanisch-Samoa",
-                 "Österreich (Austria)",
-                 "Australien",
-                 "Aruba",
-                 "Azerbaijan",
-                 "Bosnien-Herzegovina",
-                 "Barbados",
-                 "Bangladesh",
-                 "Belgien",
-                 "Burkina Faso",
-                 "Bulgarien",
-                 "Bahrain",
-                 "Burundi",
-                 "Benin",
-                 "Bermudas",
-                 "Brunei Darussalam",
-                 "Bolivien",
-                 "Brasilien",
-                 "Bahamas",
-                 "Bhutan",
-                 "Bouvet Island",
-                 "Botswana",
-                 "Weißrußland (Belarus)",
-                 "Belize",
-                 "Canada",
-                 "Cocos (Keeling) Islands",
-                 "Demokratische Republik Kongo",
-                 "Zentralafrikanische Republik",
-                 "Kongo",
-                 "Schweiz",
-                 "Elfenbeinküste (Cote D'Ivoire)",
-                 "Cook Islands",
-                 "Chile",
-                 "Kamerun",
-                 "China",
-                 "Kolumbien",
-                 "Costa Rica",
-                 "Tschechoslowakei (ehemalige)",
-                 "Kuba",
-                 "Kap Verde",
-                 "Christmas Island",
-                 "Zypern",
-                 "Tschechische Republik",
-                 "Deutschland",
-                 "Djibouti",
-                 "Dänemark",
-                 "Dominica",
-                 "Dominikanische Republik",
-                 "Algerien",
-                 "Ecuador",
-                 "Estland",
-                 "Ägypten",
-                 "Westsahara",
-                 "Eritrea",
-                 "Spanien",
-                 "Äthiopien",
-                 "Finnland",
-                 "Fiji",
-                 "Falkland-Inseln (Malvinas)",
-                 "Micronesien",
-                 "Faröer-Inseln",
-                 "Frankreich",
-                 "France, Metropolitan",
-                 "Gabon",
-                 "Grenada",
-                 "Georgien",
-                 "Französisch Guiana",
-                 "Ghana",
-                 "Gibraltar",
-                 "Grönland",
-                 "Gambia",
-                 "Guinea",
-                 "Guadeloupe",
-                 "Äquatorialguinea",
-                 "Griechenland",
-                 "Südgeorgien und Südliche Sandwich-Inseln",
-                 "Guatemala",
-                 "Guam",
-                 "Guinea-Bissau",
-                 "Guyana",
-                 "Kong Hong",
-                 "Heard und Mc Donald Islands",
-                 "Honduras",
-                 "Haiti",
-                 "Ungarn",
-                 "Indonesien",
-                 "Irland",
-                 "Israel",
-                 "Indien",
-                 "British Indian Ocean Territory",
-                 "Irak",
-                 "Iran (Islamische Republik)",
-                 "Island",
-                 "Italien",
-                 "Jamaica",
-                 "Jordanien",
-                 "Japan",
-                 "Kenya",
-                 "Kirgisien",
-                 "Königreich Kambodscha",
-                 "Kiribati",
-                 "Komoren",
-                 "Saint Kitts und Nevis",
-                 "Korea, Volksrepublik",
-                 "Korea",
-                 "Kuwait",
-                 "Kayman Islands",
-                 "Kasachstan",
-                 "Laos",
-                 "Libanon",
-                 "Saint Lucia",
-                 "Liechtenstein",
-                 "Sri Lanka",
-                 "Liberia",
-                 "Lesotho",
-                 "Littauen",
-                 "Luxemburg",
-                 "Lettland",
-                 "Libyen",
-                 "Marokko",
-                 "Monaco",
-                 "Moldavien",
-                 "Madagaskar",
-                 "Marshall-Inseln",
-                 "Mazedonien, ehem. Jugoslawische Republik",
-                 "Mali",
-                 "Myanmar",
-                 "Mongolei",
-                 "Macao",
-                 "Nördliche Marianneninseln",
-                 "Martinique",
-                 "Mauretanien",
-                 "Montserrat",
-                 "Malta",
-                 "Mauritius",
-                 "Malediven",
-                 "Malawi",
-                 "Mexico",
-                 "Malaysien",
-                 "Mozambique",
-                 "Namibia",
-                 "Neu Kaledonien",
-                 "Niger",
-                 "Norfolk Island",
-                 "Nigeria",
-                 "Nicaragua",
-                 "Niederlande",
-                 "Norwegen",
-                 "Nepal",
-                 "Nauru",
-                 "Niue",
-                 "Neuseeland",
-                 "Oman",
-                 "Panama",
-                 "Peru",
-                 "Französisch Polynesien",
-                 "Papua Neuguinea",
-                 "Philippinen",
-                 "Pakistan",
-                 "Polen",
-                 "St. Pierre und Miquelon",
-                 "Pitcairn",
-                 "Puerto Rico",
-                 "Portugal",
-                 "Palau",
-                 "Paraguay",
-                 "Katar",
-                 "Reunion",
-                 "Rumänien",
-                 "Russische Föderation",
-                 "Ruanda",
-                 "Saudi Arabien",
-                 "Salomonen",
-                 "Seychellen",
-                 "Sudan",
-                 "Schweden",
-                 "Singapur",
-                 "St. Helena",
-                 "Slovenien",
-                 "Svalbard und Jan Mayen Islands",
-                 "Slowakei",
-                 "Sierra Leone",
-                 "San Marino",
-                 "Senegal",
-                 "Somalia",
-                 "Surinam",
-                 "Sao Tome und Principe",
-                 "El Salvador",
-                 "Syrien, Arabische Republik",
-                 "Swaziland",
-                 "Turk und Caicos-Inseln",
-                 "Tschad",
-                 "Französisches Südl.Territorium",
-                 "Togo",
-                 "Thailand",
-                 "Tadschikistan",
-                 "Tokelau",
-                 "Turkmenistan",
-                 "Tunesien",
-                 "Tonga",
-                 "Ost-Timor",
-                 "Türkei",
-                 "Trinidad und Tobago",
-                 "Tuvalu",
-                 "Taiwan",
-                 "Tansania, United Republic of",
-                 "Ukraine",
-                 "Uganda",
-                 "Großbritannien",
-                 "Vereinigte Staaten",
-                 "Vereinigte Staaten, Minor Outlying Islands",
-                 "Uruguay",
-                 "Usbekistan",
-                 "Vatikanstaat",
-                 "Saint Vincent und Grenadines",
-                 "Venezuela",
-                 "Virgin Islands (Britisch)",
-                 "Virgin Islands (U.S.)",
-                 "Vietnam",
-                 "Vanuatu",
-                 "Wallis und Futuna Islands",
-                 "Samoa",
-                 "Jemen",
-                 "Mayotte",
-                 "Jugoslawien",
-                 "Südafrika",
-                 "Sambia",
-                 "Zimbabwe"
-        };        
+        String landArray[] = {"AD", "AE",
+            "Afghanistan",
+            "Antigua und Barbuda",
+            "Anguilla",
+            "Albanien",
+            "Armenien",
+            "Niederländische Antillen",
+            "Angola",
+            "Antarktis",
+            "Argentinien",
+            "Amerikanisch-Samoa",
+            "Österreich (Austria)",
+            "Australien",
+            "Aruba",
+            "Azerbaijan",
+            "Bosnien-Herzegovina",
+            "Barbados",
+            "Bangladesh",
+            "Belgien",
+            "Burkina Faso",
+            "Bulgarien",
+            "Bahrain",
+            "Burundi",
+            "Benin",
+            "Bermudas",
+            "Brunei Darussalam",
+            "Bolivien",
+            "Brasilien",
+            "Bahamas",
+            "Bhutan",
+            "Bouvet Island",
+            "Botswana",
+            "Weißrußland (Belarus)",
+            "Belize",
+            "Canada",
+            "Cocos (Keeling) Islands",
+            "Demokratische Republik Kongo",
+            "Zentralafrikanische Republik",
+            "Kongo",
+            "Schweiz",
+            "Elfenbeinküste (Cote D'Ivoire)",
+            "Cook Islands",
+            "Chile",
+            "Kamerun",
+            "China",
+            "Kolumbien",
+            "Costa Rica",
+            "Tschechoslowakei (ehemalige)",
+            "Kuba",
+            "Kap Verde",
+            "Christmas Island",
+            "Zypern",
+            "Tschechische Republik",
+            "Deutschland",
+            "Djibouti",
+            "Dänemark",
+            "Dominica",
+            "Dominikanische Republik",
+            "Algerien",
+            "Ecuador",
+            "Estland",
+            "Ägypten",
+            "Westsahara",
+            "Eritrea",
+            "Spanien",
+            "Äthiopien",
+            "Finnland",
+            "Fiji",
+            "Falkland-Inseln (Malvinas)",
+            "Micronesien",
+            "Faröer-Inseln",
+            "Frankreich",
+            "France, Metropolitan",
+            "Gabon",
+            "Grenada",
+            "Georgien",
+            "Französisch Guiana",
+            "Ghana",
+            "Gibraltar",
+            "Grönland",
+            "Gambia",
+            "Guinea",
+            "Guadeloupe",
+            "Äquatorialguinea",
+            "Griechenland",
+            "Südgeorgien und Südliche Sandwich-Inseln",
+            "Guatemala",
+            "Guam",
+            "Guinea-Bissau",
+            "Guyana",
+            "Kong Hong",
+            "Heard und Mc Donald Islands",
+            "Honduras",
+            "Haiti",
+            "Ungarn",
+            "Indonesien",
+            "Irland",
+            "Israel",
+            "Indien",
+            "British Indian Ocean Territory",
+            "Irak",
+            "Iran (Islamische Republik)",
+            "Island",
+            "Italien",
+            "Jamaica",
+            "Jordanien",
+            "Japan",
+            "Kenya",
+            "Kirgisien",
+            "Königreich Kambodscha",
+            "Kiribati",
+            "Komoren",
+            "Saint Kitts und Nevis",
+            "Korea, Volksrepublik",
+            "Korea",
+            "Kuwait",
+            "Kayman Islands",
+            "Kasachstan",
+            "Laos",
+            "Libanon",
+            "Saint Lucia",
+            "Liechtenstein",
+            "Sri Lanka",
+            "Liberia",
+            "Lesotho",
+            "Littauen",
+            "Luxemburg",
+            "Lettland",
+            "Libyen",
+            "Marokko",
+            "Monaco",
+            "Moldavien",
+            "Madagaskar",
+            "Marshall-Inseln",
+            "Mazedonien, ehem. Jugoslawische Republik",
+            "Mali",
+            "Myanmar",
+            "Mongolei",
+            "Macao",
+            "Nördliche Marianneninseln",
+            "Martinique",
+            "Mauretanien",
+            "Montserrat",
+            "Malta",
+            "Mauritius",
+            "Malediven",
+            "Malawi",
+            "Mexico",
+            "Malaysien",
+            "Mozambique",
+            "Namibia",
+            "Neu Kaledonien",
+            "Niger",
+            "Norfolk Island",
+            "Nigeria",
+            "Nicaragua",
+            "Niederlande",
+            "Norwegen",
+            "Nepal",
+            "Nauru",
+            "Niue",
+            "Neuseeland",
+            "Oman",
+            "Panama",
+            "Peru",
+            "Französisch Polynesien",
+            "Papua Neuguinea",
+            "Philippinen",
+            "Pakistan",
+            "Polen",
+            "St. Pierre und Miquelon",
+            "Pitcairn",
+            "Puerto Rico",
+            "Portugal",
+            "Palau",
+            "Paraguay",
+            "Katar",
+            "Reunion",
+            "Rumänien",
+            "Russische Föderation",
+            "Ruanda",
+            "Saudi Arabien",
+            "Salomonen",
+            "Seychellen",
+            "Sudan",
+            "Schweden",
+            "Singapur",
+            "St. Helena",
+            "Slovenien",
+            "Svalbard und Jan Mayen Islands",
+            "Slowakei",
+            "Sierra Leone",
+            "San Marino",
+            "Senegal",
+            "Somalia",
+            "Surinam",
+            "Sao Tome und Principe",
+            "El Salvador",
+            "Syrien, Arabische Republik",
+            "Swaziland",
+            "Turk und Caicos-Inseln",
+            "Tschad",
+            "Französisches Südl.Territorium",
+            "Togo",
+            "Thailand",
+            "Tadschikistan",
+            "Tokelau",
+            "Turkmenistan",
+            "Tunesien",
+            "Tonga",
+            "Ost-Timor",
+            "Türkei",
+            "Trinidad und Tobago",
+            "Tuvalu",
+            "Taiwan",
+            "Tansania, United Republic of",
+            "Ukraine",
+            "Uganda",
+            "Großbritannien",
+            "Vereinigte Staaten",
+            "Vereinigte Staaten, Minor Outlying Islands",
+            "Uruguay",
+            "Usbekistan",
+            "Vatikanstaat",
+            "Saint Vincent und Grenadines",
+            "Venezuela",
+            "Virgin Islands (Britisch)",
+            "Virgin Islands (U.S.)",
+            "Vietnam",
+            "Vanuatu",
+            "Wallis und Futuna Islands",
+            "Samoa",
+            "Jemen",
+            "Mayotte",
+            "Jugoslawien",
+            "Südafrika",
+            "Sambia",
+            "Zimbabwe"
+        };
         land2 = new JComboBox(landArray);
         land2.setSelectedItem("Deutschland");
         //Button
         einfuegen = new JButton("Einfügen");
         zurueck = new JButton("Zurück");
-        
+
         einfuegen.setFont(text);
         einfuegen.setBackground(background2);
         zurueck.setFont(text);
         zurueck.setBackground(background2);
-        
+
         //zu Frame adden
-        
         panel.add(vname);
         panel.add(vnameText);
         panel.add(nname);
@@ -414,22 +415,22 @@ public class MitarbeiterEinfuegen extends JFrame {
         panel.add(panel2);
         panel.add(land);
         panel.add(land2);
-        
+
         panel3.add(zurueck);
         panel3.add(einfuegen);
-        
+        panel3.add(infoLabel);
+
         add(ueberschrift, BorderLayout.NORTH);
         add(panel, BorderLayout.CENTER);
         add(panel3, BorderLayout.SOUTH);
-        
-        
+
         //ActionListener für Button
         MyActionListener listener = new MyActionListener();
         einfuegen.addActionListener(listener);
         MyActionListener2 listener2 = new MyActionListener2();
         zurueck.addActionListener(listener2);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+
         //Frameeinstellungen
         setSize(800, 500);
         this.getContentPane().setBackground(background);
@@ -443,69 +444,95 @@ public class MitarbeiterEinfuegen extends JFrame {
     }
 
     private class MyActionListener implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
-            //Eingabe von Nutzer
-            String vname = vnameText.getText();
-            String nname = nnameText.getText();
-            String email = emailText.getText();
-            String tel = telText.getText();
-            String strasse = strasseText.getText();
-            String hsNr = hsNrText.getText();
-            String stadt = stadtText.getText();
-            String plz = plzText.getText();
+            Mitarbeiter m;
+            AdminJavaDBMapper mapper = new AdminJavaDBMapper();
+            boolean eingefuegt = false;
             adminB = admin.isSelected();
             laborantB = laborant.isSelected();
             verwaltungB = verwaltung.isSelected();
-            String landAuswahl = land2.getSelectedItem() + "";
-            
-            Mitarbeiter m;
-            AdminJavaDBMapper mapper = new AdminJavaDBMapper();
-            
-            if(adminB){
+
+            if (adminB) {
                 m = new Admin("einfuegen");
-            } else if(laborantB){
+            } else if (laborantB) {
                 m = new Laborant("einfuegen");
-            } else{
+            } else {
                 m = new Verwaltung("einfuegen");
             }
 
-            m.setVname(vname);
-            m.setNname(nname);
-            m.setEmail(email);
-            m.setTel(tel);
-            m.setStrasse(strasse);
-            m.setHr(hsNr);
-            m.setStadt(stadt);
-            m.setPlz(plz);
-            m.setLand(landAuswahl);
+            //Eingabe von Nutzer
+            if (vnameText.getText().trim() != null && !vnameText.getText().trim().isEmpty()) {
+                m.setVname(vnameText.getText());
+                if (emailText.getText().trim() != null && !email.getText().trim().isEmpty()) {
+                    m.setEmail(emailText.getText());
+                    if (telText.getText().trim() != null && !telText.getText().trim().isEmpty()) {
+                        m.setTel(telText.getText());
+                        if (stadtText.getText().trim() != null && !stadtText.getText().trim().isEmpty()) {
+                            m.setStadt(stadtText.getText());
+
+                            if (strasseText.getText().trim() != null && !strasse.getText().trim().isEmpty()) {
+                                m.setStrasse(strasseText.getText());
+                                if (hsNrText.getText().trim() != null && !hsNrText.getText().trim().isEmpty()) {
+                                    m.setHr(hsNrText.getText());
+                                    if (plzText.getText().trim() != null && !plzText.getText().trim().isEmpty()) {
+                                        m.setPlz(plzText.getText());
+                                        if (nnameText.getText().trim() != null && !nnameText.getText().trim().isEmpty()) {
+                                            m.setNname(nnameText.getText());
+                                            String landAuswahl = land2.getSelectedItem() + "";
+                                            m.setLand(landAuswahl);
+
+                                            String ergebnis = null;
+                                            try {
+                                                ergebnis = mapper.einfuegenMitarbeiter(m);
+                                                if (ergebnis.equals("E-Mail bereits vergeben")) {
+                                                    infoLabel.setText("E-Mail bereits vergeben");
+                                                } else {
+                                                    infoLabel.setText("Eingefügt!");
+                                                }
+                                            } catch (SQLException ex) {
+                                                System.out.println(ex.toString());
+                                            }
+                                            if (ergebnis != null && ergebnis.equals("Eingefügt")) {
+                                                vnameText.setText("");
+                                                nnameText.setText("");
+                                                emailText.setText("");
+                                                telText.setText("");
+                                                strasseText.setText("");
+                                                hsNrText.setText("");
+                                                stadtText.setText("");
+                                                plzText.setText("");
+                                                pwdField.setText("");
+                                                verwaltung.isSelected();
+                                                land2.setSelectedItem("Deutschland");
+                                            }
+                                            eingefuegt = true;
+                                        }
+
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
             
-            String ergebnis = null;
-            try {
-                ergebnis = mapper.einfuegenMitarbeiter(m);
-            } catch (SQLException ex) {
-                System.out.println(ex.toString());
+            if(!eingefuegt){
+                infoLabel.setText("Alle Eingaben ausfüllen!");
             }
-            if(ergebnis.equals("Passt")){
-                vnameText.setText("");
-                nnameText.setText("");
-                emailText.setText("");
-                telText.setText("");
-                strasseText.setText("");
-                hsNrText.setText("");
-                stadtText.setText("");
-                plzText.setText("");
-                verwaltung.isSelected();
-                land2.setSelectedItem("Deutschland");
-            }
-        }        
+            
+            
+        }
     }
-    
+
     private class MyActionListener2 implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             setVisible(false);
             new MitarbeiterVerwaltungView("Virentestcenter");
-        }        
+        }
     }
 }

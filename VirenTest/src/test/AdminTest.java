@@ -9,7 +9,9 @@ import application.Admin;
 import application.Mitarbeiter;
 import java.sql.SQLException;
 import persistence.AdminJavaDBMapper;
+import view.MitarbeiterLesen;
 import view.MitarbeiterVerwaltungView;
+import view.VirenTestcenterView;
 /*Mitarbeiter m = new Admin("2");
          m.setEmail("test19@email.com");
          m.setHr("33");
@@ -30,9 +32,9 @@ import view.MitarbeiterVerwaltungView;
  */
 public class AdminTest {
      public static void main(String[] args) throws SQLException {
-         AdminJavaDBMapper mapper = new AdminJavaDBMapper();
+        AdminJavaDBMapper mapper = new AdminJavaDBMapper();
          
-         // Aquivalenzklasse Standard: 
+        /*  // Aquivalenzklasse Standard: 
         // id Zahl >0 <=1000
         // Name mit korrekten Zeichen keine überflüssigen Blanks
         // korrekte Zeichen: a-Z, Umlaute, ß,à ....
@@ -50,26 +52,68 @@ public class AdminTest {
         ad3.setTel("0174");
         ad3.setVname("test");
         
+        Mitarbeiter ad4 = new Admin("8");
+        ad4.setEmail("test");
+        ad4.setHr("test");
+        ad4.setLand("test");
+        ad4.setNname("test");
+        ad4.setPlz("81549");
+        ad4.setStadt("MUC");
+        ad4.setStrasse("test");
+        ad4.setTel("0174");
+        ad4.setVname("test");
+        
+        Mitarbeiter ad5 = new Admin(null);
+        
         try{
             String testAd1 = mapper.einfuegenMitarbeiter(ad1);
-            System.out.println(testAd1);
         } catch (SQLException ex){
             System.out.println(ex.toString());
         }
         try{
             String testAd2 = mapper.einfuegenMitarbeiter(ad2);
-            System.out.println(testAd2);
         } catch (SQLException ex){
             System.out.println(ex.toString());
         }
         try{
             String testAd3 = mapper.einfuegenMitarbeiter(ad3);
-            System.out.println(testAd3);
         } catch (SQLException ex){
             System.out.println(ex.toString());
         }
         
+        try{
+            String testAd4 = mapper.aendernMitarbeiter(ad4);
+        } catch (SQLException ex){
+            System.out.println(ex.toString());
+        }
+        try{
+            String testAd5 = mapper.aendernMitarbeiter(ad5);
+        } catch (SQLException ex){
+            System.out.println(ex.toString());
+        }
+        try{
+            boolean testAd6 = mapper.loeschenMitarbeiter(8);
+        } catch (SQLException ex){
+            System.out.println(ex.toString());
+        }
         
+        */
          
+        Mitarbeiter ad4 = new Admin("8");
+        ad4.setEmail("test");
+        ad4.setHr("test");
+        ad4.setLand("test");
+        ad4.setNname("test");
+        ad4.setPlz("81549");
+        ad4.setStadt("MUC");
+        ad4.setStrasse("test");
+        ad4.setTel("0174");
+        ad4.setVname("test");
+        
+        //new MitarbeiterLesen("Test", ad4);
+        
+        new MitarbeiterVerwaltungView("Test");
+        
+        
      }
 }

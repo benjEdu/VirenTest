@@ -10,6 +10,7 @@ import view.TestergebnisLesen;
 import persistence.VerwaltungJavaDBMapper;
 import view.MitarbeiterAendernView;
 import view.MitarbeiterEinfuegen;
+import view.MitarbeiterLesen;
 import view.MitarbeiterVerwaltungView;
 import view.TestpersonEinfuegen;
 import view.TestpersonLoeschen;
@@ -17,6 +18,7 @@ import view.TestpersonenVerwaltungView;
 import view.ViewLaborant;
 import view.TestpersonAendern;
 import view.TestpersonenVerwaltungstabelle;
+import view.VirenTestcenterView;
 
 public class Test{
 
@@ -76,7 +78,7 @@ public class Test{
         //new ViewLaborant("Virentestcenter");
         //new TestpersonEinfuegen("Virentestcenter");
         //new TestpersonLoeschen("Virentestcenter");
-        new MitarbeiterEinfuegen("Virentestcenter");
+        //new MitarbeiterEinfuegen("Virentestcenter");
         
         //mapper.einfuegenTestperson(tp);
         //List<Testperson> test = mapper.lesenAlleTestpersonen();
@@ -137,6 +139,25 @@ public class Test{
                 */
         //new TestpersonenVerwaltungstabelle("Virentestcenter");
         
-        //new MitarbeiterVerwaltungView("Virentestcenter");    
+        //new MitarbeiterVerwaltungView("Virentestcenter"); 
+        
+        //new VirenTestcenterView("Virentestcenter");
+        
+        /*
+        Mitarbeiter tp = new Laborant("15");
+       tp.setEmail("test");
+       tp.setHr("1");
+       tp.setLand("DE");
+       tp.setNname("test");
+       tp.setPlz("test");
+       tp.setStadt("test");
+       tp.setStrasse("test");
+       tp.setTel("test");
+       tp.setVname("test");
+       
+        new MitarbeiterLesen("Virentestcenter", tp);
+             */
+        
+        //new MitarbeiterVerwaltungView("Virentestcenter");
 }
 }

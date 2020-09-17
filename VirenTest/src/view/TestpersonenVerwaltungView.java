@@ -3,7 +3,6 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import persistence.VerwaltungJavaDBMapper;
 
 public class TestpersonenVerwaltungView extends JFrame {
 
