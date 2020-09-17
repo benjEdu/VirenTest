@@ -92,7 +92,7 @@ public class MitarbeiterVerwaltungView extends JFrame{
         }
         
         setLayout(new BorderLayout());
-        JPanel panel2 = new JPanel(new FlowLayout());
+        JPanel panel2 = new JPanel(new GridLayout(1,5));
         
         table = new JTable(data3, columnNames){
             @Override
@@ -129,7 +129,7 @@ public class MitarbeiterVerwaltungView extends JFrame{
         lesen.setFont(text);
         lesen.setBackground(background);
         
-        mitarbeiterLesen = new JTextField();
+        mitarbeiterLesen = new JTextField("MitarbeiterID für 'Lesen' eingeben");
         
         table.setFont(text);
         table.setBackground(background2);
@@ -137,16 +137,14 @@ public class MitarbeiterVerwaltungView extends JFrame{
         add(table, BorderLayout.CENTER);
         panel2.add(delete);
         panel2.add(aendern);
-       
+        panel2.add(mitarbeiterLesen);
         panel2.add(lesen);
         panel2.add(einfuegen);
         panel2.add(infoLabel);
         
-        JPanel panel3 = new JPanel(new GridLayout(1,1));
-        
-        panel3.add(mitarbeiterLesen);
-        panel2.add(panel3);
         add(panel2, BorderLayout.SOUTH);
+        
+        
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1200, 500);
         this.getContentPane().setBackground(background);

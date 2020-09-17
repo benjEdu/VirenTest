@@ -143,7 +143,7 @@ public class Test{
         
         //new VirenTestcenterView("Virentestcenter");
         
-        
+        /*
         Mitarbeiter tp = new Laborant("15");
        tp.setEmail("test");
        tp.setHr("1");
@@ -156,6 +156,8 @@ public class Test{
        tp.setVname("test");
        
         new MitarbeiterLesen("Virentestcenter", tp);
-                
+             */
+        
+        //new MitarbeiterVerwaltungView("Virentestcenter");
 }
 }
