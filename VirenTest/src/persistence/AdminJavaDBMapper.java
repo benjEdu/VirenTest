@@ -37,7 +37,7 @@ public class AdminJavaDBMapper implements IAdminMapper{
     }
     
     @Override
-    public String einfuegenMitarbeiter(Mitarbeiter m) {
+    public String einfuegenMitarbeiter(Mitarbeiter m) throws SQLException{
         Connection conn = getConn();
         try {
             if(emailVergeben(conn, m)){
@@ -76,13 +76,12 @@ public class AdminJavaDBMapper implements IAdminMapper{
             conn.commit();
             return "Passt";
         } catch (SQLException ex) {
-            Logger.getLogger(AdminJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex);
             try {
                 conn.rollback();
             } catch (SQLException ex1) {
-                Logger.getLogger(AdminJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex1);
+                throw new SQLException(ex1);
             }
-            return "Läuft nicht";
+            throw new SQLException(ex);
         }
         finally{
             deleteConn(conn);
@@ -90,7 +89,7 @@ public class AdminJavaDBMapper implements IAdminMapper{
     }
 
     @Override
-    public String aendernMitarbeiter(Mitarbeiter m) {
+    public String aendernMitarbeiter(Mitarbeiter m) throws SQLException{
         Connection conn = getConn();
         try {
             if(emailVergeben(conn, m)){
@@ -123,8 +122,7 @@ public class AdminJavaDBMapper implements IAdminMapper{
             
             return "Passt";
         } catch (SQLException ex) {
-            Logger.getLogger(AdminJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex);
-            return "Läuft nicht";
+            throw new SQLException(ex);
         }
         finally{
             deleteConn(conn);
@@ -132,7 +130,7 @@ public class AdminJavaDBMapper implements IAdminMapper{
     }
 
     @Override
-    public boolean loeschenMitarbeiter(int id) {
+    public boolean loeschenMitarbeiter(int id) throws SQLException{
         Connection conn = getConn();
         try {
             PreparedStatement select = conn.prepareStatement("select adressid from mitarbeiter where mitarbeiterid = ?");
@@ -151,8 +149,7 @@ public class AdminJavaDBMapper implements IAdminMapper{
             
             return true;
         } catch (SQLException ex) {
-            Logger.getLogger(AdminJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
+            throw new SQLException(ex);
         }
         finally{
             deleteConn(conn);
@@ -160,7 +157,7 @@ public class AdminJavaDBMapper implements IAdminMapper{
     }
 
     @Override
-    public List<Mitarbeiter> lesenAlleMitarbeiter() {
+    public List<Mitarbeiter> lesenAlleMitarbeiter() throws SQLException{
         List<Mitarbeiter> alle = new ArrayList<>();
         Connection conn = getConn();
         try {
@@ -193,8 +190,7 @@ public class AdminJavaDBMapper implements IAdminMapper{
             }
             return alle;
         } catch (SQLException ex) {
-            Logger.getLogger(AdminJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+            throw new SQLException(ex);
         }
         finally{
             deleteConn(conn);
@@ -202,7 +198,7 @@ public class AdminJavaDBMapper implements IAdminMapper{
     }
 
     @Override
-    public Mitarbeiter lesenMitarbeiter(int id) {
+    public Mitarbeiter lesenMitarbeiter(int id) throws SQLException{
         Connection conn = getConn();
         try {
             Mitarbeiter p = null;
@@ -234,8 +230,7 @@ public class AdminJavaDBMapper implements IAdminMapper{
             }
             return p;
         } catch (SQLException ex) {
-            Logger.getLogger(AdminJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+            throw new SQLException(ex);
         }
         finally{
             deleteConn(conn);
