@@ -7,6 +7,9 @@ import application.Verwaltung;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import persistence.AdminJavaDBMapper;
 
 public class MitarbeiterEinfuegen extends JFrame {
@@ -40,7 +43,7 @@ public class MitarbeiterEinfuegen extends JFrame {
     private JTextField hsNrText; 
     private JTextField strasseText; 
     private JTextField stadtText; 
-    private JTextField plzText; 
+    private JTextField plzText;
     //Combobox
     private JComboBox land2;
     //RadioButton
@@ -469,7 +472,12 @@ public class MitarbeiterEinfuegen extends JFrame {
             m.setPlz(plz);
             m.setLand(landAuswahl);
             
-            String ergebnis = mapper.einfuegenMitarbeiter(m);
+            String ergebnis = null;
+            try {
+                ergebnis = mapper.einfuegenMitarbeiter(m);
+            } catch (SQLException ex) {
+                System.out.println(ex.toString());
+            }
             if(ergebnis.equals("Passt")){
                 vnameText.setText("");
                 nnameText.setText("");
