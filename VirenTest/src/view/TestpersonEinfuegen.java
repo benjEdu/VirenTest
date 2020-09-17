@@ -4,7 +4,6 @@ import application.Testperson;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import application.VerwaltungVerwaltung;
 
 import application.VerwaltungVerwaltung;
 public class TestpersonEinfuegen extends JFrame {

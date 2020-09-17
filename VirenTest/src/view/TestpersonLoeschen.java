@@ -1,11 +1,9 @@
 package view;
 
-import application.TestpersonenVerwaltung;
 import application.VerwaltungVerwaltung;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import persistence.VerwaltungJavaDBMapper;
 
 public class TestpersonLoeschen extends JFrame {
     //Hintergrundfarbe

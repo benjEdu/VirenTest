@@ -3,7 +3,6 @@ package view;
 import application.TestpersonenVerwaltung;
 import javax.swing.*;
 import java.awt.*;
-import persistence.TestpersonJavaDBMapper;
 
 public class TestergebnisLesen extends JFrame {
 

@@ -2,8 +2,6 @@ package view;
 
  
 
-import application.Admin;
-import application.AdminVerwaltung;
 import application.Mitarbeiter;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,7 +13,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
  
 

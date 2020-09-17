@@ -6,9 +6,7 @@
 package view;
 
 import application.LoginVerwaltung;
-import application.Person;
 import application.Testperson;
-import static com.sun.glass.ui.Cursor.setVisible;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -16,7 +14,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
