@@ -8,6 +8,7 @@ import application.Verwaltung;
 import java.util.List;
 import view.TestergebnisLesen;
 import persistence.VerwaltungJavaDBMapper;
+import view.LoginView;
 import view.MitarbeiterAendernView;
 import view.MitarbeiterEinfuegen;
 import view.MitarbeiterVerwaltungView;
@@ -137,5 +138,8 @@ public class Test{
                 */
         //new TestpersonenVerwaltungstabelle("Virentestcenter");
         
-        new MitarbeiterVerwaltungView("Virentestcenter");    }
+        //new MitarbeiterVerwaltungView("Virentestcenter");    
+   new LoginView("Virentestcenter");
+    
+    }
 }
