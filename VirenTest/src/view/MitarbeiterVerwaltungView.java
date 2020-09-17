@@ -81,6 +81,7 @@ public class MitarbeiterVerwaltungView extends JFrame{
         }
         
         setLayout(new BorderLayout());
+        
         table = new JTable(data3, columnNames){
             @Override
             public boolean isCellEditable(int x, int y) {
@@ -88,6 +89,7 @@ public class MitarbeiterVerwaltungView extends JFrame{
             }
         };
         table.setCellSelectionEnabled(false);
+        
         
         delete = new JButton("Delete");
         DeleteButtonListener deleteListener = new DeleteButtonListener();
