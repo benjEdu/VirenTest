@@ -9,6 +9,7 @@ import application.Admin;
 import application.Mitarbeiter;
 import java.sql.SQLException;
 import persistence.AdminJavaDBMapper;
+import view.MitarbeiterLesen;
 import view.MitarbeiterVerwaltungView;
 import view.VirenTestcenterView;
 /*Mitarbeiter m = new Admin("2");
@@ -31,9 +32,9 @@ import view.VirenTestcenterView;
  */
 public class AdminTest {
      public static void main(String[] args) throws SQLException {
-        /* AdminJavaDBMapper mapper = new AdminJavaDBMapper();
+        AdminJavaDBMapper mapper = new AdminJavaDBMapper();
          
-         // Aquivalenzklasse Standard: 
+        /*  // Aquivalenzklasse Standard: 
         // id Zahl >0 <=1000
         // Name mit korrekten Zeichen keine überflüssigen Blanks
         // korrekte Zeichen: a-Z, Umlaute, ß,à ....
@@ -52,15 +53,15 @@ public class AdminTest {
         ad3.setVname("test");
         
         Mitarbeiter ad4 = new Admin("8");
-        ad3.setEmail("test");
-        ad3.setHr("test");
-        ad3.setLand("test");
-        ad3.setNname("test");
-        ad3.setPlz("81549");
-        ad3.setStadt("MUC");
-        ad3.setStrasse("test");
-        ad3.setTel("0174");
-        ad3.setVname("test");
+        ad4.setEmail("test");
+        ad4.setHr("test");
+        ad4.setLand("test");
+        ad4.setNname("test");
+        ad4.setPlz("81549");
+        ad4.setStadt("MUC");
+        ad4.setStrasse("test");
+        ad4.setTel("0174");
+        ad4.setVname("test");
         
         Mitarbeiter ad5 = new Admin(null);
         
@@ -97,5 +98,22 @@ public class AdminTest {
         }
         
         */
+         
+        Mitarbeiter ad4 = new Admin("8");
+        ad4.setEmail("test");
+        ad4.setHr("test");
+        ad4.setLand("test");
+        ad4.setNname("test");
+        ad4.setPlz("81549");
+        ad4.setStadt("MUC");
+        ad4.setStrasse("test");
+        ad4.setTel("0174");
+        ad4.setVname("test");
+        
+        //new MitarbeiterLesen("Test", ad4);
+        
+        new MitarbeiterVerwaltungView("Test");
+        
+        
      }
 }

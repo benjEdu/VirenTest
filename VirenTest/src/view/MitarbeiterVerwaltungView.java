@@ -35,6 +35,7 @@ public class MitarbeiterVerwaltungView extends JFrame{
     private AdminVerwaltung av;
     private JLabel ueberschrift;
     private JTable table;
+    private JTextField mitarbeiterLesen;
     private JButton delete;
     private JButton einfuegen;
     private JButton lesen;
@@ -128,15 +129,23 @@ public class MitarbeiterVerwaltungView extends JFrame{
         lesen.setFont(text);
         lesen.setBackground(background);
         
+        mitarbeiterLesen = new JTextField();
+        
         table.setFont(text);
         table.setBackground(background2);
         add(ueberschrift, BorderLayout.NORTH);
         add(table, BorderLayout.CENTER);
         panel2.add(delete);
         panel2.add(aendern);
+       
         panel2.add(lesen);
         panel2.add(einfuegen);
         panel2.add(infoLabel);
+        
+        JPanel panel3 = new JPanel(new GridLayout(1,1));
+        
+        panel3.add(mitarbeiterLesen);
+        panel2.add(panel3);
         add(panel2, BorderLayout.SOUTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1200, 500);
@@ -214,7 +223,23 @@ public class MitarbeiterVerwaltungView extends JFrame{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            setVisible(false);
+            String mId = mitarbeiterLesen.getText();
+            if(mitarbeiterLesen.getText().trim() != null && !mitarbeiterLesen.getText().trim().isEmpty()){
+                try {
+                    Mitarbeiter m = av.lesenMitarbeiter(Integer.parseInt(mId));
+                    if(m != null){
+                        String titel = m.getNname() + ", " + m.getVname();
+                        new MitarbeiterLesen(titel, m);
+                        setVisible(false);
+                    } else {
+                        infoLabel.setText("Mitarbeiter existiert nicht!");
+                    }
+                    
+                } catch (SQLException ex) {
+                    infoLabel.setText("Mitarbeiter auslesen hat nicht funktioniert");
+                }
+            }
+            
         }
     }
     
