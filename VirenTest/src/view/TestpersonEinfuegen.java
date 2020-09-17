@@ -1,13 +1,12 @@
 package view;
 
-import application.Login;
 import application.Testperson;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import persistence.VerwaltungJavaDBMapper;
-import view.TestpersonenVerwaltungView;
+import application.VerwaltungVerwaltung;
 
+import application.VerwaltungVerwaltung;
 public class TestpersonEinfuegen extends JFrame {
 
     //Hintergrundfarbe
@@ -18,6 +17,8 @@ public class TestpersonEinfuegen extends JFrame {
     Font ueberschriftFont = new Font("SansSerif", Font.BOLD, 25);
     Font text = new Font("SansSerif", Font.BOLD, 17);
 
+    private final VerwaltungVerwaltung vv;
+    
     //Label
     private JLabel ueberschrift;
     private JLabel nname;
@@ -30,7 +31,6 @@ public class TestpersonEinfuegen extends JFrame {
     private JLabel stadt;
     private JLabel plz;
     private JLabel land;
-    private JLabel infoLabel;
     //Tesxtfelder
     private JTextField nnameText;
     private JTextField vnameText;
@@ -50,13 +50,14 @@ public class TestpersonEinfuegen extends JFrame {
     //Konstruktor
     public TestpersonEinfuegen(String titel) {
         super(titel);
+        vv = new VerwaltungVerwaltung();
         init();
     }
 
     private void init() {
         setLayout(new BorderLayout());
 
-        JPanel panel = new JPanel(new GridLayout(9, 2));
+        JPanel panel = new JPanel(new GridLayout(10, 2));
 
         JPanel panel2 = new JPanel(new FlowLayout());
 
@@ -95,11 +96,10 @@ public class TestpersonEinfuegen extends JFrame {
 
         land = new JLabel("Land:");
 
-        infoLabel = new JLabel("");
-
         nname.setFont(text);
         vname.setFont(text);
         email.setFont(text);
+        pwd.setFont(text);
         tel.setFont(text);
         strasse.setFont(text);
         hsNr.setFont(text);
@@ -395,11 +395,11 @@ public class TestpersonEinfuegen extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Frameeinstellungen
-        setSize(600, 400);
+        setSize(800, 500);
         this.getContentPane().setBackground(background);
         panel.setBackground(background2);
         panel2.setBackground(background);
-        setLocation(600, 300);
+        setLocation(550, 300);
         setVisible(true);
     }
 
@@ -423,15 +423,14 @@ public class TestpersonEinfuegen extends JFrame {
                 pwd = pwd+c;
             }
 
-            VerwaltungJavaDBMapper mapper = new VerwaltungJavaDBMapper();
-
             Testperson te = new Testperson(nname, vname, email, tel, hsNr, strasse, stadt, plz, landAuswahl, pwd);
 
-            String ergebnis = mapper.einfuegenTestperson(te);
+            String ergebnis = vv.einfuegenTestperson(te);
             if (ergebnis.equals("Testperson erfolgreich eingefügt :)")) {
                 vnameText.setText("");
                 nnameText.setText("");
                 emailText.setText("");
+                pwdField.setText("");
                 telText.setText("");
                 strasseText.setText("");
                 hsNrText.setText("");
@@ -439,7 +438,6 @@ public class TestpersonEinfuegen extends JFrame {
                 plzText.setText("");
                 land2.setSelectedItem("Deutschland");
             }
-            infoLabel.setText(ergebnis + "");
         }
     }
 

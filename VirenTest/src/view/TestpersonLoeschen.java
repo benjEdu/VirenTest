@@ -1,5 +1,7 @@
 package view;
 
+import application.TestpersonenVerwaltung;
+import application.VerwaltungVerwaltung;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -12,6 +14,8 @@ public class TestpersonLoeschen extends JFrame {
     //Schriftart und -größe
     Font ueberschriftFont = new Font("SansSerif", Font.BOLD, 25);
     Font text = new Font("SansSerif", Font.BOLD, 17);
+    
+    private final VerwaltungVerwaltung vv;
     
     //Label
     private JLabel ueberschrift;
@@ -27,6 +31,7 @@ public class TestpersonLoeschen extends JFrame {
     //Konstruktor
     public TestpersonLoeschen(String titel) {
         super(titel);
+        vv = new VerwaltungVerwaltung();
         init();
     }
 
@@ -82,7 +87,7 @@ public class TestpersonLoeschen extends JFrame {
         this.getContentPane().setBackground(background);
         panel.setBackground(background2);
         panel2.setBackground(background);
-        setLocation(600, 300);
+        setLocation(650, 300);
         setVisible(true);
     }
 
@@ -91,9 +96,8 @@ public class TestpersonLoeschen extends JFrame {
         public void actionPerformed(ActionEvent e) {
             //Eingabe von Nutzer
             int id = Integer.parseInt(idText.getText());
-            VerwaltungJavaDBMapper mapper = new VerwaltungJavaDBMapper();
-
-            boolean ergebnis = mapper.loeschenTestperson(id);
+         
+            boolean ergebnis = vv.loeschenTestperson(id);
             if(ergebnis){
                 idText.setText("");
             }
