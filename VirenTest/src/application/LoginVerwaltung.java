@@ -20,7 +20,11 @@ public class LoginVerwaltung {
         
     }
     
-    public Testperson einloggen(String email, String pwd){
-        return mapper.einloggen(email, pwd);
+    public Testperson testpersonEinloggen(String email, String pwd){
+        return mapper.testpersonEinloggen(email, pwd);
+    }
+    
+    public Mitarbeiter mitarbeiterEinloggen(String email, String pwd){
+        return mapper.mitarbeiterEinloggen(email, pwd);
     }
 }

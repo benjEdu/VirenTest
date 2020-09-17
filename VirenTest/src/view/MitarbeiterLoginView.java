@@ -1,13 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
+import application.Admin;
+import application.Laborant;
 import application.LoginVerwaltung;
+import application.Mitarbeiter;
 import application.Person;
 import application.Testperson;
+import application.Verwaltung;
 import static com.sun.glass.ui.Cursor.setVisible;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -26,7 +25,7 @@ import javax.swing.JTextField;
  *
  * @author z003ub8r
  */
-public class LoginView extends JFrame{
+public class MitarbeiterLoginView extends JFrame{
     private JLabel emailLabel;
     private JLabel pwdLabel;
     private JLabel messageLabel;
@@ -36,7 +35,7 @@ public class LoginView extends JFrame{
     private LoginVerwaltung lv;
 
     
-    public LoginView(String titel){
+    public MitarbeiterLoginView(String titel){
         super(titel);
         lv = new LoginVerwaltung();
         init();
@@ -84,17 +83,24 @@ public class LoginView extends JFrame{
             try{
                 System.out.println(email);
                 System.out.println(pwd);
-                Testperson tp = lv.einloggen(email, pwd);
-                System.out.println(tp.getTestpersonId());
-                TestergebnisLesen tl = new TestergebnisLesen("Testergebnis", tp.getTestpersonId());
+                Mitarbeiter m = lv.mitarbeiterEinloggen(email, pwd);
+                
+                //Todo, je nach Rollenid auf unterschiedliche GUIs weiterleiten
+                if(m instanceof Admin){
+                    MitarbeiterVerwaltungView mvv = new MitarbeiterVerwaltungView("Mitarbeiterverwaltung");
+                }else if(m instanceof Verwaltung){
+                    TestpersonenVerwaltungView tvv = new TestpersonenVerwaltungView("Testpersonenverwaltung");
+                }else if(m instanceof Laborant){
+                    ViewLaborant vl = new ViewLaborant("Testergebnis ändern");
+                }
                 setVisible(false);
                 dispose();  
             }catch (NullPointerException ex){
-                Logger.getLogger(LoginView.class.getName()).log(Level.FINE, null, ex);
+                Logger.getLogger(TestpersonenLoginView.class.getName()).log(Level.FINE, null, ex);
                 messageLabel.setForeground(Color.red);
                 messageLabel.setText("Email oder Passwort falsch!");
             }
-            System.out.println("Erfolgreich eingefügt.");
+            System.out.println("Erfolgreich eingeloggt.");
         }
     }
 }

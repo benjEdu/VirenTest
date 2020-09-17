@@ -7,7 +7,7 @@ package test;
 
 import application.Testperson;
 import persistence.VerwaltungJavaDBMapper;
-import view.LoginView;
+import view.TestpersonenLoginView;
 
 /**
  *
@@ -23,7 +23,7 @@ public class TestpersonTest {
     
         System.out.println(einfuegenTest(mapper, tp));
         System.out.println(aendernTest(mapper, tp, tp2));*/
-        LoginView lv = new LoginView("Titel");
+        TestpersonenLoginView lv = new TestpersonenLoginView("Titel");
         
     
     }
