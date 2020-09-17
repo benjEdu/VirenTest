@@ -64,6 +64,8 @@ public class TestpersonenVerwaltungView extends JFrame {
         TestpersonenVerwaltungView.MyActionListener listener = new TestpersonenVerwaltungView.MyActionListener();
         TestpersonenVerwaltungView.MyActionListener2 listener2 = new TestpersonenVerwaltungView.MyActionListener2();
         TestpersonenVerwaltungView.MyActionListener3 listener3 = new TestpersonenVerwaltungView.MyActionListener3();
+        ausloggenActionListener ausloggenListener = new ausloggenActionListener();
+        ausloggen.addActionListener(ausloggenListener);
         eingabe.addActionListener(listener);
         aendern.addActionListener(listener2);
         loeschen.addActionListener(listener3);
@@ -100,6 +102,14 @@ public class TestpersonenVerwaltungView extends JFrame {
         public void actionPerformed(ActionEvent e) {
             setVisible(false);
             new TestpersonLoeschen("Virentestcenter");
+        }
+    }
+    
+    private class ausloggenActionListener implements ActionListener {
+        
+        public void actionPerformed(ActionEvent e) {
+            setVisible(false);
+            new VirenTestcenterView("Virentestcenter");
         }
     }
 }
