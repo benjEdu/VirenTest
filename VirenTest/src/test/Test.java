@@ -17,6 +17,7 @@ import view.TestpersonenVerwaltungView;
 import view.ViewLaborant;
 import view.TestpersonAendern;
 import view.TestpersonenVerwaltungstabelle;
+import view.VirenTestcenterView;
 
 public class Test{
 
@@ -76,7 +77,7 @@ public class Test{
         //new ViewLaborant("Virentestcenter");
         //new TestpersonEinfuegen("Virentestcenter");
         //new TestpersonLoeschen("Virentestcenter");
-        new MitarbeiterEinfuegen("Virentestcenter");
+        //new MitarbeiterEinfuegen("Virentestcenter");
         
         //mapper.einfuegenTestperson(tp);
         //List<Testperson> test = mapper.lesenAlleTestpersonen();
@@ -137,6 +138,8 @@ public class Test{
                 */
         //new TestpersonenVerwaltungstabelle("Virentestcenter");
         
-        //new MitarbeiterVerwaltungView("Virentestcenter");    
+        //new MitarbeiterVerwaltungView("Virentestcenter"); 
+        
+        new VirenTestcenterView("Virentestcenter");
 }
 }

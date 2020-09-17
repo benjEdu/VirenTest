@@ -49,10 +49,12 @@ public class VirenTestcenterView extends JFrame{
         ueberschrift.setHorizontalAlignment(JLabel.CENTER);
         ueberschrift.setFont(ueberschriftFont);
         
-        setLayout(new FlowLayout());
+        setLayout(new BorderLayout());
+        
+        JPanel panel = new JPanel(new GridLayout(2,1));
 
-        mitarbeiter = new JButton("Mitarbeiter");
-        testperson = new JButton("Testperson");
+        mitarbeiter = new JButton("Als Mitarbeiter einloggen");
+        testperson = new JButton("Als Testperson einloggen");
 
         mitarbeiter.setFont(text);
         mitarbeiter.setBackground(background);
@@ -65,15 +67,22 @@ public class VirenTestcenterView extends JFrame{
         TestpersonButton testpersonListener = new TestpersonButton();
         testperson.addActionListener(testpersonListener);
 
+        mitarbeiter.setFont(text);
+        mitarbeiter.setBackground(background2);
+        testperson.setFont(text);
+        testperson.setBackground(background2);
+        
         add(ueberschrift, BorderLayout.NORTH);
-        add(mitarbeiter);
-        add(testperson);
+        panel.add(mitarbeiter);
+        panel.add(testperson);
+        add(panel, BorderLayout.CENTER);
+        
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 500);
+        setSize(600, 400);
         this.getContentPane().setBackground(background);
         setBackground(background2);
-        setLocation(550, 300);
+        setLocation(650, 300);
         setVisible(true);
 
     }
