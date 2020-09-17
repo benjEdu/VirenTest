@@ -64,7 +64,6 @@ public class AdminJavaDBMapper implements IAdminMapper{
             }
             
             final String salt = Login.getSalt();
-            System.out.println(salt);
             String pwdHash = Login.hashPassword(m.getPwd(), salt);
             PreparedStatement insert = conn.prepareStatement("insert into mitarbeiter (vname, nname, email, tel, rollenid, adressid, salt, pwdhash) values (?,?,?,?,?,?,?,?)");
             insert.setString(1, m.getVname());
@@ -169,7 +168,7 @@ public class AdminJavaDBMapper implements IAdminMapper{
         List<Mitarbeiter> alle = new ArrayList<>();
         Connection conn = getConn();
         try {
-            PreparedStatement select = conn.prepareStatement("select bezeichnung, mitarbeiterid, vname, nname, email, tel, adressid from mitarbeiter a, rollen b where a.rollenid = b.rollenid");
+            PreparedStatement select = conn.prepareStatement("select bezeichnung, mitarbeiterid, vname, nname, email, tel, adressid from mitarbeiter a, rollen b where a.rollenid = b.rollenid order by mitarbeiterid");
             ResultSet rs = select.executeQuery();
             while(rs.next()){
                 PreparedStatement select2 = conn.prepareStatement("select adressid, strasse, hsnr, stadt, plz, land from adressen where adressid = ?");
