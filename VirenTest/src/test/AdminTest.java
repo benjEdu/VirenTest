@@ -10,6 +10,7 @@ import application.Mitarbeiter;
 import java.sql.SQLException;
 import persistence.AdminJavaDBMapper;
 import view.MitarbeiterVerwaltungView;
+import view.VirenTestcenterView;
 /*Mitarbeiter m = new Admin("2");
          m.setEmail("test19@email.com");
          m.setHr("33");
@@ -36,7 +37,7 @@ public class AdminTest {
         // id Zahl >0 <=1000
         // Name mit korrekten Zeichen keine überflüssigen Blanks
         // korrekte Zeichen: a-Z, Umlaute, ß,à ....
-        Mitarbeiter ad1 = new Admin("test");
+        /*Mitarbeiter ad1 = new Admin("test");
         Mitarbeiter ad2 = new Admin(null);
         
         Mitarbeiter ad3 = new Admin("test");
@@ -67,9 +68,9 @@ public class AdminTest {
             System.out.println(testAd3);
         } catch (SQLException ex){
             System.out.println(ex.toString());
-        }
+        } */
         
-        
+        new VirenTestcenterView("Start-View");
          
      }
 }
