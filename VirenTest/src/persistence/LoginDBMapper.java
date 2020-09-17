@@ -43,7 +43,6 @@ public class LoginDBMapper implements ILoginMapper{
             if(rs.next()){
                 String dbPwdHash = rs.getString("pwdhash");
                 String dbSalt = rs.getString("salt");
-                
                 //Eingegebenes Passwort hashen
                 String pwdHash = Login.hashPassword(pwd, dbSalt);
                 if(pwdHash.equals(dbPwdHash)){
@@ -103,6 +102,7 @@ public class LoginDBMapper implements ILoginMapper{
                         String plz = rs2.getString("plz");
                         String land = rs2.getString("land");
                         tp = new Testperson(adressId, Nname, Vname, Email, tel, hsNr, strasse, stadt, plz, land);
+                        tp.setTestpersonId(rs.getInt("testpersonid"));
                     }else{
                         tp = new Testperson(Nname, Vname, Email, tel);
                     }

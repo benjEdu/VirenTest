@@ -124,6 +124,7 @@ public class TestpersonenLoginView extends JFrame{
                 System.out.println(pwd);
                 Testperson tp = lv.testpersonEinloggen(email, pwd);
                 System.out.println(tp.getTestpersonId());
+                
                 TestergebnisLesen tl = new TestergebnisLesen("Testergebnis", tp.getTestpersonId());
                 setVisible(false);
                 dispose();  

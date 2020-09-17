@@ -17,7 +17,6 @@ import view.TestpersonenLoginView;
 public class TestpersonTest {
     public static void main(String[] args){
         System.out.println(alleTesten());
-        MitarbeiterLoginView mlv =  new MitarbeiterLoginView("blabla");
     }
     
     public static String alleTesten(){

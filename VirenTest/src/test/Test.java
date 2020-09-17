@@ -158,6 +158,6 @@ public class Test{
         new MitarbeiterLesen("Virentestcenter", tp);
              */
         
-        //new MitarbeiterVerwaltungView("Virentestcenter");
+        new VirenTestcenterView("Virentestcenter");
 }
 }

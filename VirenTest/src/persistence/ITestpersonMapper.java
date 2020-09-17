@@ -13,7 +13,7 @@ import java.util.List;
  * @author benni
  */
 public interface ITestpersonMapper {
-    public boolean ergebnisAbrufen(int testpersonId);
+    public String ergebnisAbrufen(int testpersonId);
 }
 
 

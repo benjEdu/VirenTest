@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 public class TestpersonJavaDBMapper implements ITestpersonMapper {
 
     @Override
-    public boolean ergebnisAbrufen(int testpersonId) {
+    public String ergebnisAbrufen(int testpersonId) {
 
         Connection conn = getConn();
         try {
@@ -24,12 +24,16 @@ public class TestpersonJavaDBMapper implements ITestpersonMapper {
             if (rs.next()) {
                 ergebnis = rs.getBoolean(1);
             } else {
-                return false;
+                return "Ergebnis noch nicht vorhanden";
             }
-            return ergebnis;
+            if(ergebnis){
+                return "Positiv";
+            } else {
+                return "Negativ";
+            }
         } catch (SQLException ex) {
             Logger.getLogger(TestpersonJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
+            return "Error";
         } finally {
             deleteConn(conn);
         }

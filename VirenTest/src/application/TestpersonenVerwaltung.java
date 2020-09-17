@@ -10,7 +10,7 @@ public class TestpersonenVerwaltung {
     public TestpersonenVerwaltung() {
         mapper = EinfacheDBFactory.getTestpersonMapper();
     }
-    public boolean ergebnisAbrufen(int testpersonId){
+    public String ergebnisAbrufen(int testpersonId){
         return mapper.ergebnisAbrufen(testpersonId);
     }
     

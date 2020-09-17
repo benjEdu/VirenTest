@@ -4,6 +4,9 @@ import application.LaborantVerwaltung;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ViewLaborant extends JFrame {
     //Hintergrundfarbe
@@ -26,6 +29,7 @@ public class ViewLaborant extends JFrame {
     private JRadioButton negativ;
     //Button
     private JButton einfuegen;
+    private JButton ausloggen;
     
     private boolean testPositiv;
 
@@ -40,6 +44,7 @@ public class ViewLaborant extends JFrame {
         
         JPanel panel = new JPanel(new GridLayout(2,2,0,10));
         JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel panel3 = new JPanel(new FlowLayout());
         
         //Überschrift
         ueberschrift = new JLabel("Willkommen beim Virentestcenter");
@@ -55,14 +60,22 @@ public class ViewLaborant extends JFrame {
         negativ = new JRadioButton("Test negativ", true);
         //Button
         einfuegen = new JButton("Einfügen");
+        ausloggen = new JButton("Ausloggen");
         
         idLabel.setFont(text);
         ergebnisLabel.setFont(text);
         positiv.setFont(text);
         negativ.setFont(text);
         
-        einfuegen.setBackground(background);
+        einfuegen.setBackground(background2);
         einfuegen.setFont(text);
+        
+        ausloggen.setFont(text);
+        ausloggen.setBackground(background2);
+        
+        ausloggenActionListener ausloggenListener = new ausloggenActionListener();
+        ausloggen.addActionListener(ausloggenListener);
+        
 
         //Gruppierung RadioButton
         ButtonGroup ergebnisGroub = new ButtonGroup();
@@ -78,7 +91,9 @@ public class ViewLaborant extends JFrame {
         panel2.add(negativ);
         panel.add(panel2);
         add(panel, BorderLayout.CENTER);
-        add(einfuegen, BorderLayout.SOUTH);
+        panel3.add(ausloggen);
+        panel3.add(einfuegen);
+        add(panel3, BorderLayout.SOUTH);
         
         //Testergebnis negativ ausgewählt
         negativ.isSelected();
@@ -92,6 +107,7 @@ public class ViewLaborant extends JFrame {
         this.getContentPane().setBackground(background);
         panel.setBackground(background2);
         panel2.setBackground(background2);
+        panel3.setBackground(background);
         negativ.setBackground(background);
         positiv.setBackground(background);
         
@@ -106,11 +122,28 @@ public class ViewLaborant extends JFrame {
             //Eingabe von Nutzer
             String id = idText.getText();
             testPositiv = positiv.isSelected();
-            boolean ergebnis = lv.einfuegenTestergebnis(id, testPositiv);
+            boolean ergebnis = false;
+            try {
+                ergebnis = lv.einfuegenTestergebnis(id, testPositiv);
+            } catch (SQLException ex) {
+                try {
+                    ergebnis = lv.aendernTestergebnis(id, testPositiv);
+                } catch (SQLException ex1) {
+                    System.out.println("Geht nicht");
+                }
+            }
             if(ergebnis){
                 idText.setText("");
                 negativ.isSelected();
             }
+        }
+    }
+    
+    private class ausloggenActionListener implements ActionListener {
+        
+        public void actionPerformed(ActionEvent e) {
+            setVisible(false);
+            new VirenTestcenterView("Virentestcenter");
         }
     }
 }

@@ -13,7 +13,6 @@ import persistence.AdminJavaDBMapper;
 public class MitarbeiterEinfuegen extends JFrame {
 
     //Hintergrundfarbe
-
     Color background = new Color(229, 255, 249);
     Color background2 = new Color(194, 255, 241);
     //Schriftart und -größe
@@ -464,66 +463,66 @@ public class MitarbeiterEinfuegen extends JFrame {
 
             //Eingabe von Nutzer
             if (vnameText.getText().trim() != null && !vnameText.getText().trim().isEmpty()) {
-                m.setVname(vnameText.getText());
+                m.setVname(vnameText.getText().trim());
                 if (emailText.getText().trim() != null && !email.getText().trim().isEmpty()) {
-                    m.setEmail(emailText.getText());
+                    m.setEmail(emailText.getText().trim());
                     if (telText.getText().trim() != null && !telText.getText().trim().isEmpty()) {
-                        m.setTel(telText.getText());
+                        m.setTel(telText.getText().trim());
                         if (stadtText.getText().trim() != null && !stadtText.getText().trim().isEmpty()) {
-                            m.setStadt(stadtText.getText());
+                            m.setStadt(stadtText.getText().trim());
+                            if (String.valueOf(pwdField.getPassword()).trim() != null && !String.valueOf(pwdField.getPassword()).trim().isEmpty()) {
+                                m.setPwd(String.valueOf(pwdField.getPassword()).trim());
+                                if (strasseText.getText().trim() != null && !strasse.getText().trim().isEmpty()) {
+                                    m.setStrasse(strasseText.getText().trim());
+                                    if (hsNrText.getText().trim() != null && !hsNrText.getText().trim().isEmpty()) {
+                                        m.setHr(hsNrText.getText().trim());
+                                        if (plzText.getText().trim() != null && !plzText.getText().trim().isEmpty()) {
+                                            m.setPlz(plzText.getText().trim());
+                                            if (nnameText.getText().trim() != null && !nnameText.getText().trim().isEmpty()) {
+                                                m.setNname(nnameText.getText().trim());
+                                                String landAuswahl = land2.getSelectedItem() + "";
+                                                m.setLand(landAuswahl);
 
-                            if (strasseText.getText().trim() != null && !strasse.getText().trim().isEmpty()) {
-                                m.setStrasse(strasseText.getText());
-                                if (hsNrText.getText().trim() != null && !hsNrText.getText().trim().isEmpty()) {
-                                    m.setHr(hsNrText.getText());
-                                    if (plzText.getText().trim() != null && !plzText.getText().trim().isEmpty()) {
-                                        m.setPlz(plzText.getText());
-                                        if (nnameText.getText().trim() != null && !nnameText.getText().trim().isEmpty()) {
-                                            m.setNname(nnameText.getText());
-                                            String landAuswahl = land2.getSelectedItem() + "";
-                                            m.setLand(landAuswahl);
-
-                                            String ergebnis = null;
-                                            try {
-                                                ergebnis = mapper.einfuegenMitarbeiter(m);
-                                                if (ergebnis.equals("E-Mail bereits vergeben")) {
-                                                    infoLabel.setText("E-Mail bereits vergeben");
-                                                } else {
-                                                    infoLabel.setText("Eingefügt!");
+                                                String ergebnis = null;
+                                                try {
+                                                    ergebnis = mapper.einfuegenMitarbeiter(m);
+                                                    if (ergebnis.equals("E-Mail bereits vergeben")) {
+                                                        infoLabel.setText("E-Mail bereits vergeben");
+                                                    } else {
+                                                        infoLabel.setText("Eingefügt!");
+                                                    }
+                                                } catch (SQLException ex) {
+                                                    System.out.println(ex.toString());
                                                 }
-                                            } catch (SQLException ex) {
-                                                System.out.println(ex.toString());
+                                                if (ergebnis != null && ergebnis.equals("Eingefügt")) {
+                                                    vnameText.setText("");
+                                                    nnameText.setText("");
+                                                    emailText.setText("");
+                                                    telText.setText("");
+                                                    strasseText.setText("");
+                                                    hsNrText.setText("");
+                                                    stadtText.setText("");
+                                                    plzText.setText("");
+                                                    pwdField.setText("");
+                                                    verwaltung.isSelected();
+                                                    land2.setSelectedItem("Deutschland");
+                                                }
+                                                eingefuegt = true;
                                             }
-                                            if (ergebnis != null && ergebnis.equals("Eingefügt")) {
-                                                vnameText.setText("");
-                                                nnameText.setText("");
-                                                emailText.setText("");
-                                                telText.setText("");
-                                                strasseText.setText("");
-                                                hsNrText.setText("");
-                                                stadtText.setText("");
-                                                plzText.setText("");
-                                                pwdField.setText("");
-                                                verwaltung.isSelected();
-                                                land2.setSelectedItem("Deutschland");
-                                            }
-                                            eingefuegt = true;
-                                        }
 
+                                        }
                                     }
                                 }
                             }
-
                         }
                     }
                 }
             }
-            
-            if(!eingefuegt){
+
+            if (!eingefuegt) {
                 infoLabel.setText("Alle Eingaben ausfüllen!");
             }
-            
-            
+
         }
     }
 

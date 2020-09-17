@@ -163,6 +163,12 @@ public abstract class Person {
     public void setLand(String land) {
         this.land = land;
     }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
+    
+    
     
     @Override
     public String toString(){

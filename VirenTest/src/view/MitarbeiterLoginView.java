@@ -120,9 +120,9 @@ public class MitarbeiterLoginView extends JFrame{
                 System.out.println(email);
                 System.out.println(pwd);
                 Mitarbeiter m = lv.mitarbeiterEinloggen(email, pwd);
-                
                 //Falls Email oder Passwort falsch sind wird eine NPE geworfen
                 if(m==null){
+                    System.out.println("Ist null");
                     throw new NullPointerException();
                 }
                 //Todo, je nach Rollenid auf unterschiedliche GUIs weiterleiten
