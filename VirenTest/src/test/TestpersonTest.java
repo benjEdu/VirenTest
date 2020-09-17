@@ -16,19 +16,51 @@ import view.TestpersonenLoginView;
  */
 public class TestpersonTest {
     public static void main(String[] args){
-        /*
+        System.out.println(alleTesten());
+    }
+    
+    public static String alleTesten(){
+        String testergebnis = "";
         VerwaltungJavaDBMapper mapper = new VerwaltungJavaDBMapper();
         Testperson tp = new Testperson("Sentiten", "Dimitri", "test@testmail.com", "456498", "5", "laikestrasse", "Bonn", "94649", "Deutschelaaand", "Passwort");
         Testperson tp2 = new Testperson("2Sentiten", "2Dimitri", "2test@testmail.com", "2456498", "25", "2laikestrasse", "2Bonn", "29469", "2Deutschelaaand", "Passwort2");
-        Testperson tp3 = new Testperson("3Sentiten", "3Dimitri", "3test@testmail.com", "3456498", "35", "3laikestrasse", "3Bonn", "39469", "3Deutschelaaand", "Passwort3");
     
-        System.out.println(einfuegenTest(mapper, tp));
-        System.out.println(aendernTest(mapper, tp, tp2));*/
-        //TestpersonenLoginView tlv = new TestpersonenLoginView("Titel");
-        MitarbeiterLoginView mlv = new MitarbeiterLoginView("LULU");
+        boolean einfuegen = einfuegenTest(mapper, tp);
+        boolean lesen = lesenTest(mapper, tp);
+        boolean aendern = aendernTest(mapper, tp, tp2);
+        boolean loeschen = loeschenTest(mapper, tp);
         
-    
+        //Einfuegen testen
+        if(einfuegen){
+            testergebnis+="\nEinfügen Test fehlerfrei durchlaufen";
+        }else{
+            testergebnis+="\nFehler beim Einfügen Test. Hierdurch failen auch der Lesen und der Löschen Test";
+        }
+        
+        //Lesen testen
+        if(lesen){
+            testergebnis+="\nLesen Test fehlerfrei durchlaufen.";
+        }else{
+            testergebnis+="\nFehler beim Lesen.";
+        }
+        
+        //Aendern testen
+        if(aendern){
+            testergebnis+="\nändern Test fehlerfrei durchlaufen";
+        }else{
+            testergebnis+="\nFehler beim ändern Test. Hierdurch failen auch der Lesen und der Löschen Test";
+        }
+        
+        //Loeschen testen
+        if(loeschen){
+            testergebnis+="\nLöschen Test fehlerfrei durchlaufen";
+        }else{
+            testergebnis+="\nFehler beim Löschen Test. Hierdurch failen auch der Lesen und der Löschen Test";
+        }
+        
+        return testergebnis;
     }
+    
     public static boolean einfuegenTest(VerwaltungJavaDBMapper mapper, Testperson tp){
         String einfuegen = mapper.einfuegenTestperson(tp);
         if(einfuegen.equals("Testperson erfolgreich eingefügt :)")){
@@ -55,6 +87,50 @@ public class TestpersonTest {
             return false;
         }
     }
+    
+    //Hierfür muss auch einfuegenTestperson funktionieren
+    public static boolean lesenTest(VerwaltungJavaDBMapper mapper, Testperson tp){
+        mapper.einfuegenTestperson(tp);
+        Testperson tp2 = mapper.lesenTestperson(tp.getTestpersonId());
+        if(tp.getVname().equals(tp2.getVname())){
+            if(tp.getNname().equals(tp2.getNname())){
+                if(tp.getEmail().equals(tp2.getEmail())){
+                    if(tp.getAdressId()==tp.getAdressId()){
+                        if(tp.getTel().equals(tp2.getTel())){
+                            if(tp.getHsNr().equals(tp2.getHsNr())){
+                                if(tp.getStrasse().equals(tp2.getStrasse())){
+                                    if(tp.getStadt().equals(tp2.getStadt())){
+                                        if(tp.getPlz().equals(tp2.getPlz())){
+                                            if(tp.getLand().equals(tp2.getLand())){
+                                                return true;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                        
+                }
+            }
+        }
+        return false;
+    }
+    
+    public static boolean loeschenTest(VerwaltungJavaDBMapper mapper, Testperson tp){
+      String ef = mapper.einfuegenTestperson(tp);
+      if(lesenTest(mapper, tp)==false){
+          return false;
+      }
+      mapper.loeschenTestperson(tp.getTestpersonId());
+      boolean lt = lesenTest(mapper, tp);
+      if(lt == false){
+          return true;
+      }
+      return false;
+    }
+    
+    
 /*
     System.out.println("\n\nAendern");
     System.out.println(mapper.aendernTestperson(tp2));

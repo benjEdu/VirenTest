@@ -34,16 +34,18 @@ public class MitarbeiterAendernView extends JFrame {
     private JLabel plzLabel;
     private JLabel bezeichnungLabel;
     private String idMit;
+    private JLabel infoLabel;
 
     private JTextField vNameText;
     private JTextField nNameText;
     private JTextField emailText;
     private JTextField telText;
     private JTextField stadtText;
-    private JTextField landText;
     private JTextField strasseText;
     private JTextField hnrText;
     private JTextField plzText;
+
+    private JComboBox land2;
 
     private JButton aendern;
     private JButton zurueck;
@@ -72,6 +74,8 @@ public class MitarbeiterAendernView extends JFrame {
         hnrLabel = new JLabel("Hausnummer");
         plzLabel = new JLabel("Postleitzahl");
         bezeichnungLabel = new JLabel(m.getClass().getSimpleName());
+        infoLabel = new JLabel();
+
         idMit = m.getMitarbeiterId();
 
         vNameText = new JTextField(m.getVname());
@@ -79,10 +83,251 @@ public class MitarbeiterAendernView extends JFrame {
         emailText = new JTextField(m.getEmail());
         telText = new JTextField(m.getTel());
         stadtText = new JTextField(m.getStadt());
-        landText = new JTextField(m.getLand());
         strasseText = new JTextField(m.getStrasse());
         hnrText = new JTextField(m.getHsNr());
         plzText = new JTextField(m.getPlz());
+
+        String landArray[] = {"AD", "AE",
+            "Afghanistan",
+            "Antigua und Barbuda",
+            "Anguilla",
+            "Albanien",
+            "Armenien",
+            "Niederländische Antillen",
+            "Angola",
+            "Antarktis",
+            "Argentinien",
+            "Amerikanisch-Samoa",
+            "Österreich (Austria)",
+            "Australien",
+            "Aruba",
+            "Azerbaijan",
+            "Bosnien-Herzegovina",
+            "Barbados",
+            "Bangladesh",
+            "Belgien",
+            "Burkina Faso",
+            "Bulgarien",
+            "Bahrain",
+            "Burundi",
+            "Benin",
+            "Bermudas",
+            "Brunei Darussalam",
+            "Bolivien",
+            "Brasilien",
+            "Bahamas",
+            "Bhutan",
+            "Bouvet Island",
+            "Botswana",
+            "Weißrußland (Belarus)",
+            "Belize",
+            "Canada",
+            "Cocos (Keeling) Islands",
+            "Demokratische Republik Kongo",
+            "Zentralafrikanische Republik",
+            "Kongo",
+            "Schweiz",
+            "Elfenbeinküste (Cote D'Ivoire)",
+            "Cook Islands",
+            "Chile",
+            "Kamerun",
+            "China",
+            "Kolumbien",
+            "Costa Rica",
+            "Tschechoslowakei (ehemalige)",
+            "Kuba",
+            "Kap Verde",
+            "Christmas Island",
+            "Zypern",
+            "Tschechische Republik",
+            "Deutschland",
+            "Djibouti",
+            "Dänemark",
+            "Dominica",
+            "Dominikanische Republik",
+            "Algerien",
+            "Ecuador",
+            "Estland",
+            "Ägypten",
+            "Westsahara",
+            "Eritrea",
+            "Spanien",
+            "Äthiopien",
+            "Finnland",
+            "Fiji",
+            "Falkland-Inseln (Malvinas)",
+            "Micronesien",
+            "Faröer-Inseln",
+            "Frankreich",
+            "France, Metropolitan",
+            "Gabon",
+            "Grenada",
+            "Georgien",
+            "Französisch Guiana",
+            "Ghana",
+            "Gibraltar",
+            "Grönland",
+            "Gambia",
+            "Guinea",
+            "Guadeloupe",
+            "Äquatorialguinea",
+            "Griechenland",
+            "Südgeorgien und Südliche Sandwich-Inseln",
+            "Guatemala",
+            "Guam",
+            "Guinea-Bissau",
+            "Guyana",
+            "Kong Hong",
+            "Heard und Mc Donald Islands",
+            "Honduras",
+            "Haiti",
+            "Ungarn",
+            "Indonesien",
+            "Irland",
+            "Israel",
+            "Indien",
+            "British Indian Ocean Territory",
+            "Irak",
+            "Iran (Islamische Republik)",
+            "Island",
+            "Italien",
+            "Jamaica",
+            "Jordanien",
+            "Japan",
+            "Kenya",
+            "Kirgisien",
+            "Königreich Kambodscha",
+            "Kiribati",
+            "Komoren",
+            "Saint Kitts und Nevis",
+            "Korea, Volksrepublik",
+            "Korea",
+            "Kuwait",
+            "Kayman Islands",
+            "Kasachstan",
+            "Laos",
+            "Libanon",
+            "Saint Lucia",
+            "Liechtenstein",
+            "Sri Lanka",
+            "Liberia",
+            "Lesotho",
+            "Littauen",
+            "Luxemburg",
+            "Lettland",
+            "Libyen",
+            "Marokko",
+            "Monaco",
+            "Moldavien",
+            "Madagaskar",
+            "Marshall-Inseln",
+            "Mazedonien, ehem. Jugoslawische Republik",
+            "Mali",
+            "Myanmar",
+            "Mongolei",
+            "Macao",
+            "Nördliche Marianneninseln",
+            "Martinique",
+            "Mauretanien",
+            "Montserrat",
+            "Malta",
+            "Mauritius",
+            "Malediven",
+            "Malawi",
+            "Mexico",
+            "Malaysien",
+            "Mozambique",
+            "Namibia",
+            "Neu Kaledonien",
+            "Niger",
+            "Norfolk Island",
+            "Nigeria",
+            "Nicaragua",
+            "Niederlande",
+            "Norwegen",
+            "Nepal",
+            "Nauru",
+            "Niue",
+            "Neuseeland",
+            "Oman",
+            "Panama",
+            "Peru",
+            "Französisch Polynesien",
+            "Papua Neuguinea",
+            "Philippinen",
+            "Pakistan",
+            "Polen",
+            "St. Pierre und Miquelon",
+            "Pitcairn",
+            "Puerto Rico",
+            "Portugal",
+            "Palau",
+            "Paraguay",
+            "Katar",
+            "Reunion",
+            "Rumänien",
+            "Russische Föderation",
+            "Ruanda",
+            "Saudi Arabien",
+            "Salomonen",
+            "Seychellen",
+            "Sudan",
+            "Schweden",
+            "Singapur",
+            "St. Helena",
+            "Slovenien",
+            "Svalbard und Jan Mayen Islands",
+            "Slowakei",
+            "Sierra Leone",
+            "San Marino",
+            "Senegal",
+            "Somalia",
+            "Surinam",
+            "Sao Tome und Principe",
+            "El Salvador",
+            "Syrien, Arabische Republik",
+            "Swaziland",
+            "Turk und Caicos-Inseln",
+            "Tschad",
+            "Französisches Südl.Territorium",
+            "Togo",
+            "Thailand",
+            "Tadschikistan",
+            "Tokelau",
+            "Turkmenistan",
+            "Tunesien",
+            "Tonga",
+            "Ost-Timor",
+            "Türkei",
+            "Trinidad und Tobago",
+            "Tuvalu",
+            "Taiwan",
+            "Tansania, United Republic of",
+            "Ukraine",
+            "Uganda",
+            "Großbritannien",
+            "Vereinigte Staaten",
+            "Vereinigte Staaten, Minor Outlying Islands",
+            "Uruguay",
+            "Usbekistan",
+            "Vatikanstaat",
+            "Saint Vincent und Grenadines",
+            "Venezuela",
+            "Virgin Islands (Britisch)",
+            "Virgin Islands (U.S.)",
+            "Vietnam",
+            "Vanuatu",
+            "Wallis und Futuna Islands",
+            "Samoa",
+            "Jemen",
+            "Mayotte",
+            "Jugoslawien",
+            "Südafrika",
+            "Sambia",
+            "Zimbabwe"
+        };
+        land2 = new JComboBox(landArray);
+        land2.setSelectedItem(m.getLand());
 
         rolleLabel.setFont(text);
         vNameLabel.setFont(text);
@@ -95,12 +340,12 @@ public class MitarbeiterAendernView extends JFrame {
         hnrLabel.setFont(text);
         plzLabel.setFont(text);
         bezeichnungLabel.setFont(text);
-        
-                
+        infoLabel.setFont(text);
+
         setLayout(new BorderLayout());
-        
+
         JPanel panel2 = new JPanel(new GridLayout(10, 2));
-        
+
         JPanel panel3 = new JPanel(new FlowLayout());
 
         aendern = new JButton("Ändern");
@@ -131,7 +376,7 @@ public class MitarbeiterAendernView extends JFrame {
         panel2.add(stadtLabel);
         panel2.add(stadtText);
         panel2.add(landLabel);
-        panel2.add(landText);
+        panel2.add(land2);
         panel2.add(strasseLabel);
         panel2.add(strasseText);
         panel2.add(hnrLabel);
@@ -140,9 +385,10 @@ public class MitarbeiterAendernView extends JFrame {
         panel2.add(plzText);
         panel3.add(zurueck);
         panel3.add(aendern);
+        panel3.add(infoLabel);
         add(panel2, BorderLayout.CENTER);
         add(panel3, BorderLayout.SOUTH);
-        
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 500);
         this.getContentPane().setBackground(background);
@@ -158,6 +404,7 @@ public class MitarbeiterAendernView extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             Mitarbeiter mit = null;
+            boolean geaendert = false;
             switch (bezeichnungLabel.getText()) {
                 case "Admin":
                     mit = new Admin(idMit);
@@ -174,39 +421,43 @@ public class MitarbeiterAendernView extends JFrame {
 
             if (vNameText.getText().trim() != null && !vNameText.getText().trim().isEmpty()) {
                 mit.setVname(vNameText.getText());
-                if (emailText.getText().trim() != null && !vNameText.getText().trim().isEmpty()) {
+                if (emailText.getText().trim() != null && !emailText.getText().trim().isEmpty()) {
                     mit.setEmail(emailText.getText());
-                    if (telText.getText().trim() != null && !vNameText.getText().trim().isEmpty()) {
+                    if (telText.getText().trim() != null && !telText.getText().trim().isEmpty()) {
                         mit.setTel(telText.getText());
-                        if (stadtText.getText().trim() != null && !vNameText.getText().trim().isEmpty()) {
+                        if (stadtText.getText().trim() != null && !stadtText.getText().trim().isEmpty()) {
                             mit.setStadt(stadtText.getText());
-                            if (landText.getText().trim() != null && !vNameText.getText().trim().isEmpty()) {
-                                mit.setLand(landText.getText());
-                                if (strasseText.getText().trim() != null && !vNameText.getText().trim().isEmpty()) {
-                                    mit.setStrasse(strasseText.getText());
-                                    if (hnrText.getText().trim() != null && !vNameText.getText().trim().isEmpty()) {
-                                        mit.setHr(hnrText.getText());
-                                        if (plzText.getText().trim() != null && !vNameText.getText().trim().isEmpty()) {
-                                            mit.setPlz(plzText.getText());
-                                            if (nNameText.getText().trim() != null && !nNameText.getText().trim().isEmpty()) {
-                                                mit.setNname(nNameText.getText());
-                                                try {
-                                                    av.aendernMitarbeiter(mit);
-                                                } catch (SQLException ex) {
-                                                    System.out.println(ex.toString());
-                                                }
-                                                setVisible(false);
-                                                new MitarbeiterVerwaltungView("Verwaltung");
+                            if (strasseText.getText().trim() != null && !strasseText.getText().trim().isEmpty()) {
+                                mit.setStrasse(strasseText.getText());
+                                if (hnrText.getText().trim() != null && !hnrText.getText().trim().isEmpty()) {
+                                    mit.setHr(hnrText.getText());
+                                    if (plzText.getText().trim() != null && !plzText.getText().trim().isEmpty()) {
+                                        mit.setPlz(plzText.getText());
+                                        if (nNameText.getText().trim() != null && !nNameText.getText().trim().isEmpty()) {
+                                            mit.setNname(nNameText.getText());
+                                            String landAuswahl = land2.getSelectedItem() + "";
+                                            mit.setLand(landAuswahl);
+                                            try {
+                                                av.aendernMitarbeiter(mit);
+                                            } catch (SQLException ex) {
+                                                System.out.println(ex.toString());
                                             }
-
+                                            setVisible(false);
+                                            new MitarbeiterVerwaltungView("Verwaltung");
                                         }
+
                                     }
                                 }
                             }
+
                         }
                     }
                 }
             }
+            if (!geaendert) {
+                infoLabel.setText("Alle Eingabefelder ausfüllen!");
+            }
+
         }
     }
 
