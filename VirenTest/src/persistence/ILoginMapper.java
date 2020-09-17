@@ -14,3 +14,5 @@ import application.Person;
 public interface ILoginMapper {
     Person einloggen(String email, String pwd);
 }
+
+
