@@ -32,7 +32,7 @@ public class TestergebnisLesen extends JFrame {
         setLayout(new BorderLayout());
 
         //Überschrift
-        ueberschrift = new JLabel("Willkommen bei Ihrem Virentestcenter");
+        ueberschrift = new JLabel("Willkommen beim Virentestcenter");
         ueberschrift.setHorizontalAlignment(JLabel.CENTER);
         ueberschrift.setFont(ueberschriftFont);
 
