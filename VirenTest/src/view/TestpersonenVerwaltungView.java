@@ -17,10 +17,11 @@ public class TestpersonenVerwaltungView extends JFrame {
     private JLabel aendernLabel;
     private JLabel loeschenLabel;
     private JLabel ueberschrift;
-
+    
     private JButton eingabe;
     private JButton aendern;
     private JButton loeschen;
+    private JButton ausloggen;
 
     private String einfuegen;
 
@@ -30,13 +31,15 @@ public class TestpersonenVerwaltungView extends JFrame {
     }
 
     private void init() {
-        setLayout(new GridLayout(4, 1));
-        //idLabel = new JLabel("Person(ID):");
-        //idText = new JTextField(10);
+        setLayout(new BorderLayout());
+        
+        JPanel panel = new JPanel(new GridLayout(3, 1));
+        
         eingabe = new JButton("Testperson hinzufügen");
         aendern = new JButton("Testperson ändern");
         loeschen = new JButton("Testperson löschen ");
-
+        ausloggen = new JButton("Ausloggen");
+        
         //Überschrift
         ueberschrift = new JLabel("Willkommen beim Virentestcenter");
         ueberschrift.setHorizontalAlignment(JLabel.CENTER);
@@ -48,11 +51,15 @@ public class TestpersonenVerwaltungView extends JFrame {
         aendern.setBackground(background);
         loeschen.setFont(text);
         loeschen.setBackground(background2);
+        ausloggen.setFont(text);
+        ausloggen.setBackground(background);
 
-        add(ueberschrift);
-        add(eingabe);
-        add(aendern);
-        add(loeschen);
+        add(ueberschrift, BorderLayout.NORTH);
+        panel.add(eingabe);
+        panel.add(aendern);
+        panel.add(loeschen);
+        add(panel, BorderLayout.CENTER);
+        add(ausloggen, BorderLayout.SOUTH);
 
         TestpersonenVerwaltungView.MyActionListener listener = new TestpersonenVerwaltungView.MyActionListener();
         TestpersonenVerwaltungView.MyActionListener2 listener2 = new TestpersonenVerwaltungView.MyActionListener2();
@@ -64,6 +71,7 @@ public class TestpersonenVerwaltungView extends JFrame {
 
         setSize(600, 400);
         this.getContentPane().setBackground(background);
+        panel.setBackground(background);
         setLocation(650, 300);
         setVisible(true);
     }

@@ -1,12 +1,3 @@
-
-
-
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 import application.Admin;
@@ -41,7 +32,7 @@ public class MitarbeiterVerwaltungView extends JFrame{
     private JButton lesen;
     private JLabel infoLabel;
     private JButton aendern;
-    
+    private JButton ausloggen;
     
     public MitarbeiterVerwaltungView(String titel){
         super(titel);
@@ -114,6 +105,10 @@ public class MitarbeiterVerwaltungView extends JFrame{
         LesenButtonListener lesenListener = new LesenButtonListener();
         lesen.addActionListener(lesenListener);
         
+        ausloggen = new JButton("Ausloggen");        
+        ausloggenActionListener ausloggenListener = new ausloggenActionListener();
+        ausloggen.addActionListener(ausloggenListener);
+        
         infoLabel = new JLabel();
         
         aendern = new JButton("Ändern");
@@ -128,13 +123,16 @@ public class MitarbeiterVerwaltungView extends JFrame{
         delete.setBackground(background);
         lesen.setFont(text);
         lesen.setBackground(background);
+        ausloggen.setFont(text);
+        ausloggen.setBackground(background);
         
-        mitarbeiterLesen = new JTextField("MitarbeiterID für 'Lesen' eingeben");
+        mitarbeiterLesen = new JTextField("MitarbeiterID für 'Lesen'");
         
         table.setFont(text);
         table.setBackground(background2);
         add(ueberschrift, BorderLayout.NORTH);
         add(table, BorderLayout.CENTER);
+        panel2.add(ausloggen);
         panel2.add(delete);
         panel2.add(aendern);
         panel2.add(mitarbeiterLesen);
@@ -250,6 +248,13 @@ public class MitarbeiterVerwaltungView extends JFrame{
         }
     }
     
+        private class ausloggenActionListener implements ActionListener {
+        
+        public void actionPerformed(ActionEvent e) {
+            setVisible(false);
+            new VirenTestcenterView("Virentestcenter");
+        }
+    }
             
 }
 
