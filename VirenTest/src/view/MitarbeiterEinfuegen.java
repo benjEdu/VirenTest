@@ -25,6 +25,7 @@ public class MitarbeiterEinfuegen extends JFrame {
     private JLabel nname;
     private JLabel vname;
     private JLabel email; 
+    private JLabel pwd;
     private JLabel tel;
     private JLabel hsNr; 
     private JLabel strasse; 
@@ -36,6 +37,7 @@ public class MitarbeiterEinfuegen extends JFrame {
     private JTextField nnameText;
     private JTextField vnameText;
     private JTextField emailText; 
+    private JPasswordField pwdField;
     private JTextField telText;
     private JTextField hsNrText; 
     private JTextField strasseText; 
@@ -82,6 +84,9 @@ public class MitarbeiterEinfuegen extends JFrame {
         email = new JLabel("E-Mail:");
         emailText = new JTextField(60);
         
+        pwd = new JLabel("Passwort:");
+        pwdField = new JPasswordField();
+        
         tel = new JLabel("Telefonnummer:");
         telText = new JTextField(20);
         
@@ -115,6 +120,7 @@ public class MitarbeiterEinfuegen extends JFrame {
         nname.setFont(text);
         vname.setFont(text);
         email.setFont(text);
+        pwd.setFont(text);
         tel.setFont(text);
         strasse.setFont(text);
         hsNr.setFont(text);
@@ -386,6 +392,8 @@ public class MitarbeiterEinfuegen extends JFrame {
         panel.add(nnameText);
         panel.add(email);
         panel.add(emailText);
+        panel.add(pwd);
+        panel.add(pwdField);
         panel.add(tel);
         panel.add(telText);
         panel.add(strasse);

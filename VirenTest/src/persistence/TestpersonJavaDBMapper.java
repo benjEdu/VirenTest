@@ -20,7 +20,7 @@ public class TestpersonJavaDBMapper implements ITestpersonMapper {
             PreparedStatement read = conn.prepareStatement("select ergebniss from testergebnisse te NATURAL JOIN testpersonen tp where tp.testpersonId = ?");
             read.setInt(1, testpersonId);
             ResultSet rs = read.executeQuery();
-            boolean ergebnis;
+            boolean ergebnis;  //True bei positivem Test; False bei negativem Test
             if (rs.next()) {
                 ergebnis = rs.getBoolean(1);
             } else {
