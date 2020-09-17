@@ -139,7 +139,7 @@ public class TestpersonenLoginView extends JFrame{
         }
     }
     
-     private class MyActionListener2 implements ActionListener {
+    private class MyActionListener2 implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {

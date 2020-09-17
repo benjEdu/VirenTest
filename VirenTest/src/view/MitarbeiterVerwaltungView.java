@@ -36,6 +36,7 @@ public class MitarbeiterVerwaltungView extends JFrame{
     private JLabel ueberschrift;
     private JTable table;
     private JButton delete;
+    private JButton einfuegen;
     private JLabel infoLabel;
     private JButton aendern;
     
@@ -103,6 +104,10 @@ public class MitarbeiterVerwaltungView extends JFrame{
         DeleteButtonListener deleteListener = new DeleteButtonListener();
         delete.addActionListener(deleteListener);
         
+        einfuegen = new JButton("Neuen Einfügen");
+        EinfuegenButtonListener einfuegenListener = new EinfuegenButtonListener();
+        einfuegen.addActionListener(einfuegenListener);
+        
         infoLabel = new JLabel();
         
         aendern = new JButton("Ändern");
@@ -111,6 +116,8 @@ public class MitarbeiterVerwaltungView extends JFrame{
         
         aendern.setFont(text);
         aendern.setBackground(background);
+        einfuegen.setFont(text);
+        einfuegen.setBackground(background);
         delete.setFont(text);
         delete.setBackground(background);
         
@@ -120,6 +127,7 @@ public class MitarbeiterVerwaltungView extends JFrame{
         add(table, BorderLayout.CENTER);
         panel2.add(delete);
         panel2.add(aendern);
+        panel2.add(einfuegen);
         panel2.add(infoLabel);
         add(panel2, BorderLayout.SOUTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -192,6 +200,15 @@ public class MitarbeiterVerwaltungView extends JFrame{
                 }
                 
             }
+    }
+    
+    private class EinfuegenButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            setVisible(false);
+            new MitarbeiterEinfuegen("Virentestcenter");
+        }
     }
     
 }
