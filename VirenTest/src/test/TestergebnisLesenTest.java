@@ -112,13 +112,8 @@ public class TestergebnisLesenTest {
         return conn;
     }
 
-    /**
-     * nicht threadsafe!
-     *
-     * Aufraeumarbeiten
-     */
+    
     private void deleteConn(Connection conn) {
-        // solange noch kein Pool vorhanden 
         // nicht threadsafe
         try {
             // immer vorsichtshalber commit vor close

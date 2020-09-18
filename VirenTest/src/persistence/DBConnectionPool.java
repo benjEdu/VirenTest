@@ -32,7 +32,6 @@ public class DBConnectionPool {
     }
 
     static protected void deleteConn(Connection conn) {
-        // solange noch kein Pool vorhanden 
         // nicht threadsafe
         try {
             // immer vorsichtshalber commit vor close

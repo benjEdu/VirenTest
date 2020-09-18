@@ -9,6 +9,7 @@ package persistence;
 import application.Login;
 import application.Testperson;
 import java.sql.Connection;
+import persistence.DBConnectionPool;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,7 +42,7 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
     @Override
     public String einfuegenTestperson(Testperson tp) {
         int adressId = 0;
-        Connection conn = getConn();
+        Connection conn = DBConnectionPool.getConn();
         try{
             conn.setAutoCommit(false);
             if(emailVergeben(conn,tp)){
@@ -102,13 +103,13 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
             return ex.toString();
         }
         finally{
-            deleteConn(conn);
+            DBConnectionPool.deleteConn(conn);
         }
     }
 
     @Override
     public String aendernTestperson(Testperson tp) {
-        Connection conn = getConn();
+        Connection conn = DBConnectionPool.getConn();
         try{
             conn.setAutoCommit(false);
             if(emailVergeben(conn,tp)){
@@ -137,13 +138,13 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
             return ex.toString();
         }
         finally{
-            deleteConn(conn);
+            DBConnectionPool.deleteConn(conn);
         }
     }
 
     @Override
     public boolean loeschenTestperson(int tpid) {
-        Connection conn = getConn();
+        Connection conn = DBConnectionPool.getConn();
         try {
             PreparedStatement delete = conn.prepareStatement("delete from testergebnisse where testpersonid = ?");
             delete.setInt(1, tpid);
@@ -157,13 +158,13 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
             return false;
         }
         finally{
-            deleteConn(conn);
+            DBConnectionPool.deleteConn(conn);
         }
     }
 
     @Override
     public Testperson lesenTestperson(int tpid) {
-        Connection conn = getConn();
+        Connection conn = DBConnectionPool.getConn();
         try{
             PreparedStatement read = conn.prepareStatement("select * from testpersonen where testpersonid = ?");
             read.setInt(1, tpid);
@@ -192,7 +193,7 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
         } catch (SQLException ex) {
             Logger.getLogger(VerwaltungJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-        deleteConn(conn);
+        DBConnectionPool.deleteConn(conn);
     }
         return null;
     }
@@ -201,7 +202,7 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
     @Override
     public List<Testperson> lesenAlleTestpersonen() {
         List<Testperson> alleTestpersonen = new ArrayList<>();
-        Connection conn = getConn();
+        Connection conn = DBConnectionPool.getConn();
         try{
             PreparedStatement read = conn.prepareStatement("select * from testpersonen");
             ResultSet rs = read.executeQuery();
@@ -236,41 +237,8 @@ public class VerwaltungJavaDBMapper implements IVerwaltungMapper{
         } catch (NullPointerException ex) {
             Logger.getLogger(VerwaltungJavaDBMapper.class.getName()).log(Level.SEVERE, null, ex);
         }finally {
-            deleteConn(conn);
+            DBConnectionPool.deleteConn(conn);
         }
         return alleTestpersonen;
     }
-    
-    private Connection getConn() {
-        String userid = "VDB";
-        String password = "123";
-        String driver = "org.apache.derby.jdbc.ClientDriver";
-        String url = "jdbc:derby://localhost:1527/Virendatenbank";
-        Connection conn = null;
-        try {
-            Class.forName(driver);
-            conn = DriverManager.getConnection(url, userid, password);
-        } catch (ClassNotFoundException e) {
-            System.err.println(e);
-        } catch (SQLException e) {
-            System.err.println("getConn" + e);
-        }
-        return conn;
-    }
-
-    private void deleteConn(Connection conn) {
-        // solange noch kein Pool vorhanden 
-        // nicht threadsafe
-        try {
-            // immer vorsichtshalber commit vor close
-            conn.commit();
-            // schließen
-            conn.close();
-            // aufraeumen
-            conn = null;
-        } catch (SQLException e) {
-            System.err.println(e);
-        }
-    }
-    
 }

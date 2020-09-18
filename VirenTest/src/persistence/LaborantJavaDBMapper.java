@@ -4,6 +4,7 @@ import application.Person;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import persistence.DBConnectionPool;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class LaborantJavaDBMapper implements ILaborantMapper{
 
     @Override
     public boolean einfuegenTestergebnis(String id, boolean ergebnis) throws SQLException{
-                Connection conn = getConn();
+                Connection conn = DBConnectionPool.getConn();
         try {
             PreparedStatement insert = conn.prepareStatement("insert into testergebnisse (testpersonId, ergebniss) values (?,?)");
             insert.setInt(1, Integer.parseInt(id));            
@@ -33,7 +34,7 @@ public class LaborantJavaDBMapper implements ILaborantMapper{
     
     @Override
     public boolean aendernTestergebnis(String id, boolean ergebnis ) throws SQLException{
-        Connection conn = getConn();
+        Connection conn = DBConnectionPool.getConn();
         try {
             PreparedStatement insert = conn.prepareStatement("update testergebnisse set ergebniss = ? where testpersonid = ?");
             insert.setBoolean(1, ergebnis);
@@ -51,9 +52,8 @@ public class LaborantJavaDBMapper implements ILaborantMapper{
             throw new SQLException(ex);
         } 
     }
-    
    /*     public Person lesenTestergebnis(int id, boolean ergebnis ) {
-        Connection conn = getConn();
+        Connection conn = DBConnectionPool.getConn();
          
         try {
             PreparedStatement insert = conn.prepareStatement("select testergebnisse from personen where id = ?");
@@ -66,51 +66,4 @@ public class LaborantJavaDBMapper implements ILaborantMapper{
             return null;
         } 
     }*/
-    
-            private  Connection getConn() {
-        String userid = "VDB";
-        String password = "123";
-        String driver = "org.apache.derby.jdbc.ClientDriver";
-        String url = "jdbc:derby://localhost:1527/Virendatenbank";
-        Connection conn = null;
-        try {
-            Class.forName(driver);
-            conn = DriverManager.getConnection(url, userid, password);
-        } catch (ClassNotFoundException e) {
-            System.err.println(e);
-        } catch (SQLException e) {
-            System.err.println("getConn" + e);
-        }
-        return conn;
-    }
-
-    public boolean ergebnisAbrufen(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }
-
-        
-
-            
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    

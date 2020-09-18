@@ -2,6 +2,7 @@
 package persistence;
 
 import application.Admin;
+import persistence.DBConnectionPool;
 import application.Laborant;
 import application.Login;
 import application.Mitarbeiter;
@@ -37,7 +38,7 @@ public class AdminJavaDBMapper implements IAdminMapper{
     
     @Override
     public String einfuegenMitarbeiter(Mitarbeiter m) throws SQLException{
-        Connection conn = getConn();
+        Connection conn = DBConnectionPool.getConn();
         try {
             if(emailVergeben(conn, m)){
                 return "E-Mail bereits vergeben";
@@ -86,13 +87,13 @@ public class AdminJavaDBMapper implements IAdminMapper{
             throw new SQLException(ex);
         }
         finally{
-            deleteConn(conn);
+            DBConnectionPool.deleteConn(conn);
         }
     }
 
     @Override
     public String aendernMitarbeiter(Mitarbeiter m) throws SQLException{
-        Connection conn = getConn();
+        Connection conn = DBConnectionPool.getConn();
         try {
             if(emailVergeben(conn, m)){
                 return "E-Mail bereits vergeben";
@@ -132,13 +133,13 @@ public class AdminJavaDBMapper implements IAdminMapper{
             throw new SQLException(ex);
         }
         finally{
-            deleteConn(conn);
+            DBConnectionPool.deleteConn(conn);
         }
     }
 
     @Override
     public boolean loeschenMitarbeiter(int id) throws SQLException{
-        Connection conn = getConn();
+        Connection conn = DBConnectionPool.getConn();
         try {
             PreparedStatement select = conn.prepareStatement("select adressid from mitarbeiter where mitarbeiterid = ?");
             select.setInt(1, id);
@@ -159,14 +160,14 @@ public class AdminJavaDBMapper implements IAdminMapper{
             throw new SQLException(ex);
         }
         finally{
-            deleteConn(conn);
+            DBConnectionPool.deleteConn(conn);
         }
     }
 
     @Override
     public List<Mitarbeiter> lesenAlleMitarbeiter() throws SQLException{
         List<Mitarbeiter> alle = new ArrayList<>();
-        Connection conn = getConn();
+        Connection conn = DBConnectionPool.getConn();
         try {
             PreparedStatement select = conn.prepareStatement("select bezeichnung, mitarbeiterid, vname, nname, email, tel, adressid from mitarbeiter a, rollen b where a.rollenid = b.rollenid order by mitarbeiterid");
             ResultSet rs = select.executeQuery();
@@ -200,13 +201,13 @@ public class AdminJavaDBMapper implements IAdminMapper{
             throw new SQLException(ex);
         }
         finally{
-            deleteConn(conn);
+            DBConnectionPool.deleteConn(conn);
         }
     }
 
     @Override
     public Mitarbeiter lesenMitarbeiter(int id) throws SQLException{
-        Connection conn = getConn();
+        Connection conn = DBConnectionPool.getConn();
         try {
             Mitarbeiter p = null;
             PreparedStatement select = conn.prepareStatement("select bezeichnung, mitarbeiterid, vname, nname, email, tel, adressid from mitarbeiter a, rollen b where a.rollenid = b.rollenid and mitarbeiterid = ?");
@@ -240,47 +241,8 @@ public class AdminJavaDBMapper implements IAdminMapper{
             throw new SQLException(ex);
         }
         finally{
-            deleteConn(conn);
+            DBConnectionPool.deleteConn(conn);
         }
     }
 
-    
-    
-    private Connection getConn() {
-        String userid = "VDB";
-        String password = "123";
-        String driver = "org.apache.derby.jdbc.ClientDriver";
-        String url = "jdbc:derby://localhost:1527/Virendatenbank";
-        Connection conn = null;
-        try {
-            Class.forName(driver);
-            conn = DriverManager.getConnection(url, userid, password);
-        } catch (ClassNotFoundException e) {
-            System.err.println(e);
-        } catch (SQLException e) {
-            System.err.println("getConn" + e);
-        }
-        return conn;
-    }
-    
-    /**
-     * nicht threadsafe!
-     *
-     * Aufraeumarbeiten
-     */
-    private void deleteConn(Connection conn) {
-        // solange noch kein Pool vorhanden 
-        // nicht threadsafe
-        try {
-            // immer vorsichtshalber commit vor close
-            conn.commit();
-            // schließen
-            conn.close();
-            // aufraeumen
-            conn = null;
-        } catch (SQLException e) {
-            System.err.println(e);
-        }
-    }
-    
 }
