@@ -58,27 +58,23 @@ public class TestergebnisLesenTest {
         System.out.println("Test TestergebnisLesen beendet");
     }
     
-    public static boolean ergebnisAbrufenTestPositiv(TestpersonenVerwaltung tpv, int tpId){
+    public static String ergebnisAbrufenTestPositiv(TestpersonenVerwaltung tpv, int tpId){
         
-        //boolean abgerufen = tpv.ergebnisAbrufen(tpId);
-        /*if(abgerufen){ //Wenn Testergebnis Positiv ist
-            return true;  //Rückgabe True
-        }else{
-            System.out.println("TestergebnisLesen gescheitert");
-            return false;
-        }*/
-        return false;
+        String abgerufen = tpv.ergebnisAbrufen(tpId);
+        if(abgerufen.equals("Positiv")){ //Wenn Testergebnis Positiv ist
+            return "Positiv";  //Rückgabe True
+        }else {
+            return "TestergebnisLesen gescheitert";
+        }
     }
     
-    public static boolean ergebnisAbrufenTestNegativ(TestpersonenVerwaltung tpv, int tpId){
-        /*boolean abgerufen = tpv.ergebnisAbrufen(tpId);
-        if(!abgerufen){
-            return true;
-        }else{
-            System.out.println("TestergebnisLesen gescheitert");
-            return false;
-        }*/
-        return false;
+    public static String ergebnisAbrufenTestNegativ(TestpersonenVerwaltung tpv, int tpId){
+        String abgerufen = tpv.ergebnisAbrufen(tpId);
+        if(abgerufen.equals("Negativ")){ //Wenn Testergebnis Positiv ist
+            return "Negativ";  //Rückgabe True
+        }else {
+            return "TestergebnisLesen gescheitert";
+        }
     }
     
     public static int getMaxId () {
